@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sitemap Management - GHOTI BUILDER</title>
+
+  <!-- Google Fonts: Hind Siliguri (Bangla) & Plus Jakarta Sans (English) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================================
+       GHOTI BUILDER - DESIGN SYSTEM & PURE CSS
+       ======================================================== */
+    :root {
+      --bg-color: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --primary-navy: #0A192F;
+      --accent-orange: #FF6B00;
+      --accent-orange-hover: #E05D00;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --success-color: #16A34A;
+      --success-bg: #F0FDF4;
+      --warning-color: #D97706;
+      --warning-bg: #FFFBEB;
+      --warning-border: #FDE68A;
+      --error-color: #DC2626;
+      --error-bg: #FEF2F2;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+      --font-main: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+      --shadow-sm: 0 1px 3px rgba(10, 25, 47, 0.05);
+      --shadow-md: 0 4px 20px -2px rgba(10, 25, 47, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem 3rem 1rem;
+      line-height: 1.5;
+    }
+
+    /* Page Container */
+    .page-wrapper {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* Header Nav */
+    .header-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.875rem;
+      border-radius: var(--radius-md);
+      background-color: #FFFFFF;
+      border: 1px solid var(--border-color);
+      color: var(--primary-navy);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-back:hover {
+      background-color: #F1F5F9;
+      border-color: #CBD5E1;
+      transform: translateX(-2px);
+    }
+
+    .brand-tag {
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--accent-orange);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .page-title-wrap {
+      margin-top: 0.25rem;
+    }
+
+    .page-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary-navy);
+      letter-spacing: -0.02em;
+    }
+
+    .page-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* Main Card Layout */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.825rem;
+      font-weight: 600;
+    }
+
+    .status-badge.active {
+      background-color: var(--success-bg);
+      color: var(--success-color);
+      border: 1px solid #BBF7D0;
+    }
+
+    .status-badge.inactive {
+      background-color: var(--warning-bg);
+      color: var(--warning-color);
+      border: 1px solid var(--warning-border);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .status-badge.active .dot { background-color: var(--success-color); }
+    .status-badge.inactive .dot { background-color: var(--warning-color); }
+
+    /* Sitemap Section Specifics */
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-top-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .field-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .field-label {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .domain-display {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-orange);
+      background-color: #FFF7ED;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid #FFEDD5;
+      display: inline-block;
+      word-break: break-all;
+    }
+
+    /* Copy Input Box & Action Group */
+    .url-copy-box {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .url-input {
+      flex: 1;
+      padding: 0.85rem 1rem;
+      background-color: #F8FAFC;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      color: var(--text-main);
+      font-family: inherit;
+      outline: none;
+      word-break: break-all;
+      overflow-wrap: anywhere;
+    }
+
+    .url-input:focus {
+      border-color: var(--accent-orange);
+      background-color: #FFFFFF;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-orange);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(255, 107, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-orange-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: #FFFFFF;
+      color: var(--primary-navy);
+      border: 1.5px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary:hover {
+      background-color: #F1F5F9;
+      border-color: #CBD5E1;
+      transform: translateY(-1px);
+    }
+
+    .btn-copied {
+      background-color: var(--success-color) !important;
+      color: #FFFFFF !important;
+    }
+
+    /* Preview Box */
+    .preview-box {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      background-color: #F8FAFC;
+      border: 1px dashed var(--border-color);
+      border-radius: var(--radius-md);
+    }
+
+    .preview-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .preview-link {
+      color: var(--primary-navy);
+      font-weight: 600;
+      text-decoration: underline;
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      font-size: 0.95rem;
+    }
+
+    .preview-link:hover {
+      color: var(--accent-orange);
+    }
+
+    /* Info Box */
+    .info-box {
+      margin-top: 1.5rem;
+      background-color: #F0F9FF;
+      border: 1px solid #BAE6FD;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      gap: 0.75rem;
+      color: #0369A1;
+      font-size: 0.9rem;
+    }
+
+    .info-box-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    /* Warning / Empty / Auth States */
+    .state-card {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .state-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+
+    .state-icon.warning { background-color: var(--warning-bg); color: var(--warning-color); border: 1px solid var(--warning-border); }
+    .state-icon.auth { background-color: #EFF6FF; color: #2563EB; border: 1px solid #BFDBFE; }
+    .state-icon.error { background-color: var(--error-bg); color: var(--error-color); border: 1px solid #FECACA; }
+
+    .state-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--primary-navy);
+    }
+
+    .state-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    /* Animated Loader */
+    .loader-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1rem;
+      gap: 1rem;
+      color: var(--text-muted);
+    }
+
+    .spinner {
+      width: 42px;
+      height: 42px;
+      border: 3.5px solid var(--border-color);
+      border-top-color: var(--accent-orange);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 360px;
+      width: calc(100% - 3rem);
+      pointer-events: none;
+    }
+
+    .toast {
+      pointer-events: auto;
+      background-color: var(--primary-navy);
+      color: #FFFFFF;
+      padding: 0.9rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success { border-left: 4px solid var(--success-color); }
+    .toast.error { border-left: 4px solid var(--error-color); }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Footer */
+    .footer-text {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 1.5rem;
+    }
+
+    /* Mobile Responsive Adjustments */
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem 0.75rem 2rem 0.75rem;
+      }
+
+      .card {
+        padding: 1.25rem;
+        border-radius: var(--radius-md);
+      }
+
+      .page-title {
+        font-size: 1.35rem;
+      }
+
+      .url-copy-box {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .toast-container {
+        top: 1rem;
+        right: 1rem;
+        width: calc(100% - 2rem);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Notification System -->
+  <div class="toast-container" id="toast-container">
+    <div id="app-toast" class="toast">
+      <span id="toast-icon">✓</span>
+      <span id="toast-message"></span>
+    </div>
+  </div>
+
+  <!-- Page Content Wrapper -->
+  <div class="page-wrapper">
+
+    <!-- Header Navigation -->
+    <header class="header-nav">
+      <a href="shop-dashboard.html" class="btn-back">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>Back</span>
+      </a>
+      <span class="brand-tag">GHOTI BUILDER</span>
+    </header>
+
+    <!-- Page Title -->
+    <div class="page-title-wrap">
+      <h1 class="page-title">Sitemap Management</h1>
+      <p class="page-subtitle">Search engines discovery endpoint for your online store.</p>
+    </div>
+
+    <!-- STATE 1: LOADING STATE -->
+    <div id="state-loading" class="card loader-wrap">
+      <div class="spinner"></div>
+      <p>Loading your sitemap...</p>
+    </div>
+
+    <!-- STATE 2: ACTIVE CUSTOM DOMAIN (Main Sitemap View) -->
+    <main id="state-active-sitemap" class="card hidden">
+      <div class="card-top">
+        <div class="card-top-title">
+          <span>🗺️ Your Sitemap</span>
+        </div>
+        <span class="status-badge active">
+          <span class="dot"></span> Custom Domain Active
+        </span>
+      </div>
+
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+        Search engines can use this sitemap to discover pages from your online store.
+      </p>
+
+      <!-- Custom Domain Name Display -->
+      <div class="field-group">
+        <span class="field-label">Custom Domain</span>
+        <div id="display-domain" class="domain-display">loading...</div>
+      </div>
+
+      <!-- Sitemap URL Box -->
+      <div class="field-group">
+        <span class="field-label">Sitemap URL</span>
+        <div class="url-copy-box">
+          <input type="text" id="sitemap-url-input" class="url-input" readonly value="" />
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="btn-group">
+        <button type="button" id="btn-copy" class="btn btn-primary">
+          <span id="btn-copy-icon">📋</span>
+          <span id="btn-copy-text">Copy Sitemap URL</span>
+        </button>
+
+        <a id="btn-open-sitemap" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <span>🌐</span>
+          <span>Open Sitemap</span>
+        </a>
+      </div>
+
+      <!-- Sitemap Preview Section -->
+      <div class="preview-box">
+        <div class="preview-title">Sitemap Preview</div>
+        <a id="sitemap-preview-link" href="#" target="_blank" rel="noopener noreferrer" class="preview-link">
+          https://...
+        </a>
+      </div>
+
+      <!-- Tip Box -->
+      <div class="info-box">
+        <span class="info-box-icon">💡</span>
+        <div>
+          <strong>Tip:</strong> আপনার Sitemap URL টি Google Search Console এবং অন্যান্য search engine webmaster tools-এ submit করতে পারেন যাতে দ্রুত আপনার প্রোডাক্টগুলো ইন্ডেক্স হয়।
+        </div>
+      </div>
+    </main>
+
+    <!-- STATE 3: CUSTOM DOMAIN NOT FOUND -->
+    <section id="state-no-domain" class="card state-card hidden">
+      <div class="state-icon warning">🔒</div>
+      <h2 class="state-title">Custom Domain Required</h2>
+      <p class="state-desc">
+        আপনার Shop-এ কোনো Custom Domain সেট করা নেই। Sitemap শুধুমাত্র Custom Domain ব্যবহারকারী Shop-এর জন্য available। আপনার Shop-এর Custom Domain সেট করুন এবং তারপর এখানে আপনার Sitemap URL দেখতে পারবেন।
+      </p>
+      <div style="margin-top: 0.5rem;">
+        <span class="status-badge inactive">
+          <span class="dot"></span> Custom Domain Not Connected
+        </span>
+      </div>
+      <div style="margin-top: 1rem;">
+        <a href="custom-domain.html" class="btn btn-primary">
+          <span>⚙️</span>
+          <span>Setup Custom Domain</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- STATE 4: LOGIN REQUIRED -->
+    <section id="state-auth-required" class="card state-card hidden">
+      <div class="state-icon auth">🔐</div>
+      <h2 class="state-title">Login Required</h2>
+      <p class="state-desc">
+        Sitemap দেখতে আপনাকে আপনার Shop Account-এ login করতে হবে।
+      </p>
+      <div style="margin-top: 1rem;">
+        <a href="login.html" class="btn btn-primary">
+          <span>Login</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- STATE 5: SHOP NOT FOUND -->
+    <section id="state-shop-not-found" class="card state-card hidden">
+      <div class="state-icon error">⚠️</div>
+      <h2 class="state-title">Shop Not Found</h2>
+      <p class="state-desc">
+        আপনার Shop information পাওয়া যায়নি। দয়া করে আপনার অ্যাকাউন্ট স্ট্যাটাস চেক করুন।
+      </p>
+      <div style="margin-top: 1rem;">
+        <a href="shop-dashboard.html" class="btn btn-secondary">
+          <span>Return to Dashboard</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- STATE 6: FIREBASE ERROR -->
+    <section id="state-error" class="card state-card hidden">
+      <div class="state-icon error">❌</div>
+      <h2 class="state-title">Unable to load shop information</h2>
+      <p class="state-desc">
+        সার্ভারের সাথে যোগাযোগ করতে সমস্যা হচ্ছে। অনুগ্রহ করে আপনার ইন্টারনেট সংযোগ পরীক্ষা করে পুনরায় চেষ্টা করুন।
+      </p>
+      <div style="margin-top: 1rem;">
+        <button type="button" id="btn-retry" class="btn btn-secondary">
+          <span>🔄 Try Again</span>
+        </button>
+      </div>
+    </section>
+
+    <footer class="footer-text">
+      &copy; GHOTI BUILDER — E-commerce Platform
+    </footer>
+
+  </div>
+
+  <!-- ========================================================
+       FIREBASE V10+ MODULAR SDK & APPLICATION LOGIC
+       ======================================================== -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // 1. FIREBASE CONFIGURATION
+   const firebaseConfig = {
+  apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
+  authDomain: "ghotimarket.firebaseapp.com",
+  databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
+  projectId: "ghotimarket",
+  storageBucket: "ghotimarket.firebasestorage.app",
+  messagingSenderId: "481257644093",
+  appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
+  measurementId: "G-4SR8V2EKC1"
+};
+    // Initialize Firebase Services
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // DOM Elements References
+    const stateLoading = document.getElementById('state-loading');
+    const stateActiveSitemap = document.getElementById('state-active-sitemap');
+    const stateNoDomain = document.getElementById('state-no-domain');
+    const stateAuthRequired = document.getElementById('state-auth-required');
+    const stateShopNotFound = document.getElementById('state-shop-not-found');
+    const stateError = document.getElementById('state-error');
+
+    const displayDomainEl = document.getElementById('display-domain');
+    const sitemapUrlInput = document.getElementById('sitemap-url-input');
+    const sitemapPreviewLink = document.getElementById('sitemap-preview-link');
+    const btnOpenSitemap = document.getElementById('btn-open-sitemap');
+    const btnCopy = document.getElementById('btn-copy');
+    const btnCopyIcon = document.getElementById('btn-copy-icon');
+    const btnCopyText = document.getElementById('btn-copy-text');
+    const btnRetry = document.getElementById('btn-retry');
+
+    let currentSitemapUrl = "";
+    let currentUserUID = null;
+
+    // Helper: Switch UI States Cleanly
+    function showState(activeStateEl) {
+      [stateLoading, stateActiveSitemap, stateNoDomain, stateAuthRequired, stateShopNotFound, stateError].forEach(el => {
+        if (el) el.classList.add('hidden');
+      });
+      if (activeStateEl) {
+        activeStateEl.classList.remove('hidden');
+      }
+    }
+
+    // 2. DOMAIN NORMALIZATION FUNCTION
+    function normalizeDomain(rawDomain) {
+      if (!rawDomain || typeof rawDomain !== 'string') return '';
+      
+      let clean = rawDomain.trim().toLowerCase();
+      
+      // Remove protocol prefix (http://, https://)
+      clean = clean.replace(/^https?:\/\//i, '');
+      
+      // Remove www.
+      clean = clean.replace(/^www\./i, '');
+      
+      // Remove paths, query parameters, or hashes (e.g., myshop.com/path?a=1)
+      clean = clean.split('/')[0].split('?')[0].split('#')[0];
+      
+      // Strip any non-domain safe characters (allows alphanumeric, hyphens, and dots)
+      clean = clean.replace(/[^a-z0-9.-]/gi, '');
+
+      return clean;
+    }
+
+    // 3. LOAD SHOP DATA FROM FIRESTORE
+    async function loadShopData(uid) {
+      showState(stateLoading);
+      try {
+        const shopRef = doc(db, "shops", uid);
+        const shopSnap = await getDoc(shopRef);
+
+        if (!shopSnap.exists()) {
+          showState(stateShopNotFound);
+          return;
+        }
+
+        const shopData = shopSnap.data();
+        const rawDomain = shopData ? shopData.customDomain : null;
+        const normalizedDomain = normalizeDomain(rawDomain);
+
+        if (normalizedDomain && normalizedDomain.length > 3) {
+          // Construct Clean HTTPS Sitemap URL
+          currentSitemapUrl = `https://${normalizedDomain}/sitemap.xml`;
+
+          // Update UI Elements
+          displayDomainEl.textContent = normalizedDomain;
+          sitemapUrlInput.value = currentSitemapUrl;
+          sitemapPreviewLink.href = currentSitemapUrl;
+          sitemapPreviewLink.textContent = currentSitemapUrl;
+          btnOpenSitemap.href = currentSitemapUrl;
+
+          showState(stateActiveSitemap);
+        } else {
+          // Custom domain missing or empty
+          showState(stateNoDomain);
+        }
+
+      } catch (err) {
+        console.error("Error loading shop data from Firestore:", err);
+        showState(stateError);
+      }
+    }
+
+    // 4. AUTH STATE OBSERVER
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUserUID = user.uid;
+        loadShopData(currentUserUID);
+      } else {
+        currentUserUID = null;
+        showState(stateAuthRequired);
+      }
+    });
+
+    // 5. COPY TO CLIPBOARD HANDLER
+    btnCopy.addEventListener('click', async () => {
+      if (!currentSitemapUrl) return;
+
+      let copiedSuccess = false;
+
+      // Primary: Modern Clipboard API
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(currentSitemapUrl);
+          copiedSuccess = true;
+        } catch (err) {
+          console.warn("Clipboard API failed, attempting fallback copy method.", err);
+        }
+      }
+
+      // Fallback: execCommand('copy')
+      if (!copiedSuccess) {
+        try {
+          sitemapUrlInput.select();
+          sitemapUrlInput.setSelectionRange(0, 99999); // Mobile
+          copiedSuccess = document.execCommand('copy');
+          window.getSelection().removeAllRanges();
+        } catch (err) {
+          console.error("Fallback copy failed:", err);
+        }
+      }
+
+      if (copiedSuccess) {
+        showToast("সাইটম্যাপ লিংক কপি হয়েছে!", "success");
+        
+        // Button UI Feedback
+        btnCopy.classList.add('btn-copied');
+        btnCopyIcon.textContent = "✓";
+        btnCopyText.textContent = "Copied";
+
+        setTimeout(() => {
+          btnCopy.classList.remove('btn-copied');
+          btnCopyIcon.textContent = "📋";
+          btnCopyText.textContent = "Copy Sitemap URL";
+        }, 2500);
+      } else {
+        showToast("কপি করা যায়নি, ম্যানুয়ালি কপি করুন।", "error");
+      }
+    });
+
+    // Retry Button Handler
+    if (btnRetry) {
+      btnRetry.addEventListener('click', () => {
+        if (currentUserUID) {
+          loadShopData(currentUserUID);
+        } else {
+          location.reload();
+        }
+      });
+    }
+
+    // 6. CUSTOM TOAST NOTIFICATION SYSTEM
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('app-toast');
+      const toastIcon = document.getElementById('toast-icon');
+      const toastMsg = document.getElementById('toast-message');
+
+      if (!toast || !toastMsg) return;
+
+      toastMsg.textContent = message;
+
+      if (type === 'success') {
+        toastIcon.textContent = "✓";
+      } else {
+        toastIcon.textContent = "⚠️";
+      }
+
+      toast.className = `toast ${type} active`;
+
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

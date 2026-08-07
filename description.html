@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Description - GHOTI Builder</title>
+
+  <!-- Google Fonts: Hind Siliguri & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================================
+       GHOTI BUILDER - SAAS BRANDING & DESIGN SYSTEM
+       Primary: #0A192F | Accent: #FF6B00 | Slate BG: #F8FAFC
+       ======================================================== */
+    :root {
+      --bg-color: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --primary-navy: #0A192F;
+      --accent-orange: #FF6B00;
+      --accent-orange-hover: #E05D00;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --input-bg: #F8FAFC;
+      --success-color: #16A34A;
+      --error-color: #DC2626;
+      --warning-color: #D97706;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --font-bn: 'Hind Siliguri', sans-serif;
+      --font-en: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-bn);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.25rem 1rem 2.5rem 1rem;
+    }
+
+    /* Top Sticky/Fixed-Style Navigation Header */
+    .top-header {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--primary-navy);
+      padding: 0.5rem 0.875rem;
+      border-radius: 8px;
+      font-family: var(--font-bn);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back:hover {
+      background-color: var(--border-color);
+      color: var(--text-main);
+    }
+
+    .header-title-wrap {
+      text-align: right;
+    }
+
+    .header-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+    }
+
+    .header-subtitle-sm {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Main Container Card */
+    .main-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      width: 100%;
+      max-width: 680px;
+      box-shadow: 0 10px 30px -5px rgba(10, 25, 47, 0.04);
+      position: relative;
+    }
+
+    /* Shop Info Overview Header inside Card */
+    .shop-profile-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px dashed var(--border-color);
+    }
+
+    .shop-logo-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: #F1F5F9;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .shop-logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .shop-logo-fallback {
+      color: var(--text-muted);
+    }
+
+    .shop-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shop-title-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      line-height: 1.2;
+    }
+
+    .shop-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: var(--accent-orange);
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+
+    /* Global Page Loader */
+    .page-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1rem;
+      gap: 1rem;
+      color: var(--text-muted);
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--border-color);
+      border-top-color: var(--accent-orange);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Editor Title Header */
+    .editor-header {
+      margin-bottom: 1.25rem;
+    }
+
+    .page-main-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .page-description {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* Form Controls */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .textarea-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .description-textarea {
+      width: 100%;
+      min-height: 180px;
+      max-height: 320px;
+      font-family: var(--font-bn);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      background-color: var(--input-bg);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      outline: none;
+      resize: vertical;
+      transition: all 0.2s ease;
+    }
+
+    .description-textarea:focus {
+      background-color: #FFFFFF;
+      border-color: var(--accent-orange);
+      box-shadow: 0 0 0 3.5px rgba(255, 107, 0, 0.12);
+    }
+
+    /* Meta Counter & Warning Bar */
+    .meta-counter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .warning-text {
+      color: var(--warning-color);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .char-counter {
+      font-family: var(--font-en);
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .char-counter.near-limit {
+      color: var(--warning-color);
+    }
+
+    .char-counter.at-limit {
+      color: var(--error-color);
+      font-weight: 700;
+    }
+
+    /* Save Button */
+    .btn-save {
+      width: 100%;
+      background-color: var(--accent-orange);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.875rem 1.5rem;
+      font-family: var(--font-bn);
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.625rem;
+      box-shadow: 0 4px 14px rgba(255, 107, 0, 0.22);
+    }
+
+    .btn-save:hover:not(:disabled) {
+      background-color: var(--accent-orange-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-save:disabled {
+      background-color: #CBD5E1;
+      color: #94A3B8;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .btn-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-top-color: #FFFFFF;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    /* Bottom Privacy Note */
+    .privacy-note {
+      margin-top: 1.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    /* Screen State Messages (Error / Auth) */
+    .state-screen {
+      text-align: center;
+      padding: 2.5rem 1rem;
+    }
+
+    .state-icon {
+      width: 56px;
+      height: 56px;
+      background-color: #FEF2F2;
+      color: var(--error-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem auto;
+    }
+
+    .state-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .state-desc {
+      color: var(--text-muted);
+      font-size: 0.925rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .btn-action {
+      display: inline-block;
+      background-color: var(--primary-navy);
+      color: #FFFFFF;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn-action:hover {
+      opacity: 0.9;
+    }
+
+    /* Toast Notification System */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+    }
+
+    .toast {
+      background-color: var(--primary-navy);
+      color: #FFFFFF;
+      padding: 0.875rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.925rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success { border-left: 4px solid var(--success-color); }
+    .toast.error { border-left: 4px solid var(--error-color); }
+    .toast.warning { border-left: 4px solid var(--warning-color); }
+
+    /* Utility */
+    .hidden { display: none !important; }
+
+    /* Responsive Mobile Adjustments */
+    @media (max-width: 640px) {
+      body {
+        padding: 0.875rem 0.5rem 1.5rem 0.5rem;
+      }
+      .top-header {
+        margin-bottom: 1rem;
+      }
+      .main-card {
+        padding: 1.25rem;
+        border-radius: 12px;
+      }
+      .page-main-title {
+        font-size: 1.2rem;
+      }
+      .description-textarea {
+        min-height: 160px;
+        font-size: 0.95rem;
+      }
+      .toast-container {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+      }
+      .toast {
+        text-align: center;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="top-header">
+    <button type="button" class="btn-back" onclick="handleNavigationBack()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back
+    </button>
+    <div class="header-title-wrap">
+      <div class="header-title">Shop Description</div>
+      <div class="header-subtitle-sm">GHOTI Builder</div>
+    </div>
+  </header>
+
+  <!-- Main Card Container -->
+  <main class="main-card">
+
+    <!-- 1. Global Page Loading State -->
+    <div id="page-loader" class="page-loader">
+      <div class="spinner"></div>
+      <p>শপের তথ্য লোড হচ্ছে...</p>
+    </div>
+
+    <!-- 2. Shop Document Not Found Screen -->
+    <div id="shop-not-found-screen" class="state-screen hidden">
+      <div class="state-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+      </div>
+      <h2 class="state-title">Shop Profile Not Found</h2>
+      <p class="state-desc">আপনার অ্যাকাউন্টের সাথে কোনো শপ প্রোফাইল খুঁজে পাওয়া যায়নি। প্রথমে শপ সেটআপ সম্পন্ন করুন।</p>
+      <a href="shop-dashboard.html" class="btn-action">Go to Dashboard</a>
+    </div>
+
+    <!-- 3. Description Editor Form Container -->
+    <div id="editor-container" class="hidden">
+
+      <!-- Active Shop Overview -->
+      <div class="shop-profile-bar">
+        <div id="shop-logo-container" class="shop-logo-box">
+          <!-- Logo image or Fallback Icon will load here dynamically -->
+        </div>
+        <div class="shop-details">
+          <span id="shop-name-display" class="shop-title-text">...</span>
+          <span class="shop-badge">Active Shop</span>
+        </div>
+      </div>
+
+      <!-- Editor Header -->
+      <div class="editor-header">
+        <h1 class="page-main-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" color="var(--accent-orange)"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          Shop Description
+        </h1>
+        <p class="page-description">আপনার দোকান সম্পর্কে ক্রেতাদের বিস্তারিত জানান</p>
+      </div>
+
+      <!-- Main Form -->
+      <form id="description-form" onsubmit="return false;">
+        <div class="form-group">
+          <div class="textarea-wrapper">
+            <textarea
+              id="shop-description-input"
+              class="description-textarea"
+              maxlength="500"
+              placeholder="আপনার দোকান সম্পর্কে লিখুন...&#10;যেমন:&#10;আমাদের দোকানে মানসম্মত পণ্য সাশ্রয়ী মূল্যে পাওয়া যায়। আমরা দ্রুত ডেলিভারি এবং ভালো কাস্টমার সার্ভিস দেওয়ার চেষ্টা করি।"
+              spellcheck="false"
+            ></textarea>
+          </div>
+
+          <!-- Counter and Warning Info -->
+          <div class="meta-counter-bar">
+            <span id="warning-text" class="warning-text hidden"></span>
+            <span id="char-counter" class="char-counter">0 / 500</span>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="button" id="btn-save" class="btn-save">
+          <span id="btn-text">Save Description</span>
+        </button>
+      </form>
+
+      <!-- Bottom Security Note -->
+      <div class="privacy-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>আপনার Shop Description আপনার দোকানের তথ্য হিসেবে প্রদর্শিত হবে।</span>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Toast System -->
+  <div class="toast-container">
+    <div id="app-toast" class="toast">
+      <span id="toast-message"></span>
+    </div>
+  </div>
+
+  <!-- Firebase Modular SDK Script (v10.12.2) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged 
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      updateDoc 
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // ========================================================
+    // 1. FIREBASE CONFIGURATION
+    // Existing project configuration used
+    // ========================================================
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase Services
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // ========================================================
+    // 2. STATE MANAGEMENT & DOM ELEMENTS
+    // ========================================================
+    let currentUser = null;
+    let shopDocRef = null;
+    let initialDescription = "";
+    const MAX_CHARS = 500;
+
+    // DOM Elements
+    const pageLoader = document.getElementById('page-loader');
+    const shopNotFoundScreen = document.getElementById('shop-not-found-screen');
+    const editorContainer = document.getElementById('editor-container');
+    
+    const shopLogoContainer = document.getElementById('shop-logo-container');
+    const shopNameDisplay = document.getElementById('shop-name-display');
+    const descriptionInput = document.getElementById('shop-description-input');
+    const charCounter = document.getElementById('char-counter');
+    const warningText = document.getElementById('warning-text');
+    const btnSave = document.getElementById('btn-save');
+    const btnText = document.getElementById('btn-text');
+
+    // ========================================================
+    // 3. AUTHENTICATION & SHOP DATA LOADING
+    // ========================================================
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        // Redirect to login page if user is not authenticated
+        window.location.href = "login.html";
+        return;
+      }
+
+      currentUser = user;
+      shopDocRef = doc(db, "shops", currentUser.uid);
+
+      try {
+        // Fetch shops/{currentUser.uid} document
+        const shopSnap = await getDoc(shopDocRef);
+
+        if (!shopSnap.exists()) {
+          showScreen('not-found');
+          return;
+        }
+
+        const shopData = shopSnap.data();
+        renderShopInfo(shopData);
+        initEditor(shopData.shopDescription || "");
+        showScreen('editor');
+
+      } catch (error) {
+        console.error("Firestore Document Load Error:", error);
+        handleFirebaseError(error);
+        showScreen('not-found');
+      }
+    });
+
+    // Render Shop Info Header (Name & Logo)
+    function renderShopInfo(data) {
+      shopNameDisplay.textContent = data.shopName || "My Shop";
+
+      if (data.shopLogo && data.shopLogo.trim() !== "") {
+        shopLogoContainer.innerHTML = `<img src="${escapeHtml(data.shopLogo)}" alt="Shop Logo" onerror="this.src=''; this.parentNode.innerHTML=getDefaultShopIcon();">`;
+      } else {
+        shopLogoContainer.innerHTML = getDefaultShopIcon();
+      }
+    }
+
+    function getDefaultShopIcon() {
+      return `<svg class="shop-logo-fallback" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>`;
+    }
+
+    // Screen State Controller
+    function showScreen(type) {
+      pageLoader.classList.add('hidden');
+      shopNotFoundScreen.classList.add('hidden');
+      editorContainer.classList.add('hidden');
+
+      if (type === 'not-found') shopNotFoundScreen.classList.remove('hidden');
+      if (type === 'editor') {
+        editorContainer.classList.remove('hidden');
+        // Auto focus on textarea for better UX
+        setTimeout(() => descriptionInput.focus(), 100);
+      }
+    }
+
+    // ========================================================
+    // 4. DESCRIPTION EDITOR & CHARACTER COUNTER
+    // ========================================================
+    function initEditor(existingDesc) {
+      initialDescription = existingDesc.trim();
+      descriptionInput.value = existingDesc;
+      updateCharCounter();
+    }
+
+    // Input Event Listener for Live Character Counting & Warnings
+    descriptionInput.addEventListener('input', () => {
+      // Enforce hard maximum limit of 500 characters
+      if (descriptionInput.value.length > MAX_CHARS) {
+        descriptionInput.value = descriptionInput.value.slice(0, MAX_CHARS);
+      }
+      
+      updateCharCounter();
+
+      // Reset button state if modified after save
+      if (btnText.textContent === "Saved ✓") {
+        btnText.textContent = "Save Description";
+        btnSave.style.backgroundColor = "var(--accent-orange)";
+      }
+    });
+
+    function updateCharCounter() {
+      const currentLength = descriptionInput.value.length;
+      const remaining = MAX_CHARS - currentLength;
+
+      charCounter.textContent = `${currentLength} / ${MAX_CHARS}`;
+
+      // Reset styles
+      charCounter.classList.remove('near-limit', 'at-limit');
+      warningText.classList.add('hidden');
+
+      // Warning when close to limit (<= 20 chars left)
+      if (remaining <= 20 && remaining > 0) {
+        charCounter.classList.add('near-limit');
+        warningText.innerHTML = `⚠️ আর মাত্র ${remaining} অক্ষর বাকি`;
+        warningText.classList.remove('hidden');
+      } else if (remaining === 0) {
+        charCounter.classList.add('at-limit');
+        warningText.innerHTML = `⚠️ সর্বোচ্চ অক্ষর সীমায় পৌঁছেছেন`;
+        warningText.classList.remove('hidden');
+      }
+    }
+
+    // ========================================================
+    // 5. FIRESTORE UPDATE & VALIDATION
+    // ========================================================
+    btnSave.addEventListener('click', async () => {
+      const rawText = descriptionInput.value;
+      const cleanDesc = rawText.trim();
+
+      // Validation 1: Empty check
+      if (!cleanDesc) {
+        showToast("দোকানের Description লিখুন", "warning");
+        descriptionInput.focus();
+        return;
+      }
+
+      // Validation 2: Character Limit check
+      if (cleanDesc.length > MAX_CHARS) {
+        showToast("Description সর্বোচ্চ ৫০০ অক্ষরের মধ্যে হতে হবে", "error");
+        return;
+      }
+
+      // UX Optimization: Check if content actually changed
+      if (cleanDesc === initialDescription) {
+        showToast("কোনো পরিবর্তন করা হয়নি", "warning");
+        return;
+      }
+
+      // Start Save Process
+      setLoadingState(true);
+
+      try {
+        // ONLY update shopDescription in shops/{currentUser.uid}
+        // Never overwrite the entire document or modify other attributes
+        await updateDoc(shopDocRef, {
+          shopDescription: cleanDesc
+        });
+
+        // Update local initial state
+        initialDescription = cleanDesc;
+
+        // Success UX Feedback
+        setLoadingState(false);
+        btnText.textContent = "Saved ✓";
+        btnSave.style.backgroundColor = "var(--success-color)";
+        showToast("Shop Description সফলভাবে সংরক্ষণ করা হয়েছে", "success");
+
+      } catch (error) {
+        console.error("Firestore Update Error:", error);
+        setLoadingState(false);
+        handleFirebaseError(error);
+      }
+    });
+
+    function setLoadingState(isLoading) {
+      if (isLoading) {
+        btnSave.disabled = true;
+        btnText.innerHTML = `<div class="btn-spinner"></div> Saving...`;
+      } else {
+        btnSave.disabled = false;
+        btnText.textContent = "Save Description";
+      }
+    }
+
+    // ========================================================
+    // 6. ERROR HANDLING & USER FRIENDLY BENGALI MESSAGES
+    // ========================================================
+    function handleFirebaseError(error) {
+      const errCode = error ? error.code : "";
+      
+      if (errCode === 'permission-denied') {
+        showToast("আপনার এই Shop Description পরিবর্তন করার অনুমতি নেই।", "error");
+      } else if (errCode === 'unavailable' || !navigator.onLine) {
+        showToast("ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।", "error");
+      } else {
+        showToast("একটি সমস্যা হয়েছে, অনুগ্রহ করে আবার চেষ্টা করুন।", "error");
+      }
+    }
+
+    // Toast Notification Display Helper
+    function showToast(message, type = "info") {
+      const toast = document.getElementById('app-toast');
+      const toastMsg = document.getElementById('toast-message');
+
+      toastMsg.textContent = message;
+      toast.className = `toast ${type} active`;
+
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3500);
+    }
+
+    // Utility: HTML Sanitizer for safe rendering
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Navigation Back Logic
+    window.handleNavigationBack = function() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "dashboard.html";
+      }
+    };
+  </script>
+</body>
+</html>

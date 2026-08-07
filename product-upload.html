@@ -635,21 +635,22 @@
 
     if (shopDocSnap.exists()) {
       const data = shopDocSnap.data();
-      const profileUnlocked = data.profileUnlocked; // shops collection এর field
+      const profileUnlocked = data.profileUnlocked; // এটা এখন Number
 
-      // Check if profileUnlocked exists and is a Firestore Timestamp
-      if (profileUnlocked && typeof profileUnlocked.toMillis === 'function') {
-        const expireTime = profileUnlocked.toMillis(); // Timestamp -> ms
+      // Check if profileUnlocked exists and is a Number
+      if (profileUnlocked && typeof profileUnlocked === 'number') {
+        const expireTime = profileUnlocked; // সরাসরি ms
         const currentTime = Date.now();
 
         if (expireTime > currentTime) {
           isProfileUnlockedValid = true;
-          console.log("Subscription Valid. Expires on:", new Date(expireTime));
+          const daysLeft = Math.ceil((expireTime - currentTime) / (1000 * 60 * 60 * 24));
+          console.log("Subscription Valid. " + daysLeft + " days left");
         } else {
-          console.log("Subscription Expired on:", new Date(expireTime));
+          console.log("Subscription Expired");
         }
       } else {
-        console.log("profileUnlocked field not found or not a Timestamp");
+        console.log("profileUnlocked field not found or not a Number");
       }
     } else {
       console.log("Shop doc not found");
@@ -659,7 +660,6 @@
       productForm.classList.remove('hidden');
       subscriptionWarning.classList.add('hidden');
     } else {
-      // Locked/Expired Subscription
       productForm.classList.add('hidden');
       subscriptionWarning.classList.remove('hidden');
     }
@@ -668,7 +668,7 @@
     showToast("Error checking subscription status", "error");
     productForm.classList.add('hidden');
   }
-    }
+                      }
 
 
     // ------------------------------------------

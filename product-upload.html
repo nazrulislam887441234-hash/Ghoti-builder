@@ -630,7 +630,7 @@
 
     async function checkProfileUnlocked(uid) {
       try {
-        const userDocRef = doc(db, "users", uid);
+        const userDocRef = doc(db, "shops", uid);
         const userDocSnap = await getDoc(userDocRef);
 
         if (userDocSnap.exists()) {

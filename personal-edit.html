@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Shop Information - GHOTI Builder</title>
+
+  <!-- Google Fonts: Hind Siliguri (Bangla) & Plus Jakarta Sans (English) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================================
+       GHOTI BUILDER - BRANDING & PURE CSS STYLES
+       ======================================================== */
+    :root {
+      --bg-color: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --primary-navy: #0A192F;
+      --accent-orange: #FF6B00;
+      --accent-orange-hover: #E05D00;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --input-bg: #F8FAFC;
+      --input-focus-bg: #FFFFFF;
+      --success-color: #16A34A;
+      --success-bg: #F0FDF4;
+      --error-color: #DC2626;
+      --error-bg: #FEF2F2;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+      --font-main: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+      --shadow-sm: 0 1px 3px rgba(10, 25, 47, 0.05);
+      --shadow-md: 0 4px 20px -2px rgba(10, 25, 47, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem 3rem 1rem;
+      line-height: 1.5;
+    }
+
+    /* Page Container */
+    .page-wrapper {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* Navigation & Header */
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.875rem;
+      border-radius: var(--radius-md);
+      background-color: #FFFFFF;
+      border: 1px solid var(--border-color);
+      color: var(--primary-navy);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-back:hover {
+      background-color: #F1F5F9;
+      border-color: #CBD5E1;
+      transform: translateX(-2px);
+    }
+
+    .page-title-wrap {
+      margin-top: 0.5rem;
+    }
+
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary-navy);
+      letter-spacing: -0.02em;
+    }
+
+    .page-subtitle {
+      font-size: 0.925rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* Main Form Card */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-header {
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-header-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge-protected {
+      font-size: 0.75rem;
+      background-color: #F1F5F9;
+      color: var(--text-muted);
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-weight: 600;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Form Layout */
+    .form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary-navy);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .required-star {
+      color: var(--error-color);
+      margin-left: 2px;
+    }
+
+    .input-control, .select-control, .textarea-control {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background-color: var(--input-bg);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      color: var(--text-main);
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .input-control:focus, .select-control:focus, .textarea-control:focus {
+      border-color: var(--accent-orange);
+      background-color: var(--input-focus-bg);
+      box-shadow: 0 0 0 3.5px rgba(255, 107, 0, 0.12);
+    }
+
+    .input-control.error, .select-control.error, .textarea-control.error {
+      border-color: var(--error-color);
+      background-color: var(--error-bg);
+    }
+
+    .textarea-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .select-control {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%3C0F172A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1rem;
+      padding-right: 2.5rem;
+    }
+
+    /* Textarea Counter Footer */
+    .field-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.2rem;
+    }
+
+    .error-text {
+      font-size: 0.8rem;
+      color: var(--error-color);
+      font-weight: 500;
+    }
+
+    .char-counter {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      margin-left: auto;
+      font-weight: 500;
+    }
+
+    /* Save Button */
+    .btn-save {
+      margin-top: 1rem;
+      width: 100%;
+      background-color: var(--accent-orange);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.95rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.625rem;
+      box-shadow: 0 4px 14px rgba(255, 107, 0, 0.25);
+      transition: all 0.2s ease;
+    }
+
+    .btn-save:hover:not(:disabled) {
+      background-color: var(--accent-orange-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(255, 107, 0, 0.3);
+    }
+
+    .btn-save:disabled {
+      background-color: #CBD5E1;
+      color: #94A3B8;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .btn-save.success {
+      background-color: var(--success-color);
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25);
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #FFFFFF;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Page Initial Loader Overlay */
+    .page-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1rem;
+      gap: 1rem;
+      color: var(--text-muted);
+    }
+
+    .page-loader .large-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border-color);
+      border-top-color: var(--accent-orange);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    /* Error Alert Container */
+    .alert-banner {
+      background-color: var(--error-bg);
+      border: 1px solid #FECACA;
+      color: var(--error-color);
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Custom Toast Notifications */
+    .toast-container {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 360px;
+      width: calc(100% - 3rem);
+      pointer-events: none;
+    }
+
+    .toast {
+      pointer-events: auto;
+      background-color: var(--primary-navy);
+      color: #FFFFFF;
+      padding: 0.9rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success { border-left: 4px solid var(--success-color); }
+    .toast.error { border-left: 4px solid var(--error-color); }
+
+    /* Auth Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(10, 25, 47, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 1rem;
+    }
+
+    .modal-card {
+      background-color: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .modal-icon {
+      width: 52px;
+      height: 52px;
+      background-color: var(--error-bg);
+      color: var(--error-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+    }
+
+    .modal-desc {
+      font-size: 0.925rem;
+      color: var(--text-muted);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Footer Branding */
+    .footer-text {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 1.5rem;
+    }
+
+    /* Responsive Mobile Styles */
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem 0.75rem 2rem 0.75rem;
+      }
+
+      .card {
+        padding: 1.25rem;
+        border-radius: var(--radius-md);
+      }
+
+      .page-title {
+        font-size: 1.3rem;
+      }
+
+      .input-control, .select-control, .textarea-control {
+        padding: 0.75rem 0.875rem;
+      }
+
+      .toast-container {
+        top: 1rem;
+        right: 1rem;
+        width: calc(100% - 2rem);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Notification System -->
+  <div class="toast-container" id="toast-container">
+    <div id="app-toast" class="toast">
+      <span id="toast-icon"></span>
+      <span id="toast-message"></span>
+    </div>
+  </div>
+
+  <!-- Unauthenticated Modal Overlay -->
+  <div id="auth-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      </div>
+      <div class="modal-title">Authentication Required</div>
+      <div class="modal-desc">Please login first to manage your shop settings.</div>
+      <div class="spinner" style="border-color: rgba(10,25,47,0.2); border-top-color: var(--primary-navy);"></div>
+    </div>
+  </div>
+
+  <!-- Page Content Container -->
+  <div class="page-wrapper">
+
+    <!-- Top Navigation Header -->
+    <header class="header-nav">
+      <a href="shop-dashboard.html" class="btn-back">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>Back</span>
+      </a>
+    </header>
+
+    <!-- Page Title Header -->
+    <div class="page-title-wrap">
+      <h1 class="page-title">Edit Shop Information</h1>
+      <p class="page-subtitle">Update your basic shop details visible to your customers.</p>
+    </div>
+
+    <!-- Initial Loading State -->
+    <div id="page-loader" class="page-loader">
+      <div class="large-spinner"></div>
+      <p>Loading shop information...</p>
+    </div>
+
+    <!-- Error Banner (When doc read fails) -->
+    <div id="error-banner" class="alert-banner hidden">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+      <span id="error-banner-text">Shop information not found.</span>
+    </div>
+
+    <!-- Main Shop Information Card -->
+    <main id="main-card" class="card hidden">
+      <div class="card-header">
+        <div class="card-header-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-orange)" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span>Shop Information</span>
+        </div>
+        <span class="badge-protected">5 Editable Fields</span>
+      </div>
+
+      <form id="edit-shop-form" novalidate>
+        <div class="form-grid">
+
+          <!-- 1. Shop Name Field -->
+          <div class="form-group">
+            <label class="form-label" for="shopName">
+              <span>Shop Name<span class="required-star">*</span></span>
+            </label>
+            <input 
+              type="text" 
+              id="shopName" 
+              name="shopName" 
+              class="input-control" 
+              placeholder="Enter your shop name" 
+              required 
+              minlength="2" 
+              maxlength="100"
+              autocomplete="off"
+            />
+            <div class="field-footer">
+              <span id="err-shopName" class="error-text"></span>
+            </div>
+          </div>
+
+          <!-- 2. Business Number Field -->
+          <div class="form-group">
+            <label class="form-label" for="businessNumber">
+              <span>Business Number<span class="required-star">*</span></span>
+            </label>
+            <input 
+              type="text" 
+              id="businessNumber" 
+              name="businessNumber" 
+              class="input-control" 
+              placeholder="Enter business/contact number" 
+              required 
+              minlength="7" 
+              maxlength="20"
+              autocomplete="off"
+            />
+            <div class="field-footer">
+              <span id="err-businessNumber" class="error-text"></span>
+            </div>
+          </div>
+
+          <!-- 3. Address Field -->
+          <div class="form-group">
+            <label class="form-label" for="address">
+              <span>Shop Address<span class="required-star">*</span></span>
+            </label>
+            <textarea 
+              id="address" 
+              name="address" 
+              class="textarea-control" 
+              placeholder="Enter your complete shop address" 
+              required 
+              minlength="5" 
+              maxlength="300"
+            ></textarea>
+            <div class="field-footer">
+              <span id="err-address" class="error-text"></span>
+              <span id="address-char-counter" class="char-counter">0 / 300</span>
+            </div>
+          </div>
+
+          <!-- 4. Country Dropdown -->
+          <div class="form-group">
+            <label class="form-label" for="country">
+              <span>Country<span class="required-star">*</span></span>
+            </label>
+            <select id="country" name="country" class="select-control" required>
+              <option value="Bangladesh">Bangladesh</option>
+              <option value="India">India</option>
+              <option value="Pakistan">Pakistan</option>
+              <option value="Nepal">Nepal</option>
+              <option value="Bhutan">Bhutan</option>
+              <option value="United States">United States</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="United Arab Emirates">United Arab Emirates</option>
+              <option value="Saudi Arabia">Saudi Arabia</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Singapore">Singapore</option>
+              <option value="Other">Other</option>
+            </select>
+            <div class="field-footer">
+              <span id="err-country" class="error-text"></span>
+            </div>
+          </div>
+
+          <!-- 5. Language Dropdown -->
+          <div class="form-group">
+            <label class="form-label" for="language">
+              <span>Language<span class="required-star">*</span></span>
+            </label>
+            <select id="language" name="language" class="select-control" required>
+              <option value="Bangla">Bangla</option>
+              <option value="English">English</option>
+              <option value="Hindi">Hindi</option>
+              <option value="Urdu">Urdu</option>
+              <option value="Arabic">Arabic</option>
+              <option value="Other">Other</option>
+            </select>
+            <div class="field-footer">
+              <span id="err-language" class="error-text"></span>
+            </div>
+          </div>
+
+          <!-- Save Button -->
+          <button type="submit" id="btn-save" class="btn-save">
+            <svg id="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            <span id="btn-text">Save Changes</span>
+          </button>
+
+        </div>
+      </form>
+    </main>
+
+    <footer class="footer-text">
+      &copy; GHOTI Builder — E-commerce Management
+    </footer>
+
+  </div>
+
+  <!-- ========================================== -->
+  <!-- FIREBASE V9+ MODULAR SDK & APPLICATION LOGIC -->
+  <!-- ========================================== -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+    // ==========================================
+    // FIREBASE CONFIG
+    // ==========================================
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // DOM Elements References
+    const pageLoader = document.getElementById('page-loader');
+    const mainCard = document.getElementById('main-card');
+    const errorBanner = document.getElementById('error-banner');
+    const errorBannerText = document.getElementById('error-banner-text');
+    const authModal = document.getElementById('auth-modal');
+    const editShopForm = document.getElementById('edit-shop-form');
+
+    // Form Inputs
+    const shopNameInput = document.getElementById('shopName');
+    const businessNumberInput = document.getElementById('businessNumber');
+    const addressInput = document.getElementById('address');
+    const countrySelect = document.getElementById('country');
+    const languageSelect = document.getElementById('language');
+    const addressCharCounter = document.getElementById('address-char-counter');
+
+    // Save Button Elements
+    const btnSave = document.getElementById('btn-save');
+    const btnText = document.getElementById('btn-text');
+    const btnIcon = document.getElementById('btn-icon');
+
+    // Application State
+    let currentUser = null;
+    let isSubmitting = false;
+
+    // ==========================================
+    // LIVE ADDRESS CHARACTER COUNTER & INPUT VALIDATION
+    // ==========================================
+    addressInput.addEventListener('input', () => {
+      const len = addressInput.value.length;
+      addressCharCounter.textContent = `${len} / 300`;
+      if (len > 300) {
+        addressCharCounter.style.color = 'var(--error-color)';
+      } else {
+        addressCharCounter.style.color = 'var(--text-muted)';
+      }
+    });
+
+    // Clear inline error on field interaction
+    [shopNameInput, businessNumberInput, addressInput, countrySelect, languageSelect].forEach(input => {
+      input.addEventListener('input', () => clearFieldError(input.id));
+      input.addEventListener('change', () => clearFieldError(input.id));
+    });
+
+    function clearFieldError(fieldId) {
+      const inputEl = document.getElementById(fieldId);
+      const errEl = document.getElementById(`err-${fieldId}`);
+      if (inputEl) inputEl.classList.remove('error');
+      if (errEl) errEl.textContent = '';
+    }
+
+    function setFieldError(fieldId, message) {
+      const inputEl = document.getElementById(fieldId);
+      const errEl = document.getElementById(`err-${fieldId}`);
+      if (inputEl) inputEl.classList.add('error');
+      if (errEl) errEl.textContent = message;
+    }
+
+    // Validation Logic
+    function validateForm() {
+      let isValid = true;
+
+      // 1. Shop Name: 2 - 100 chars
+      const shopNameVal = shopNameInput.value.trim();
+      if (!shopNameVal) {
+        setFieldError('shopName', 'Shop name is required.');
+        isValid = false;
+      } else if (shopNameVal.length < 2 || shopNameVal.length > 100) {
+        setFieldError('shopName', 'Shop name must be between 2 and 100 characters.');
+        isValid = false;
+      }
+
+      // 2. Business Number: 7 - 20 chars
+      const businessNumVal = businessNumberInput.value.trim();
+      if (!businessNumVal) {
+        setFieldError('businessNumber', 'Business number is required.');
+        isValid = false;
+      } else if (businessNumVal.length < 7 || businessNumVal.length > 20) {
+        setFieldError('businessNumber', 'Business number must be between 7 and 20 characters.');
+        isValid = false;
+      }
+
+      // 3. Address: 5 - 300 chars
+      const addressVal = addressInput.value.trim();
+      if (!addressVal) {
+        setFieldError('address', 'Shop address is required.');
+        isValid = false;
+      } else if (addressVal.length < 5 || addressVal.length > 300) {
+        setFieldError('address', 'Address must be between 5 and 300 characters.');
+        isValid = false;
+      }
+
+      // 4. Country
+      if (!countrySelect.value) {
+        setFieldError('country', 'Please select a country.');
+        isValid = false;
+      }
+
+      // 5. Language
+      if (!languageSelect.value) {
+        setFieldError('language', 'Please select a language.');
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    // ==========================================
+    // AUTHENTICATION LISTENER & INITIALIZATION
+    // ==========================================
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        // User not logged in: Show Modal and redirect
+        authModal.classList.remove('hidden');
+        showToast('Please login first', 'error');
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 2000);
+        return;
+      }
+
+      currentUser = user;
+      await loadShopData(currentUser.uid);
+    });
+
+    // ==========================================
+    // LOAD SHOP DATA FROM FIRESTORE
+    // ==========================================
+    async function loadShopData(uid) {
+      try {
+        const shopRef = doc(db, 'shops', uid);
+        const shopSnap = await getDoc(shopRef);
+
+        if (!shopSnap.exists()) {
+          showErrorBanner('Shop information not found.');
+          showToast('Shop information not found.', 'error');
+          pageLoader.classList.add('hidden');
+          return;
+        }
+
+        const shopData = shopSnap.data();
+
+        // Populate Form Fields
+        shopNameInput.value = shopData.shopName || '';
+        businessNumberInput.value = shopData.businessNumber || '';
+        addressInput.value = shopData.address || '';
+        addressCharCounter.textContent = `${addressInput.value.length} / 300`;
+
+        if (shopData.country) {
+          countrySelect.value = shopData.country;
+        }
+        if (shopData.language) {
+          languageSelect.value = shopData.language;
+        }
+
+        // Hide Loader & Show Form Card
+        pageLoader.classList.add('hidden');
+        mainCard.classList.remove('hidden');
+
+      } catch (err) {
+        console.error('Error fetching shop data:', err);
+        const friendlyMessage = parseFirebaseError(err);
+        showErrorBanner(friendlyMessage);
+        showToast(friendlyMessage, 'error');
+        pageLoader.classList.add('hidden');
+      }
+    }
+
+    function showErrorBanner(msg) {
+      errorBannerText.textContent = msg;
+      errorBanner.classList.remove('hidden');
+    }
+
+    // ==========================================
+    // FORM SUBMISSION & UPDATE LOGIC
+    // ==========================================
+    editShopForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (isSubmitting || !currentUser) return;
+
+      // Reset previous error messages
+      ['shopName', 'businessNumber', 'address', 'country', 'language'].forEach(clearFieldError);
+
+      if (!validateForm()) {
+        showToast('Please correct the highlighted errors.', 'error');
+        return;
+      }
+
+      isSubmitting = true;
+      setButtonLoadingState(true);
+
+      // Extract ONLY the allowed 5 fields
+      const updatedFields = {
+        shopName: shopNameInput.value.trim(),
+        businessNumber: businessNumberInput.value.trim(),
+        address: addressInput.value.trim(),
+        country: countrySelect.value,
+        language: languageSelect.value
+      };
+
+      try {
+        const shopRef = doc(db, 'shops', currentUser.uid);
+
+        // Perform selective field updateDoc (never setDoc, never overwrites protected fields)
+        await updateDoc(shopRef, updatedFields);
+
+        // Success Feedback
+        showToast('✓ Shop information updated successfully!', 'success');
+        setButtonSuccessState();
+
+      } catch (err) {
+        console.error('Error updating shop data:', err);
+        const friendlyMessage = parseFirebaseError(err);
+        showToast(friendlyMessage, 'error');
+        setButtonDefaultState();
+      } finally {
+        isSubmitting = false;
+      }
+    });
+
+    // Button UI Controller
+    function setButtonLoadingState(isLoading) {
+      if (isLoading) {
+        btnSave.disabled = true;
+        btnIcon.className = 'spinner';
+        btnIcon.innerHTML = '';
+        btnText.textContent = 'Saving...';
+      }
+    }
+
+    function setButtonSuccessState() {
+      btnSave.disabled = true;
+      btnSave.classList.add('success');
+      btnIcon.className = '';
+      btnIcon.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+      btnText.textContent = 'Saved ✓';
+
+      setTimeout(() => {
+        setButtonDefaultState();
+      }, 2500);
+    }
+
+    function setButtonDefaultState() {
+      btnSave.disabled = false;
+      btnSave.classList.remove('success');
+      btnIcon.className = '';
+      btnIcon.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>`;
+      btnText.textContent = 'Save Changes';
+    }
+
+    // ==========================================
+    // ERROR HANDLER (Readable Custom Messages)
+    // ==========================================
+    function parseFirebaseError(error) {
+      if (!error || !error.code) {
+        if (error && error.message && error.message.includes('network')) {
+          return 'Network error. Please check your internet connection.';
+        }
+        return 'Something went wrong. Please try again.';
+      }
+
+      switch (error.code) {
+        case 'permission-denied':
+          return "You don't have permission to update this shop.";
+        case 'not-found':
+          return 'Shop information not found.';
+        case 'unavailable':
+        case 'network-request-failed':
+          return 'Network error. Please check your internet connection.';
+        default:
+          return 'Something went wrong. Please try again.';
+      }
+    }
+
+    // ==========================================
+    // CUSTOM TOAST SYSTEM
+    // ==========================================
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('app-toast');
+      const toastIcon = document.getElementById('toast-icon');
+      const toastMsg = document.getElementById('toast-message');
+
+      toastMsg.textContent = message;
+
+      if (type === 'success') {
+        toastIcon.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success-color)" stroke-width="3"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+      } else {
+        toastIcon.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--error-color)" stroke-width="3"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`;
+      }
+
+      toast.className = `toast ${type} active`;
+
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

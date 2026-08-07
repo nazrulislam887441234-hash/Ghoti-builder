@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set Your Shop Username - GHOTI BUILDER</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================================
+       GHOTI BUILDER - PURE CSS STYLES
+       Modern SaaS UI Palette
+       Navy: #0A192F | Accent: #FF6B00 | Slate: #0F172A
+       ======================================================== */
+    :root {
+      --bg-color: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --primary-navy: #0A192F;
+      --accent-orange: #FF6B00;
+      --accent-orange-hover: #E05D00;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --input-bg: #F8FAFC;
+      --success-color: #16A34A;
+      --error-color: #DC2626;
+      --warning-color: #D97706;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --font-bn: 'Hind Siliguri', sans-serif;
+      --font-en: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-bn);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem 1rem;
+    }
+
+    /* Header Section */
+    .app-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-en);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary-navy);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .brand-badge {
+      background-color: var(--accent-orange);
+      color: #FFFFFF;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header-subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* Container Card */
+    .main-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      width: 100%;
+      max-width: 680px;
+      box-shadow: 0 10px 30px -5px rgba(10, 25, 47, 0.05);
+      position: relative;
+    }
+
+    /* Global Full Loader */
+    .page-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1rem;
+      gap: 1rem;
+      color: var(--text-muted);
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border-color);
+      border-top-color: var(--accent-orange);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Card Content Headers */
+    .card-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-description {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Existing Username Card Banner */
+    .existing-username-banner {
+      background-color: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .existing-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #166534;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .existing-handle {
+      font-family: var(--font-en);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #14532D;
+    }
+
+    .btn-edit {
+      background-color: #FFFFFF;
+      border: 1px solid #86EFAC;
+      color: #15803D;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-edit:hover {
+      background-color: #DCFCE7;
+    }
+
+    /* Input Controls */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-prefix {
+      position: absolute;
+      left: 1.25rem;
+      font-family: var(--font-en);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent-orange);
+      pointer-events: none;
+    }
+
+    .username-input {
+      width: 100%;
+      font-family: var(--font-en);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary-navy);
+      background-color: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.875rem 2.75rem 0.875rem 2.75rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .username-input:focus {
+      background-color: #FFFFFF;
+      border-color: var(--accent-orange);
+      box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.12);
+    }
+
+    .input-spinner {
+      position: absolute;
+      right: 1.25rem;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-color);
+      border-top-color: var(--accent-orange);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    .input-hint {
+      display: block;
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    /* Status Indicator Box */
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-top: 0.625rem;
+      min-height: 24px;
+    }
+
+    .status-indicator.success { color: var(--success-color); }
+    .status-indicator.error { color: var(--error-color); }
+    .status-indicator.warning { color: var(--warning-color); }
+
+    /* Live Preview Box */
+    .preview-card {
+      background-color: #F1F5F9;
+      border: 1px dashed #CBD5E1;
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .preview-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .preview-url {
+      font-family: var(--font-en);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      word-break: break-all;
+    }
+
+    /* Action Button */
+    .btn-save {
+      width: 100%;
+      background-color: var(--accent-orange);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.875rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 14px rgba(255, 107, 0, 0.2);
+    }
+
+    .btn-save:hover:not(:disabled) {
+      background-color: var(--accent-orange-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-save:disabled {
+      background-color: #CBD5E1;
+      color: #94A3B8;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    /* Auth Guard & Error Screen */
+    .state-screen {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .state-icon {
+      width: 60px;
+      height: 60px;
+      background-color: #FEF2F2;
+      color: var(--error-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem auto;
+    }
+
+    .state-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .state-desc {
+      color: var(--text-muted);
+      font-size: 0.925rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      background-color: var(--primary-navy);
+      color: #FFFFFF;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn-secondary:hover {
+      opacity: 0.9;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+    }
+
+    .toast {
+      background-color: var(--primary-navy);
+      color: #FFFFFF;
+      padding: 0.875rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success { border-left: 4px solid var(--success-color); }
+    .toast.error { border-left: 4px solid var(--error-color); }
+
+    /* Utility */
+    .hidden { display: none !important; }
+
+    @media (max-width: 640px) {
+      body { padding: 1rem 0.5rem; }
+      .main-card { padding: 1.5rem; }
+      .toast-container { left: 1rem; right: 1rem; bottom: 1rem; }
+      .toast { text-align: center; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <a href="#" class="brand-logo">
+      GHOTI BUILDER <span class="brand-badge">SaaS</span>
+    </a>
+    <p class="header-subtitle">আপনার শপের জন্য একটি ইউনিক ওয়েব এড্রেস তৈরি করুন</p>
+  </header>
+
+  <!-- Main Card Container -->
+  <main class="main-card">
+
+    <!-- 1. Global Page Loader -->
+    <div id="page-loader" class="page-loader">
+      <div class="spinner"></div>
+      <p>Checking your shop authentication...</p>
+    </div>
+
+    <!-- 2. Auth Required Screen -->
+    <div id="auth-required-screen" class="state-screen hidden">
+      <div class="state-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+      </div>
+      <h2 class="state-title">Login Required</h2>
+      <p class="state-desc">Username সেট করার জন্য আপনাকে প্রথমে অ্যাকাউন্টে লগইন করতে হবে।</p>
+      <a href="login.html" id="login-redirect-btn" class="btn-secondary">Go to Login</a>
+    </div>
+
+    <!-- 3. Shop Profile Not Found Screen -->
+    <div id="shop-not-found-screen" class="state-screen hidden">
+      <div class="state-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+      </div>
+      <h2 class="state-title">Shop Profile Not Found</h2>
+      <p class="state-desc">আপনার অ্যাকাউন্টের সাথে কোনো Shop Profile খুঁজে পাওয়া যায়নি।</p>
+      <a href="dashboard.html" class="btn-secondary">Go to Dashboard</a>
+    </div>
+
+    <!-- 4. Main Username Setup Form Container -->
+    <div id="setup-form-container" class="hidden">
+      
+      <!-- Existing Username View Banner (If already set) -->
+      <div id="existing-username-banner" class="existing-username-banner hidden">
+        <div>
+          <span class="existing-title">Your Current Username</span>
+          <div id="existing-handle-text" class="existing-handle">@myshop</div>
+        </div>
+        <button type="button" id="btn-enable-edit" class="btn-edit">Change Username</button>
+      </div>
+
+      <h1 class="card-title">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        Set Your Username
+      </h1>
+      <p class="card-description">
+        Choose a unique username for your shop. This username will help customers find and identify your store easily.
+      </p>
+
+      <form id="username-form" onsubmit="return false;">
+        <!-- Input Group -->
+        <div class="form-group">
+          <label for="username-input" class="input-label">Shop Username</label>
+          <div class="input-wrapper">
+            <span class="input-prefix">@</span>
+            <input 
+              type="text" 
+              id="username-input" 
+              class="username-input" 
+              placeholder="myshop" 
+              maxlength="20"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <div id="input-spinner" class="input-spinner hidden"></div>
+          </div>
+          <span class="input-hint">4–20 characters • lowercase letters, numbers and underscore only</span>
+
+          <!-- Real-time Status Indicator -->
+          <div id="status-indicator" class="status-indicator hidden">
+            <span id="status-icon"></span>
+            <span id="status-text"></span>
+          </div>
+        </div>
+
+        <!-- Live URL Preview -->
+        <div class="preview-card">
+          <div class="preview-title">Shop URL Preview</div>
+          <div id="preview-url-text" class="preview-url">https://ghotimarket.com/shop/myshop</div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="button" id="btn-save" class="btn-save" disabled>
+          Save Username
+        </button>
+      </form>
+    </div>
+
+  </main>
+
+  <!-- Toast System -->
+  <div class="toast-container">
+    <div id="app-toast" class="toast">
+      <span id="toast-message"></span>
+    </div>
+  </div>
+
+  <!-- Firebase Modular SDK Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      updateDoc, 
+      collection, 
+      query, 
+      where, 
+      getDocs 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // ========================================================
+    // 1. CONFIGURATION VARIABLES
+    // ========================================================
+    const firebaseConfig = {
+  apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
+  authDomain: "ghotimarket.firebaseapp.com",
+  databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
+  projectId: "ghotimarket",
+  storageBucket: "ghotimarket.firebasestorage.app",
+  messagingSenderId: "481257644093",
+  appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
+  measurementId: "G-4SR8V2EKC1"
+};
+
+    const SHOP_BASE_URL = "https://ghotimarket.com/shop/";
+    const SUCCESS_REDIRECT_URL = "dashboard.html";
+
+    const RESERVED_USERNAMES = [
+      "admin", "administrator", "support", "help", "contact",
+      "shop", "store", "ghoti", "ghotimarket", "ghotibuilder",
+      "api", "dashboard", "login", "register", "signup",
+      "user", "users", "root", "system", "official"
+    ];
+
+    // ========================================================
+    // 2. FIREBASE INITIALIZATION
+    // ========================================================
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // ========================================================
+    // 3. APPLICATION STATE
+    // ========================================================
+    let currentUser = null;
+    let shopDocRef = null;
+    let existingUsernameLower = "";
+    let isEditingMode = false;
+    let debounceTimer = null;
+    let currentSearchRequestId = 0; // Prevent race conditions in UI
+    let isUsernameValidAndAvailable = false;
+
+    // DOM Elements
+    const pageLoader = document.getElementById('page-loader');
+    const authRequiredScreen = document.getElementById('auth-required-screen');
+    const shopNotFoundScreen = document.getElementById('shop-not-found-screen');
+    const setupFormContainer = document.getElementById('setup-form-container');
+    const existingUsernameBanner = document.getElementById('existing-username-banner');
+    const existingHandleText = document.getElementById('existing-handle-text');
+    const btnEnableEdit = document.getElementById('btn-enable-edit');
+    const usernameInput = document.getElementById('username-input');
+    const inputSpinner = document.getElementById('input-spinner');
+    const statusIndicator = document.getElementById('status-indicator');
+    const statusIcon = document.getElementById('status-icon');
+    const statusText = document.getElementById('status-text');
+    const previewUrlText = document.getElementById('preview-url-text');
+    const btnSave = document.getElementById('btn-save');
+
+    // ========================================================
+    // 4. AUTHENTICATION & SHOP INITIALIZATION
+    // ========================================================
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        showScreen('auth');
+        return;
+      }
+
+      currentUser = user;
+      shopDocRef = doc(db, "shops", currentUser.uid);
+
+      try {
+        const shopSnap = await getDoc(shopDocRef);
+
+        if (!shopSnap.exists()) {
+          showScreen('not-found');
+          return;
+        }
+
+        const shopData = shopSnap.data();
+        showScreen('form');
+        initShopForm(shopData);
+
+      } catch (error) {
+        console.error("Error loading shop document:", error);
+        showToast("Unable to load shop data. Network problem.", "error");
+        showScreen('not-found');
+      }
+    });
+
+    function showScreen(screenType) {
+      pageLoader.classList.add('hidden');
+      authRequiredScreen.classList.add('hidden');
+      shopNotFoundScreen.classList.add('hidden');
+      setupFormContainer.classList.add('hidden');
+
+      if (screenType === 'auth') authRequiredScreen.classList.remove('hidden');
+      if (screenType === 'not-found') shopNotFoundScreen.classList.remove('hidden');
+      if (screenType === 'form') setupFormContainer.classList.remove('hidden');
+    }
+
+    function initShopForm(shopData) {
+      if (shopData.username && shopData.usernameLower) {
+        existingUsernameLower = shopData.usernameLower;
+        existingHandleText.textContent = `@${shopData.username}`;
+        existingUsernameBanner.classList.remove('hidden');
+        
+        // Locked by default if username already exists
+        usernameInput.value = shopData.username;
+        usernameInput.disabled = true;
+        btnSave.classList.add('hidden');
+        updatePreview(shopData.username);
+        showStatus('success', '✓', 'Username already set');
+      } else {
+        // First time setup
+        usernameInput.disabled = false;
+        btnSave.classList.remove('hidden');
+        updatePreview('myshop');
+      }
+    }
+
+    // Enable Editing Existing Username
+    btnEnableEdit.addEventListener('click', () => {
+      isEditingMode = true;
+      usernameInput.disabled = false;
+      btnSave.classList.remove('hidden');
+      btnEnableEdit.classList.add('hidden');
+      usernameInput.focus();
+      showStatus('warning', '⚠', 'Editing your existing username');
+    });
+
+    // ========================================================
+    // 5. USERNAME VALIDATION & DEBOUNCED AVAILABILITY CHECK
+    // ========================================================
+    usernameInput.addEventListener('input', (e) => {
+      // Automatic lowercase & whitespace trim
+      let rawVal = e.target.value.trim().toLowerCase();
+      e.target.value = rawVal;
+
+      clearTimeout(debounceTimer);
+      isUsernameValidAndAvailable = false;
+      btnSave.disabled = true;
+
+      updatePreview(rawVal || 'myshop');
+
+      if (!rawVal) {
+        hideStatus();
+        hideInputSpinner();
+        return;
+      }
+
+      // Format Validation Rules
+      const validationError = validateUsernameFormat(rawVal);
+      if (validationError) {
+        hideInputSpinner();
+        showStatus('error', '✕', validationError);
+        return;
+      }
+
+      // Reserved Username Check
+      if (RESERVED_USERNAMES.includes(rawVal)) {
+        hideInputSpinner();
+        showStatus('error', '✕', 'This username is reserved');
+        return;
+      }
+
+      // Self Ownership Check (If user types their current active username)
+      if (existingUsernameLower && rawVal === existingUsernameLower) {
+        hideInputSpinner();
+        isUsernameValidAndAvailable = true;
+        btnSave.disabled = false;
+        showStatus('success', '✓', 'This is your current username');
+        return;
+      }
+
+      // Show Checking Loader & Trigger 500ms Debounce Query
+      showInputSpinner();
+      showStatus('warning', '', 'Checking...');
+
+      const requestId = ++currentSearchRequestId;
+
+      debounceTimer = setTimeout(() => {
+        checkUsernameAvailabilityInFirestore(rawVal, requestId);
+      }, 500);
+    });
+
+    // Format Validation Logic
+    function validateUsernameFormat(val) {
+      if (val.length < 4) return "Minimum 4 characters required";
+      if (val.length > 20) return "Maximum 20 characters allowed";
+      
+      const regex = /^[a-z0-9_]{4,20}$/;
+      if (!regex.test(val)) {
+        return "Only lowercase letters, numbers, and underscore allowed";
+      }
+      return null;
+    }
+
+    // Firestore Availability Query
+    async function checkUsernameAvailabilityInFirestore(normalizedUsername, requestId) {
+      try {
+        const shopsRef = collection(db, "shops");
+        const q = query(shopsRef, where("usernameLower", "==", normalizedUsername));
+        const querySnapshot = await getDocs(q);
+
+        // Prevent race conditions: ignore if user typed something new while fetching
+        if (requestId !== currentSearchRequestId) return;
+
+        hideInputSpinner();
+
+        if (querySnapshot.empty) {
+          // Username is free
+          isUsernameValidAndAvailable = true;
+          btnSave.disabled = false;
+          showStatus('success', '✓', 'Username available');
+        } else {
+          // Document exists, check if it belongs to current logged-in user
+          const matchedDoc = querySnapshot.docs[0];
+          if (matchedDoc.id === currentUser.uid) {
+            isUsernameValidAndAvailable = true;
+            btnSave.disabled = false;
+            showStatus('success', '✓', 'This is your current username');
+          } else {
+            isUsernameValidAndAvailable = false;
+            btnSave.disabled = true;
+            showStatus('error', '✕', 'Username already taken');
+          }
+        }
+      } catch (err) {
+        console.error("Availability Check Error:", err);
+        hideInputSpinner();
+        showStatus('error', '✕', 'Unable to check availability');
+      }
+    }
+
+    // ========================================================
+    // 6. SAVE USERNAME TO FIRESTORE (SAFE UPDATE)
+    // ========================================================
+    btnSave.addEventListener('click', async () => {
+      const finalUsername = usernameInput.value.trim().toLowerCase();
+
+      if (!isUsernameValidAndAvailable || !finalUsername) return;
+
+      btnSave.disabled = true;
+      btnSave.textContent = "Saving...";
+      showInputSpinner();
+
+      try {
+        // Final Double Check before saving
+        const shopsRef = collection(db, "shops");
+        const q = query(shopsRef, where("usernameLower", "==", finalUsername));
+        const checkSnap = await getDocs(q);
+
+        let isSafeToSave = false;
+        if (checkSnap.empty) {
+          isSafeToSave = true;
+        } else if (checkSnap.docs[0].id === currentUser.uid) {
+          isSafeToSave = true;
+        }
+
+        if (!isSafeToSave) {
+          hideInputSpinner();
+          btnSave.textContent = "Save Username";
+          showStatus('error', '✕', 'Username was taken just now by another user');
+          showToast("Username is no longer available.", "error");
+          return;
+        }
+
+        // SAFE UPDATE: Update only username fields without overwriting other shop fields
+        await updateDoc(shopDocRef, {
+          username: finalUsername,
+          usernameLower: finalUsername
+        });
+
+        hideInputSpinner();
+        showToast("✓ Username saved successfully!", "success");
+        showStatus('success', '✓', 'Username saved successfully!');
+
+        // Redirect after short delay
+        setTimeout(() => {
+          window.location.href = SUCCESS_REDIRECT_URL;
+        }, 1500);
+
+      } catch (err) {
+        console.error("Firestore Save Error:", err);
+        hideInputSpinner();
+        btnSave.disabled = false;
+        btnSave.textContent = "Save Username";
+        showStatus('error', '✕', 'Unable to save your username. Try again.');
+        showToast("Connection problem or permission error.", "error");
+      }
+    });
+
+    // ========================================================
+    // 7. HELPER FUNCTIONS
+    // ========================================================
+    function updatePreview(val) {
+      previewUrlText.textContent = `${SHOP_BASE_URL}${val}`;
+    }
+
+    function showStatus(type, icon, text) {
+      statusIndicator.className = `status-indicator ${type}`;
+      statusIcon.textContent = icon;
+      statusText.textContent = text;
+      statusIndicator.classList.remove('hidden');
+    }
+
+    function hideStatus() {
+      statusIndicator.classList.add('hidden');
+    }
+
+    function showInputSpinner() {
+      inputSpinner.classList.remove('hidden');
+    }
+
+    function hideInputSpinner() {
+      inputSpinner.classList.add('hidden');
+    }
+
+    function showToast(msg, type = "info") {
+      const toast = document.getElementById('app-toast');
+      const toastMsg = document.getElementById('toast-message');
+      
+      toastMsg.textContent = msg;
+      toast.className = `toast ${type} active`;
+
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3500);
+    }
+
+    /* ========================================================
+       SECURITY & ARCHITECTURAL NOTES
+       1. why `usernameLower` is used:
+          Firestore queries are case-sensitive. Storing a normalized 
+          lowercase version (usernameLower) ensures reliable case-insensitive
+          uniqueness checks (e.g. 'MyShop' and 'myshop' equate to same query).
+
+       2. Client-side availability vs Race Conditions:
+          Querying `where("usernameLower", "==", val)` followed by an `updateDoc`
+          is sufficient for normal application traffic. However, in high-concurrency
+          environments, two users submitting the exact same query simultaneously 
+          could lead to a race condition.
+
+       3. Production Uniqueness Recommendation:
+          If 100% strict lock condition is required, a dedicated Firestore collection
+          like `usernames/{usernameLower}` or a Firebase Cloud Function with 
+          Transactions should be implemented. Under current requirements, this code
+          performs double verification checks right before updating `shops/{uid}`.
+       ======================================================== */
+  </script>
+</body>
+</html>

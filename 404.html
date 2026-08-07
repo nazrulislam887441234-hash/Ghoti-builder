@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | GHOTI BUILDER</title>
+  <meta name="description" content="The requested page could not be found on GHOTI BUILDER.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS Variables & Theme Setup */
+    :root {
+      --primary: #0A192F;
+      --primary-light: #1E293B;
+      --accent: #FF6B00;
+      --accent-hover: #E05D00;
+      --accent-soft: rgba(255, 107, 0, 0.1);
+      --bg-main: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --text-dark: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 12px 32px -8px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 20px 40px -12px rgba(10, 25, 47, 0.12);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Reset & Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    /* Background Ambient Elements */
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .bg-shape-1 {
+      top: -100px;
+      right: -100px;
+      width: 450px;
+      height: 450px;
+      background: rgba(255, 107, 0, 0.08);
+      animation: floatShape 12s infinite alternate ease-in-out;
+    }
+
+    .bg-shape-2 {
+      bottom: -150px;
+      left: -100px;
+      width: 500px;
+      height: 500px;
+      background: rgba(10, 25, 47, 0.06);
+      animation: floatShape 16s infinite alternate-reverse ease-in-out;
+    }
+
+    /* Minimal Header */
+    .site-header {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+      transition: var(--transition);
+    }
+
+    .brand-logo:hover {
+      opacity: 0.9;
+    }
+
+    .brand-icon-wrapper {
+      width: 38px;
+      height: 38px;
+      background: var(--primary);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      transition: var(--transition);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .nav-link:hover, .nav-link:focus-visible {
+      color: var(--primary);
+      background-color: rgba(15, 23, 42, 0.04);
+    }
+
+    /* Main Container */
+    .main-container {
+      flex: 1;
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.5rem;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .error-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 3.5rem 2.5rem;
+      width: 100%;
+      max-width: 860px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+
+    /* Illustration Styling */
+    .illustration-wrapper {
+      margin: 0 auto 1.5rem auto;
+      max-width: 320px;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .floating-svg {
+      width: 100%;
+      height: auto;
+      animation: floatIllustration 4s infinite ease-in-out;
+    }
+
+    /* Animated 404 Typography */
+    .error-code {
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--primary) 30%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.75rem;
+      display: inline-block;
+      animation: pulseCode 3s infinite ease-in-out;
+    }
+
+    /* Content Typography */
+    .error-heading {
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .bengali-text {
+      font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .sub-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto 2rem auto;
+    }
+
+    /* Action Buttons */
+    .actions-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8125rem 1.625rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      transition: var(--transition);
+      cursor: pointer;
+      border: 1px solid transparent;
+      outline: none;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(10, 25, 47, 0.15);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(10, 25, 47, 0.25);
+    }
+
+    .btn-secondary {
+      background-color: #FFFFFF;
+      color: var(--text-dark);
+      border-color: var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary:hover {
+      background-color: #F1F5F9;
+      border-color: #CBD5E1;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border-color: rgba(10, 25, 47, 0.15);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: translateY(0) !important;
+    }
+
+    /* Search Area */
+    .search-section {
+      max-width: 440px;
+      margin: 0 auto;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .search-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .search-form {
+      display: flex;
+      gap: 0.5rem;
+      position: relative;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      color: var(--text-dark);
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      background-color: #FFFFFF;
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .search-btn {
+      padding: 0.75rem 1.25rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      background-color: var(--accent);
+      color: #FFFFFF;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .search-btn:hover {
+      background-color: var(--accent-hover);
+    }
+
+    /* Interactive Notification Toast */
+    .toast-message {
+      position: absolute;
+      bottom: -45px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--primary);
+      color: #FFFFFF;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      white-space: nowrap;
+      box-shadow: var(--shadow-md);
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .toast-message.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Minimal Footer */
+    .site-footer {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(226, 232, 240, 0.7);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .footer-tagline {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    /* Keyframe Animations */
+    @keyframes floatIllustration {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes pulseCode {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.85;
+      }
+    }
+
+    @keyframes floatShape {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        transform: translate(30px, 40px) scale(1.08);
+      }
+    }
+
+    /* Accessibility: Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .bg-shape,
+      .floating-svg,
+      .error-code {
+        animation: none !important;
+        transform: none !important;
+      }
+      .btn, .nav-link, .search-btn {
+        transition: none !important;
+      }
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 640px) {
+      .site-header {
+        padding: 1.25rem 1rem 0 1.0rem;
+      }
+
+      .main-container {
+        padding: 1.5rem 1rem;
+      }
+
+      .error-card {
+        padding: 2.25rem 1.25rem;
+        border-radius: var(--radius-md);
+      }
+
+      .actions-wrapper {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .site-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+        padding: 1.25rem 1rem;
+      }
+
+      .search-form {
+        flex-direction: column;
+      }
+
+      .search-btn {
+        width: 100%;
+      }
+
+      .toast-message {
+        width: 90%;
+        white-space: normal;
+        text-align: center;
+        bottom: -55px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Glowing Orbs -->
+  <div class="bg-shape bg-shape-1" aria-hidden="true"></div>
+  <div class="bg-shape bg-shape-2" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="brand-logo" aria-label="GHOTI BUILDER Home">
+      <div class="brand-icon-wrapper">
+        <!-- Modern E-commerce Bag & Gear SVG Icon -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+      </div>
+      <span>GHOTI BUILDER</span>
+    </a>
+
+    <nav class="header-nav" aria-label="Quick links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+    </nav>
+  </header>
+
+  <!-- Main Section -->
+  <main class="main-container">
+    <article class="error-card">
+      
+      <!-- SaaS SVG Illustration -->
+      <div class="illustration-wrapper" aria-hidden="true">
+        <svg class="floating-svg" viewBox="0 0 360 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer Floating Web Page Card -->
+          <rect x="30" y="20" width="300" height="180" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
+          <rect x="30" y="20" width="300" height="38" rx="16" fill="#F8FAFC" />
+          <line x1="30" y1="58" x2="330" y2="58" stroke="#E2E8F0" stroke-width="1.5" />
+          
+          <!-- Window Dots -->
+          <circle cx="52" cy="39" r="4" fill="#FF5F56" />
+          <circle cx="66" cy="39" r="4" fill="#FFBD2E" />
+          <circle cx="80" cy="39" r="4" fill="#27C93F" />
+          
+          <!-- Mock Nav Bar in Card -->
+          <rect x="230" y="34" width="70" height="10" rx="5" fill="#E2E8F0" />
+
+          <!-- Center Broken Store/Navigation Element -->
+          <rect x="110" y="80" width="140" height="90" rx="10" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="4 4" />
+          
+          <!-- Broken Link / Shopping Bag Vector -->
+          <g transform="translate(155, 98)">
+            <!-- Shopping Bag -->
+            <path d="M10 8L3 14V30C3 31.1 3.9 32 5 32H45C46.1 32 47 31.1 47 30V14L40 8H10Z" stroke="#0A192F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="#FFFFFF" />
+            <path d="M16 14C16 18.4 19.6 22 24 22C28.4 22 32 18.4 32 14" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" />
+            <!-- Disconnected Plug / Wire Line -->
+            <path d="M-15 35L5 25" stroke="#CBD5E1" stroke-width="2.5" stroke-linecap="round" />
+            <path d="M45 25L65 35" stroke="#CBD5E1" stroke-width="2.5" stroke-linecap="round" />
+          </g>
+
+          <!-- Floating Accent Elements -->
+          <circle cx="85" cy="115" r="16" fill="rgba(255, 107, 0, 0.12)" />
+          <path d="M80 115L90 115" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" />
+          <path d="M85 110L85 120" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" />
+
+          <circle cx="275" cy="140" r="12" fill="rgba(10, 25, 47, 0.08)" />
+          <circle cx="275" cy="140" r="4" fill="#0A192F" />
+        </svg>
+      </div>
+
+      <!-- Animated 404 Text -->
+      <div class="error-code">404</div>
+
+      <!-- Core Messages -->
+      <h1 class="error-heading">Oops! Page Not Found</h1>
+      <p class="bengali-text">দুঃখিত! আপনি যে পেজটি খুঁজছেন সেটি খুঁজে পাওয়া যায়নি।</p>
+      <p class="sub-text">The page may have been moved, deleted, or the URL may be incorrect.</p>
+
+      <!-- Action Buttons -->
+      <div class="actions-wrapper">
+        <a href="index.html" class="btn btn-primary">
+          <span>&larr;</span> Go Home
+        </a>
+        <button type="button" class="btn btn-secondary" onclick="handleGoBack()">
+          Go Back
+        </button>
+        <a href="dashboard.html" class="btn btn-outline">
+          Dashboard
+        </a>
+      </div>
+
+      <!-- Search Section -->
+      <section class="search-section" aria-label="Page Search">
+        <label for="page-search-input" class="search-label">Looking for something?</label>
+        <form class="search-form" onsubmit="handleSearch(event)">
+          <input 
+            type="text" 
+            id="page-search-input" 
+            class="search-input" 
+            placeholder="Search pages, products, or shop..." 
+            required 
+            autocomplete="off"
+          />
+          <button type="submit" class="search-btn">Search</button>
+        </form>
+        <!-- Dynamic Toast Notification -->
+        <div id="toast-msg" class="toast-message" role="status">
+          Search is not available on this page.
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div>© 2026 GHOTI BUILDER. All rights reserved.</div>
+    <div class="footer-tagline">Build. Sell. Grow.</div>
+  </footer>
+
+  <!-- Vanilla JavaScript -->
+  <script>
+    /**
+     * Handles the Go Back button click using browser history.
+     * Fallback to index.html if no previous history exists.
+     */
+    function handleGoBack() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = 'index.html';
+      }
+    }
+
+    /**
+     * Handles search submission and displays a friendly notification.
+     */
+    function handleSearch(event) {
+      event.preventDefault();
+      
+      const toast = document.getElementById('toast-msg');
+      if (toast) {
+        toast.classList.add('show');
+        
+        // Auto hide after 3.5 seconds
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3500);
+      }
+    }
+  </script>
+</body>
+</html>

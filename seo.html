@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">SEO ও প্রোফাইল আপডেট - GHOTI BUILDER</title>
+  
+  <!-- Google Fonts: Hind Siliguri (Bengali) & Poppins (English) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================================
+       GHOTI BUILDER - SEO HUB PURE CSS STYLES
+       ======================================================== */
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --primary-navy: #0f172a;
+      --secondary-blue: #2563eb;
+      --secondary-blue-light: #eff6ff;
+      --accent-orange: #f97316;
+      --accent-orange-light: #fff7ed;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --border-hover: #cbd5e1;
+      --radius-xl: 20px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+      --shadow-hover: 0 12px 28px -4px rgba(15, 23, 42, 0.12);
+      --font-family: 'Poppins', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* Sticky Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0.875rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+    }
+
+    .btn-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--primary-navy);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .btn-back:hover {
+      background-color: var(--secondary-blue-light);
+      color: var(--secondary-blue);
+      border-color: #bfdbfe;
+      transform: translateX(-2px);
+    }
+
+    .header-title-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    /* Language Toggle Button */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      padding: 0.25rem;
+      border-radius: 30px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .lang-btn {
+      padding: 0.4rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background-color: var(--primary-navy);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+    }
+
+    /* Main Container */
+    .main-wrapper {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.75rem 1.25rem 3rem 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    /* Subtitle Banner */
+    .hero-banner {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background-color: var(--accent-orange-light);
+      color: var(--accent-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hero-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Section Heading */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    /* Single Hub Card */
+    .hub-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--shadow-md);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hub-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background-color: transparent;
+      transition: background-color 0.25s ease;
+    }
+
+    .hub-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--border-hover);
+    }
+
+    .hub-card:hover::before {
+      background-color: var(--secondary-blue);
+    }
+
+    .hub-card:active {
+      transform: scale(0.985);
+    }
+
+    .card-content-left {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      flex: 1;
+    }
+
+    .card-icon-wrap {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+
+    .hub-card:hover .card-icon-wrap {
+      transform: scale(1.05);
+    }
+
+    /* Custom Icon Color Variants */
+    .icon-domain { background-color: #eff6ff; color: #2563eb; }
+    .icon-desc   { background-color: #f0fdf4; color: #16a34a; }
+    .icon-key    { background-color: #f3e8ff; color: #9333ea; }
+    .icon-map    { background-color: #fff7ed; color: #ea580c; }
+    .icon-info   { background-color: #e0f2fe; color: #0284c7; }
+    .icon-media  { background-color: #fce7f3; color: #db2777; }
+
+    .card-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      font-weight: 400;
+    }
+
+    .card-arrow {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--bg-color);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+    }
+
+    .hub-card:hover .card-arrow {
+      background-color: var(--secondary-blue);
+      color: #ffffff;
+      transform: translateX(4px);
+    }
+
+    /* Tip Box */
+    .tip-box {
+      background-color: #fffbebfb;
+      border: 1px solid #fde68a;
+      border-radius: var(--radius-lg);
+      padding: 1.15rem 1.35rem;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      color: #92400e;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tip-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: -2px;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border-color);
+      background-color: #ffffff;
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .footer-brand {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      letter-spacing: 0.02em;
+    }
+
+    .footer-tagline {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .hub-card {
+        padding: 1.25rem;
+      }
+
+      .card-icon-wrap {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-md);
+      }
+
+      .card-title {
+        font-size: 1rem;
+      }
+
+      .card-desc {
+        font-size: 0.825rem;
+      }
+
+      .header-title {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-container {
+        padding: 0.75rem 1rem;
+      }
+
+      .main-wrapper {
+        padding: 1.25rem 1rem 2.5rem 1rem;
+        gap: 1.25rem;
+      }
+
+      .hero-banner {
+        padding: 1rem;
+      }
+
+      .hero-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .hero-text {
+        font-size: 0.875rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Top Header -->
+  <header class="header">
+    <div class="header-container">
+      <div class="header-left">
+        <button type="button" class="btn-back" onclick="handleBack()" aria-label="Go Back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <div class="header-title-wrap">
+          <h1 class="header-title" id="txt-header-title">SEO ও প্রোফাইল আপডেট</h1>
+        </div>
+      </div>
+
+      <!-- Language Switcher -->
+      <div class="lang-switcher" onclick="toggleLanguage()" role="button" tabindex="0" aria-label="Toggle Language" onkeydown="if(event.key==='Enter'||event.key===' ') toggleLanguage()">
+        <button type="button" id="btn-lang-bn" class="lang-btn active">বাংলা</button>
+        <button type="button" id="btn-lang-en" class="lang-btn">English</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-wrapper">
+
+    <!-- Subtitle Banner -->
+    <div class="hero-banner">
+      <div class="hero-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+      </div>
+      <p class="hero-text" id="txt-header-subtitle">
+        আপনার Shop-এর SEO, Profile এবং Branding সহজেই ম্যানেজ করুন
+      </p>
+    </div>
+
+    <!-- Section Heading -->
+    <h2 class="section-title" id="txt-section-heading">
+      আপনি কী আপডেট করতে চান?
+    </h2>
+
+    <!-- 6 Interactive Cards Grid -->
+    <div class="cards-grid">
+
+      <!-- Card 1: Custom Domain -->
+      <div class="hub-card" role="button" tabindex="0" onclick="navigateTo('https://build.ghotimarket.com/domain')" onkeydown="if(event.key==='Enter'||event.key===' ') navigateTo('https://build.ghotimarket.com/domain')">
+        <div class="card-content-left">
+          <div class="card-icon-wrap icon-domain">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          </div>
+          <div class="card-text">
+            <h3 class="card-title" id="txt-card1-title">Custom Domain</h3>
+            <p class="card-desc" id="txt-card1-desc">আপনার Shop-এর Custom Domain সেটআপ ও ম্যানেজ করুন</p>
+          </div>
+        </div>
+        <div class="card-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+      </div>
+
+      <!-- Card 2: Description -->
+      <div class="hub-card" role="button" tabindex="0" onclick="navigateTo('https://build.ghotimarket.com/description')" onkeydown="if(event.key==='Enter'||event.key===' ') navigateTo('https://build.ghotimarket.com/description')">
+        <div class="card-content-left">
+          <div class="card-icon-wrap icon-desc">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <div class="card-text">
+            <h3 class="card-title" id="txt-card2-title">Description</h3>
+            <p class="card-desc" id="txt-card2-desc">আপনার Shop-এর SEO ও Business Description আপডেট করুন</p>
+          </div>
+        </div>
+        <div class="card-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+      </div>
+
+      <!-- Card 3: Keywords -->
+      <div class="hub-card" role="button" tabindex="0" onclick="navigateTo('https://build.ghotimarket.com/keyword')" onkeydown="if(event.key==='Enter'||event.key===' ') navigateTo('https://build.ghotimarket.com/keyword')">
+        <div class="card-content-left">
+          <div class="card-icon-wrap icon-key">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+          </div>
+          <div class="card-text">
+            <h3 class="card-title" id="txt-card3-title">Keyword</h3>
+            <p class="card-desc" id="txt-card3-desc">Search Engine-এর জন্য আপনার Shop Keywords ম্যানেজ করুন</p>
+          </div>
+        </div>
+        <div class="card-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+      </div>
+
+      <!-- Card 4: Sitemap -->
+      <div class="hub-card" role="button" tabindex="0" onclick="navigateTo('https://build.ghotimarket.com/sitemap.html')" onkeydown="if(event.key==='Enter'||event.key===' ') navigateTo('https://build.ghotimarket.com/sitemap')">
+        <div class="card-content-left">
+          <div class="card-icon-wrap icon-map">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><path d="M10 6.5h4"></path><path d="M10 17.5h4"></path><path d="M6.5 10v4"></path><path d="M17.5 10v4"></path></svg>
+          </div>
+          <div class="card-text">
+            <h3 class="card-title" id="txt-card4-title">Sitemap</h3>
+            <p class="card-desc" id="txt-card4-desc">আপনার Shop-এর Sitemap তৈরি ও ম্যানেজ করুন</p>
+          </div>
+        </div>
+        <div class="card-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+      </div>
+
+      <!-- Card 5: Name, Address & Phone -->
+      <div class="hub-card" role="button" tabindex="0" onclick="navigateTo('https://build.ghotimarket.com/personal-edit')" onkeydown="if(event.key==='Enter'||event.key===' ') navigateTo('https://build.ghotimarket.com/personal-edit')">
+        <div class="card-content-left">
+          <div class="card-icon-wrap icon-info">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </div>
+          <div class="card-text">
+            <h3 class="card-title" id="txt-card5-title">নাম, ঠিকানা ও ফোন</h3>
+            <p class="card-desc" id="txt-card5-desc">Shop-এর নাম, Business Address এবং Phone Number পরিবর্তন করুন</p>
+          </div>
+        </div>
+        <div class="card-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+      </div>
+
+      <!-- Card 6: Logo & Banner -->
+      <div class="hub-card" role="button" tabindex="0" onclick="navigateTo('https://build.ghotimarket.com/logo-banner')" onkeydown="if(event.key==='Enter'||event.key===' ') navigateTo('https://build.ghotimarket.com/logo-banner')">
+        <div class="card-content-left">
+          <div class="card-icon-wrap icon-media">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          </div>
+          <div class="card-text">
+            <h3 class="card-title" id="txt-card6-title">Logo ও Banner</h3>
+            <p class="card-desc" id="txt-card6-desc">আপনার Shop Logo এবং Banner আপডেট করুন</p>
+          </div>
+        </div>
+        <div class="card-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SEO & Profile Tip Box -->
+    <div class="tip-box">
+      <span class="tip-icon">💡</span>
+      <div id="txt-tip-box">
+        আপনার Shop-এর নাম, Description, Keywords এবং Sitemap সঠিকভাবে আপডেট রাখলে Search Engine-এ আপনার Shop-এর উপস্থিতি আরও ভালো হতে পারে।
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">© 2026 GHOTI BUILDER</div>
+    <div class="footer-tagline" id="txt-footer-tagline">Build your online shop smarter.</div>
+  </footer>
+
+  <!-- ========================================================
+       APPLICATION LOGIC & LANGUAGE TRANSLATION SYSTEM
+       ======================================================== -->
+  <script>
+    // Complete Translation Dictionary
+    const translations = {
+      bn: {
+        pageTitle: "SEO ও প্রোফাইল আপডেট - GHOTI BUILDER",
+        headerTitle: "SEO ও প্রোফাইল আপডেট",
+        headerSubtitle: "আপনার Shop-এর SEO, Profile এবং Branding সহজেই ম্যানেজ করুন",
+        sectionHeading: "আপনি কী আপডেট করতে চান?",
+        card1Title: "Custom Domain",
+        card1Desc: "আপনার Shop-এর Custom Domain সেটআপ ও ম্যানেজ করুন",
+        card2Title: "Description",
+        card2Desc: "আপনার Shop-এর SEO ও Business Description আপডেট করুন",
+        card3Title: "Keyword",
+        card3Desc: "Search Engine-এর জন্য আপনার Shop Keywords ম্যানেজ করুন",
+        card4Title: "Sitemap",
+        card4Desc: "আপনার Shop-এর Sitemap তৈরি ও ম্যানেজ করুন",
+        card5Title: "নাম, ঠিকানা ও ফোন",
+        card5Desc: "Shop-এর নাম, Business Address এবং Phone Number পরিবর্তন করুন",
+        card6Title: "Logo ও Banner",
+        card6Desc: "আপনার Shop Logo এবং Banner আপডেট করুন",
+        tipBox: "আপনার Shop-এর নাম, Description, Keywords এবং Sitemap সঠিকভাবে আপডেট রাখলে Search Engine-এ আপনার Shop-এর উপস্থিতি আরও ভালো হতে পারে।",
+        footerTagline: "Build your online shop smarter."
+      },
+      en: {
+        pageTitle: "Update SEO & Profile - GHOTI BUILDER",
+        headerTitle: "Update SEO & Profile",
+        headerSubtitle: "Manage your Shop SEO, Profile and Branding easily",
+        sectionHeading: "What would you like to update?",
+        card1Title: "Custom Domain",
+        card1Desc: "Set up and manage your Shop Custom Domain",
+        card2Title: "Description",
+        card2Desc: "Update your Shop SEO and Business Description",
+        card3Title: "Keywords",
+        card3Desc: "Manage your Shop Keywords for Search Engines",
+        card4Title: "Sitemap",
+        card4Desc: "Create and manage your Shop Sitemap",
+        card5Title: "Name, Address & Phone",
+        card5Desc: "Edit your Shop Name, Business Address and Phone Number",
+        card6Title: "Logo & Banner",
+        card6Desc: "Update your Shop Logo and Banner",
+        tipBox: "Keeping your Shop Name, Description, Keywords and Sitemap updated can help improve your Shop's search engine presence.",
+        footerTagline: "Build your online shop smarter."
+      }
+    };
+
+    // Current Active Language ('bn' or 'en')
+    let currentLang = 'bn';
+
+    // Page Load Initialization
+    document.addEventListener('DOMContentLoaded', () => {
+      // Restore Language Preference from localStorage
+      const savedLang = localStorage.getItem('ghoti_lang');
+      if (savedLang === 'en' || savedLang === 'bn') {
+        currentLang = savedLang;
+      }
+      setLanguage(currentLang);
+    });
+
+    // Navigation Helper
+    function navigateTo(url) {
+      if (url) {
+        window.location.href = url;
+      }
+    }
+
+    // Back Button Handler
+    function handleBack() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "https://build.ghotimarket.com";
+      }
+    }
+
+    // Toggle Language Function
+    function toggleLanguage() {
+      currentLang = (currentLang === 'bn') ? 'en' : 'bn';
+      setLanguage(currentLang);
+    }
+
+    // Apply Language Changes to All UI Elements
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('ghoti_lang', lang);
+
+      const t = translations[lang];
+      if (!t) return;
+
+      // HTML Document Lang Attribute
+      document.documentElement.lang = lang;
+
+      // Update Page Title & Texts
+      document.getElementById('page-title').textContent = t.pageTitle;
+      document.getElementById('txt-header-title').textContent = t.headerTitle;
+      document.getElementById('txt-header-subtitle').textContent = t.headerSubtitle;
+      document.getElementById('txt-section-heading').textContent = t.sectionHeading;
+
+      document.getElementById('txt-card1-title').textContent = t.card1Title;
+      document.getElementById('txt-card1-desc').textContent = t.card1Desc;
+
+      document.getElementById('txt-card2-title').textContent = t.card2Title;
+      document.getElementById('txt-card2-desc').textContent = t.card2Desc;
+
+      document.getElementById('txt-card3-title').textContent = t.card3Title;
+      document.getElementById('txt-card3-desc').textContent = t.card3Desc;
+
+      document.getElementById('txt-card4-title').textContent = t.card4Title;
+      document.getElementById('txt-card4-desc').textContent = t.card4Desc;
+
+      document.getElementById('txt-card5-title').textContent = t.card5Title;
+      document.getElementById('txt-card5-desc').textContent = t.card5Desc;
+
+      document.getElementById('txt-card6-title').textContent = t.card6Title;
+      document.getElementById('txt-card6-desc').textContent = t.card6Desc;
+
+      document.getElementById('txt-tip-box').textContent = t.tipBox;
+      document.getElementById('txt-footer-tagline').textContent = t.footerTagline;
+
+      // Update Language Switcher UI Active State
+      const btnBn = document.getElementById('btn-lang-bn');
+      const btnEn = document.getElementById('btn-lang-en');
+
+      if (lang === 'bn') {
+        btnBn.classList.add('active');
+        btnEn.classList.remove('active');
+      } else {
+        btnEn.classList.add('active');
+        btnBn.classList.remove('active');
+      }
+    }
+  </script>
+</body>
+</html>

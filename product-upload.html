@@ -629,38 +629,47 @@
     });
 
     async function checkProfileUnlocked(uid) {
-      try {
-        const userDocRef = doc(db, "shops", uid);
-        const userDocSnap = await getDoc(userDocRef);
+  try {
+    const shopDocRef = doc(db, "shops", uid);
+    const shopDocSnap = await getDoc(shopDocRef);
 
-        if (userDocSnap.exists()) {
-          const data = userDocSnap.data();
-          const profileUnlocked = data.profileUnlocked;
+    if (shopDocSnap.exists()) {
+      const data = shopDocSnap.data();
+      const profileUnlocked = data.profileUnlocked; // shops collection এর field
 
-          // Check if profileUnlocked exists and is valid (Future Timestamp)
-          if (profileUnlocked && profileUnlocked.toMillis) {
-            const expireTime = profileUnlocked.toMillis();
-            const currentTime = Date.now();
+      // Check if profileUnlocked exists and is a Firestore Timestamp
+      if (profileUnlocked && typeof profileUnlocked.toMillis === 'function') {
+        const expireTime = profileUnlocked.toMillis(); // Timestamp -> ms
+        const currentTime = Date.now();
 
-            if (expireTime > currentTime) {
-              isProfileUnlockedValid = true;
-            }
-          }
-        }
-
-        if (isProfileUnlockedValid) {
-          productForm.classList.remove('hidden');
-          subscriptionWarning.classList.add('hidden');
+        if (expireTime > currentTime) {
+          isProfileUnlockedValid = true;
+          console.log("Subscription Valid. Expires on:", new Date(expireTime));
         } else {
-          // Locked/Expired Subscription
-          productForm.classList.add('hidden');
-          subscriptionWarning.classList.remove('hidden');
+          console.log("Subscription Expired on:", new Date(expireTime));
         }
-      } catch (err) {
-        showToast("Error checking subscription status", "error");
-        productForm.classList.add('hidden');
+      } else {
+        console.log("profileUnlocked field not found or not a Timestamp");
       }
+    } else {
+      console.log("Shop doc not found");
     }
+
+    if (isProfileUnlockedValid) {
+      productForm.classList.remove('hidden');
+      subscriptionWarning.classList.add('hidden');
+    } else {
+      // Locked/Expired Subscription
+      productForm.classList.add('hidden');
+      subscriptionWarning.classList.remove('hidden');
+    }
+  } catch (err) {
+    console.error(err);
+    showToast("Error checking subscription status", "error");
+    productForm.classList.add('hidden');
+  }
+    }
+
 
     // ------------------------------------------
     // IMAGE SELECTION & PREVIEW MANAGEMENT

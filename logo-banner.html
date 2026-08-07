@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Profile Media - GHOTI Builder</title>
+
+  <!-- Google Fonts: Hind Siliguri & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================================
+       GHOTI BUILDER - BRANDING & PURE CSS STYLES
+       Navy: #0A192F | Accent: #FF6B00 | Slate BG: #F8FAFC
+       ======================================================== */
+    :root {
+      --bg-color: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --primary-navy: #0A192F;
+      --accent-orange: #FF6B00;
+      --accent-orange-hover: #E05D00;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --input-bg: #F8FAFC;
+      --success-color: #16A34A;
+      --error-color: #DC2626;
+      --warning-color: #D97706;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --font-bn: 'Hind Siliguri', sans-serif;
+      --font-en: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-bn);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.25rem 1rem 3rem 1rem;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      width: 100%;
+      max-width: 760px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--primary-navy);
+      padding: 0.5rem 0.875rem;
+      border-radius: 8px;
+      font-family: var(--font-bn);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back:hover {
+      background-color: var(--border-color);
+    }
+
+    .header-title-wrap {
+      text-align: right;
+    }
+
+    .header-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+    }
+
+    .header-subtitle-sm {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Main Container Card */
+    .main-container {
+      width: 100%;
+      max-width: 760px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .section-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: 0 10px 30px -5px rgba(10, 25, 47, 0.04);
+    }
+
+    .card-header {
+      margin-bottom: 1.25rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* Preview Boxes */
+    .preview-container {
+      width: 100%;
+      background-color: var(--input-bg);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Logo Specific Preview Box (Square) */
+    .logo-preview-box {
+      width: 180px;
+      height: 180px;
+      border-radius: 12px;
+      margin: 0 auto 1.25rem auto;
+    }
+
+    /* Banner Specific Preview Box (Ratio 981:363) */
+    .banner-preview-box {
+      width: 100%;
+      aspect-ratio: 981 / 363;
+      max-height: 280px;
+    }
+
+    .preview-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .empty-preview-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    /* Buttons & Controls */
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .file-input-hidden {
+      display: none;
+    }
+
+    .btn-secondary {
+      background-color: #F1F5F9;
+      color: var(--primary-navy);
+      border: 1px solid var(--border-color);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-family: var(--font-bn);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: #E2E8F0;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-orange);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-family: var(--font-bn);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 12px rgba(255, 107, 0, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--accent-orange-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:disabled {
+      background-color: #CBD5E1;
+      color: #94A3B8;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .btn-spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-top-color: #FFFFFF;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Page Loader & Screen States */
+    .page-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1rem;
+      gap: 1rem;
+      color: var(--text-muted);
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--border-color);
+      border-top-color: var(--accent-orange);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .state-screen {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      padding: 3rem 1.5rem;
+      width: 100%;
+    }
+
+    .state-icon {
+      width: 56px;
+      height: 56px;
+      background-color: #FEF2F2;
+      color: var(--error-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem auto;
+    }
+
+    /* Toast Notification System */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .toast {
+      background-color: var(--primary-navy);
+      color: #FFFFFF;
+      padding: 0.875rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.925rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success { border-left: 4px solid var(--success-color); }
+    .toast.error { border-left: 4px solid var(--error-color); }
+    .toast.warning { border-left: 4px solid var(--warning-color); }
+    .toast.info { border-left: 4px solid #3B82F6; }
+
+    /* Utility */
+    .hidden { display: none !important; }
+
+    /* Responsive Mobile Adjustments */
+    @media (max-width: 640px) {
+      body { padding: 0.875rem 0.5rem 2rem 0.5rem; }
+      .section-card { padding: 1.25rem; border-radius: 12px; }
+      .logo-preview-box { width: 140px; height: 140px; }
+      .action-row { flex-direction: column; align-items: stretch; }
+      .btn-secondary, .btn-primary { width: 100%; justify-content: center; }
+      .toast-container { left: 1rem; right: 1rem; bottom: 1rem; }
+      .toast { text-align: center; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Top Header -->
+  <header class="top-header">
+    <button type="button" class="btn-back" onclick="handleNavigationBack()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back
+    </button>
+    <div class="header-title-wrap">
+      <div class="header-title">Shop মিডিয়া ম্যানেজমেন্ট</div>
+      <div class="header-subtitle-sm">GHOTI Builder</div>
+    </div>
+  </header>
+
+  <!-- Global Page Loader -->
+  <div id="page-loader" class="page-loader">
+    <div class="spinner"></div>
+    <p>Shop মিডিয়া লোড হচ্ছে...</p>
+  </div>
+
+  <!-- Shop Profile Not Found Screen -->
+  <div id="shop-not-found-screen" class="state-screen hidden">
+    <div class="state-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+    </div>
+    <h2 style="font-size: 1.2rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.5rem;">আপনার Shop Profile পাওয়া যায়নি।</h2>
+    <p style="color: var(--text-muted); font-size: 0.925rem; margin-bottom: 1.5rem;">দয়া করে আপনার অ্যাকাউন্টটি সঠিক কিনা নিশ্চিত করুন।</p>
+    <a href="dashboard.html" style="display: inline-block; background-color: var(--primary-navy); color: #FFF; padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; text-decoration: none;">Dashboard এ ফিরে যান</a>
+  </div>
+
+  <!-- Main Management Container -->
+  <main id="main-content" class="main-container hidden">
+
+    <!-- 1. SHOP LOGO MANAGEMENT CARD -->
+    <section class="section-card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" color="var(--accent-orange)"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+          Shop Logo
+        </h2>
+        <p class="card-desc">আপনার শপের লোগো আপলোড করুন। ফাইলটি স্বয়ংক্রিয়ভাবে ১:১ স্কয়ার (1000×1000 px) অনুপাতে সেন্টার-ক্রপ করা হবে।</p>
+      </div>
+
+      <!-- Logo Preview Container -->
+      <div class="preview-container logo-preview-box">
+        <img id="logo-preview-img" class="preview-img hidden" alt="Shop Logo Preview">
+        <div id="logo-empty-placeholder" class="empty-preview-placeholder">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          <span>কোনো লোগো নেই</span>
+        </div>
+      </div>
+
+      <!-- Logo Action Controls -->
+      <div class="action-row">
+        <input type="file" id="logo-file-input" class="file-input-hidden" accept="image/jpeg,image/png,image/webp">
+        
+        <button type="button" class="btn-secondary" onclick="document.getElementById('logo-file-input').click()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          <span id="logo-select-btn-text">লোগো নির্বাচন করুন</span>
+        </button>
+
+        <button type="button" id="btn-upload-logo" class="btn-primary" disabled>
+          <span id="logo-upload-text">Upload Logo</span>
+        </button>
+      </div>
+    </section>
+
+
+    <!-- 2. SHOP BANNER MANAGEMENT CARD -->
+    <section class="section-card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" color="var(--accent-orange)"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          Shop Banner
+        </h2>
+        <p class="card-desc">আপনার শপের ব্যানার আপলোড করুন। যেকোনো ইমেজ স্বয়ংক্রিয়ভাবে ৯৮১×৩৬৩ পিক্সেল অনুপাতে সেন্টার-ক্রপ করা হবে।</p>
+      </div>
+
+      <!-- Banner Preview Container -->
+      <div class="preview-container banner-preview-box">
+        <img id="banner-preview-img" class="preview-img hidden" alt="Shop Banner Preview">
+        <div id="banner-empty-placeholder" class="empty-preview-placeholder">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          <span>কোনো ব্যানার নেই</span>
+        </div>
+      </div>
+
+      <!-- Banner Action Controls -->
+      <div class="action-row">
+        <input type="file" id="banner-file-input" class="file-input-hidden" accept="image/jpeg,image/png,image/webp">
+        
+        <button type="button" class="btn-secondary" onclick="document.getElementById('banner-file-input').click()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          <span id="banner-select-btn-text">ব্যানার নির্বাচন করুন</span>
+        </button>
+
+        <button type="button" id="btn-upload-banner" class="btn-primary" disabled>
+          <span id="banner-upload-text">Upload Banner</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Custom Toast Container -->
+  <div class="toast-container">
+    <div id="app-toast" class="toast">
+      <span id="toast-message"></span>
+    </div>
+  </div>
+
+  <!-- Firebase v11 Modular SDK Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged 
+    } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      updateDoc,
+      collection,
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+    // ========================================================
+    // 1. FIREBASE CONFIGURATION & INITIALIZATION
+    // ========================================================
+    const firebaseConfig = {
+  apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
+  authDomain: "ghotimarket.firebaseapp.com",
+  databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
+  projectId: "ghotimarket",
+  storageBucket: "ghotimarket.firebasestorage.app",
+  messagingSenderId: "481257644093",
+  appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
+  measurementId: "G-4SR8V2EKC1"
+};
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Global State Variables
+    let currentUser = null;
+    let shopDocRef = null;
+    let activeLogoBlob = null;
+    let activeBannerBlob = null;
+    let isUploadingLogo = false;
+    let isUploadingBanner = false;
+
+    // Target Canvas Processing Dimensions
+    const LOGO_SPEC = { targetWidth: 1000, targetHeight: 1000, ratio: 1 / 1 };
+    const BANNER_SPEC = { targetWidth: 981, targetHeight: 363, ratio: 981 / 363 };
+    const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024; // 10MB Limit
+
+    // DOM Elements
+    const pageLoader = document.getElementById('page-loader');
+    const shopNotFoundScreen = document.getElementById('shop-not-found-screen');
+    const mainContent = document.getElementById('main-content');
+
+    const logoFileInput = document.getElementById('logo-file-input');
+    const logoPreviewImg = document.getElementById('logo-preview-img');
+    const logoEmptyPlaceholder = document.getElementById('logo-empty-placeholder');
+    const btnUploadLogo = document.getElementById('btn-upload-logo');
+    const logoUploadText = document.getElementById('logo-upload-text');
+    const logoSelectBtnText = document.getElementById('logo-select-btn-text');
+
+    const bannerFileInput = document.getElementById('banner-file-input');
+    const bannerPreviewImg = document.getElementById('banner-preview-img');
+    const bannerEmptyPlaceholder = document.getElementById('banner-empty-placeholder');
+    const btnUploadBanner = document.getElementById('btn-upload-banner');
+    const bannerUploadText = document.getElementById('banner-upload-text');
+    const bannerSelectBtnText = document.getElementById('banner-select-btn-text');
+
+    // ========================================================
+    // 2. PAGE LOAD & AUTHENTICATION CHECK
+    // ========================================================
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        showToast("Please login first.", "error");
+        setTimeout(() => { window.location.href = "login.html"; }, 1500);
+        return;
+      }
+
+      currentUser = user;
+      shopDocRef = doc(db, "shops", currentUser.uid);
+
+      try {
+        const shopSnap = await getDoc(shopDocRef);
+
+        if (!shopSnap.exists()) {
+          showScreen('not-found');
+          return;
+        }
+
+        const shopData = shopSnap.data();
+
+        // Render Existing Saved Logo
+        if (shopData.shopLogo) {
+          logoPreviewImg.src = shopData.shopLogo;
+          logoPreviewImg.classList.remove('hidden');
+          logoEmptyPlaceholder.classList.add('hidden');
+          logoSelectBtnText.textContent = "Change Logo";
+          btnUploadLogo.children[0].textContent = "Change Logo";
+        }
+
+        // Render Existing Saved Banner
+        if (shopData.shopBanner) {
+          bannerPreviewImg.src = shopData.shopBanner;
+          bannerPreviewImg.classList.remove('hidden');
+          bannerEmptyPlaceholder.classList.add('hidden');
+          bannerSelectBtnText.textContent = "Change Banner";
+          btnUploadBanner.children[0].textContent = "Change Banner";
+        }
+
+        showScreen('content');
+
+      } catch (error) {
+        console.error("Error loading shop profile:", error);
+        showToast("Firebase update failed.", "error");
+        showScreen('not-found');
+      }
+    });
+
+    function showScreen(screen) {
+      pageLoader.classList.add('hidden');
+      shopNotFoundScreen.classList.add('hidden');
+      mainContent.classList.add('hidden');
+
+      if (screen === 'not-found') shopNotFoundScreen.classList.remove('hidden');
+      if (screen === 'content') mainContent.classList.remove('hidden');
+    }
+
+    // ========================================================
+    // 3. SECURE IMGBB API KEY RETRIEVAL FROM FIRESTORE
+    // ========================================================
+    async function getImgBBApiKey() {
+      try {
+        const apiKeysRef = collection(db, "api_keys");
+        const snap = await getDocs(apiKeysRef);
+        
+        if (!snap.empty) {
+          let apiKey = null;
+          snap.forEach((docSnap) => {
+            const data = docSnap.data();
+            // Fetch key from api_keys collection dynamically
+            if (data.key || data.apiKey || data.value) {
+              apiKey = data.key || data.apiKey || data.value;
+            }
+          });
+          if (apiKey) return apiKey;
+        }
+        throw new Error("ImgBB API key not found in /api_keys collection.");
+      } catch (err) {
+        console.error("API Key Retrieval Error:", err);
+        throw new Error("API Key fetch failed.");
+      }
+    }
+
+    // ========================================================
+    // 4. CANVAS CENTER-CROP & IMAGE OPTIMIZATION ENGINE
+    // ========================================================
+    /**
+     * Reads file, validates size/corruptness, and center-crops on HTML Canvas
+     */
+    function processImageFile(file, targetWidth, targetHeight, targetRatio) {
+      return new Promise((resolve, reject) => {
+        // File Validation
+        if (!file) {
+          return reject(new Error("Please select an image."));
+        }
+
+        const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+        if (!validTypes.includes(file.type)) {
+          return reject(new Error("Invalid image file"));
+        }
+
+        if (file.size > MAX_FILE_SIZE_BYTES) {
+          return reject(new Error("Image size must be less than 10MB"));
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            try {
+              // Canvas Initialization
+              const canvas = document.createElement('canvas');
+              canvas.width = targetWidth;
+              canvas.height = targetHeight;
+              const ctx = canvas.getContext('2d');
+
+              // Center Crop Aspect Ratio Calculation
+              const sourceRatio = img.width / img.height;
+              let sx, sy, sWidth, sHeight;
+
+              if (sourceRatio > targetRatio) {
+                // Image is wider than target -> Crop horizontal sides
+                sHeight = img.height;
+                sWidth = img.height * targetRatio;
+                sx = (img.width - sWidth) / 2;
+                sy = 0;
+              } else {
+                // Image is taller than target -> Crop vertical sides
+                sWidth = img.width;
+                sHeight = img.width / targetRatio;
+                sx = 0;
+                sy = (img.height - sHeight) / 2;
+              }
+
+              // High Quality Canvas Scaling Smoothing
+              ctx.imageSmoothingEnabled = true;
+              ctx.imageSmoothingQuality = 'high';
+
+              // Draw cropped portion onto 1000x1000 or 981x363 destination canvas
+              ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, targetWidth, targetHeight);
+
+              // Export as compressed WebP (Quality 0.88), falling back to JPEG
+              canvas.toBlob((blob) => {
+                if (!blob) {
+                  return reject(new Error("Image processing failed."));
+                }
+                const previewUrl = URL.createObjectURL(blob);
+                resolve({ blob, previewUrl, canvas });
+              }, 'image/webp', 0.88);
+
+            } catch (err) {
+              reject(new Error("Image processing failed."));
+            }
+          };
+
+          img.onerror = () => reject(new Error("Invalid image file"));
+          img.src = e.target.result;
+        };
+
+        reader.onerror = () => reject(new Error("Invalid image file"));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // ========================================================
+    // 5. LOCAL FILE SELECTION HANDLERS & PREVIEW
+    // ========================================================
+    
+    // Logo File Change Event
+    logoFileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      try {
+        showToast("Processing logo preview...", "info");
+        const processed = await processImageFile(file, LOGO_SPEC.targetWidth, LOGO_SPEC.targetHeight, LOGO_SPEC.ratio);
+        
+        activeLogoBlob = processed.blob;
+        logoPreviewImg.src = processed.previewUrl;
+        logoPreviewImg.classList.remove('hidden');
+        logoEmptyPlaceholder.classList.add('hidden');
+        
+        btnUploadLogo.disabled = false;
+        showToast("Logo preview generated successfully.", "success");
+      } catch (err) {
+        showToast(err.message, "error");
+        logoFileInput.value = "";
+      }
+    });
+
+    // Banner File Change Event
+    bannerFileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      try {
+        showToast("Processing banner preview...", "info");
+        const processed = await processImageFile(file, BANNER_SPEC.targetWidth, BANNER_SPEC.targetHeight, BANNER_SPEC.ratio);
+        
+        activeBannerBlob = processed.blob;
+        bannerPreviewImg.src = processed.previewUrl;
+        bannerPreviewImg.classList.remove('hidden');
+        bannerEmptyPlaceholder.classList.add('hidden');
+        
+        btnUploadBanner.disabled = false;
+        showToast("Banner preview generated successfully.", "success");
+      } catch (err) {
+        showToast(err.message, "error");
+        bannerFileInput.value = "";
+      }
+    });
+
+    // ========================================================
+    // 6. IMGBB UPLOAD & FIRESTORE SAVE PIPELINE
+    // ========================================================
+    
+    /**
+     * Uploads Blob image to ImgBB Endpoint
+     */
+    async function uploadToImgBB(blob) {
+      const apiKey = await getImgBBApiKey();
+      const formData = new FormData();
+      formData.append("key", apiKey);
+      formData.append("image", blob, "upload.webp");
+
+      const response = await fetch("https://api.imgbb.com/1/upload", {
+        method: "POST",
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error("ImgBB upload failed.");
+      }
+
+      const result = await response.json();
+      if (result && result.success && result.data && result.data.url) {
+        return result.data.url;
+      } else {
+        throw new Error("ImgBB upload failed.");
+      }
+    }
+
+    // --- UPLOAD LOGO PROCESS ---
+    btnUploadLogo.addEventListener('click', async () => {
+      if (!activeLogoBlob || isUploadingLogo) return;
+
+      isUploadingLogo = true;
+      setButtonLoadingState(btnUploadLogo, logoUploadText, true, "Processing...");
+
+      try {
+        // Step 1: Upload to ImgBB
+        logoUploadText.textContent = "Uploading...";
+        const imageUrl = await uploadToImgBB(activeLogoBlob);
+
+        // Step 2: Update Firestore (ONLY shopLogo field)
+        logoUploadText.textContent = "Saving...";
+        await updateDoc(shopDocRef, {
+          shopLogo: imageUrl
+        });
+
+        // Step 3: Complete Success State
+        showToast("Logo updated successfully.", "success");
+        activeLogoBlob = null;
+        logoSelectBtnText.textContent = "Change Logo";
+        btnUploadLogo.disabled = true;
+
+      } catch (err) {
+        console.error("Logo Upload Flow Error:", err);
+        showToast(err.message || "Firebase update failed.", "error");
+      } finally {
+        isUploadingLogo = false;
+        setButtonLoadingState(btnUploadLogo, logoUploadText, false, "Upload Logo");
+      }
+    });
+
+    // --- UPLOAD BANNER PROCESS ---
+    btnUploadBanner.addEventListener('click', async () => {
+      if (!activeBannerBlob || isUploadingBanner) return;
+
+      isUploadingBanner = true;
+      setButtonLoadingState(btnUploadBanner, bannerUploadText, true, "Processing...");
+
+      try {
+        // Step 1: Upload to ImgBB
+        bannerUploadText.textContent = "Uploading...";
+        const imageUrl = await uploadToImgBB(activeBannerBlob);
+
+        // Step 2: Update Firestore (ONLY shopBanner field)
+        bannerUploadText.textContent = "Saving...";
+        await updateDoc(shopDocRef, {
+          shopBanner: imageUrl
+        });
+
+        // Step 3: Complete Success State
+        showToast("Banner updated successfully.", "success");
+        activeBannerBlob = null;
+        bannerSelectBtnText.textContent = "Change Banner";
+        btnUploadBanner.disabled = true;
+
+      } catch (err) {
+        console.error("Banner Upload Flow Error:", err);
+        showToast(err.message || "Firebase update failed.", "error");
+      } finally {
+        isUploadingBanner = false;
+        setButtonLoadingState(btnUploadBanner, bannerUploadText, false, "Upload Banner");
+      }
+    });
+
+    // Button Spinner Loading State Helper
+    function setButtonLoadingState(btn, labelElem, isLoading, text) {
+      if (isLoading) {
+        btn.disabled = true;
+        labelElem.innerHTML = `<div class="btn-spinner"></div> ${text}`;
+      } else {
+        labelElem.textContent = text;
+      }
+    }
+
+    // ========================================================
+    // 7. TOAST NOTIFICATION SYSTEM & NAVIGATION
+    // ========================================================
+    function showToast(message, type = "info") {
+      const toast = document.getElementById('app-toast');
+      const toastMsg = document.getElementById('toast-message');
+
+      toastMsg.textContent = message;
+      toast.className = `toast ${type} active`;
+
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3500);
+    }
+
+    window.handleNavigationBack = function() {
+      if (activeLogoBlob || activeBannerBlob) {
+        if (!confirm("আপনার পরিবর্তনগুলো এখনো সেভ করা হয়নি। আপনি কি নিশ্চিত বের হয়ে যেতে চান?")) {
+          return;
+        }
+      }
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "dashboard.html";
+      }
+    };
+  </script>
+</body>
+</html>

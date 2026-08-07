@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GHOTI BUILDER - সহজে তৈরি করুন আপনার অনলাইন শপ</title>
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="GHOTI BUILDER হলো বাংলাদেশি উদ্যোক্তা ও অনলাইন ব্যবসার জন্য একটি সহজ, আধুনিক ও দ্রুত অনলাইন স্টোর বিল্ডার প্ল্যাটফর্ম।">
+    <meta name="keywords" content="GHOTI BUILDER, Ghoti Market, E-commerce Website Builder Bangladesh, Online Store Creator, Ecommerce BD">
+    <meta name="author" content="GHOTI MARKET">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://build.ghotimarket.com/">
+    <meta name="theme-color" content="#0B1F3A">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://build.ghotimarket.com/">
+    <meta property="og:title" content="GHOTI BUILDER - সহজে তৈরি করুন আপনার অনলাইন শপ">
+    <meta property="og:description" content="কোনো কোডিং ছাড়াই তৈরি করুন আপনার স্বপ্নের ই-কমার্স স্টোর। বাংলাদেশি উদ্যোক্তাদের নির্ভরযোগ্য প্ল্যাটফর্ম।">
+    <meta property="og:image" content="https://build.ghotimarket.com/logo.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://build.ghotimarket.com/">
+    <meta name="twitter:title" content="GHOTI BUILDER - সহজে তৈরি করুন আপনার অনলাইন শপ">
+    <meta name="twitter:description" content="কোনো কোডিং ছাড়াই তৈরি করুন আপনার স্বপ্নের ই-কমার্স স্টোর।">
+    <meta name="twitter:image" content="https://build.ghotimarket.com/logo.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://build.ghotimarket.com/logo.png">
+    <link rel="apple-touch-icon" href="https://build.ghotimarket.com/logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==================================================
+           1. CSS VARIABLES & RESET
+           ================================================== */
+        :root {
+            --primary: #0B1F3A;
+            --primary-hover: #15325B;
+            --primary-light: #1A3A68;
+            --secondary: #FF7A00;
+            --secondary-hover: #E06B00;
+            --secondary-light: #FFF2E5;
+            --bg-body: #FFFFFF;
+            --bg-alt: #F7F9FC;
+            --bg-card: #FFFFFF;
+            --text-main: #172033;
+            --text-muted: #64748B;
+            --text-white: #FFFFFF;
+            --border-color: #E2E8F0;
+            --border-hover: #CBD5E1;
+            
+            --shadow-sm: 0 2px 4px rgba(11, 31, 58, 0.04);
+            --shadow-md: 0 10px 25px -5px rgba(11, 31, 58, 0.08);
+            --shadow-lg: 0 20px 30px -10px rgba(11, 31, 58, 0.12);
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 1280px;
+            --nav-height: 80px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ==================================================
+           2. PRELOADER
+           ================================================== */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--primary);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-logo {
+            width: 140px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            animation: pulse 1.8s ease-in-out infinite;
+        }
+
+        .loader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--secondary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.85; }
+        }
+
+        /* ==================================================
+           3. BUTTONS & BADGES
+           ================================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: var(--text-white);
+            box-shadow: 0 4px 14px rgba(255, 122, 0, 0.35);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 122, 0, 0.45);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1.5px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            background-color: var(--bg-alt);
+            color: var(--primary);
+        }
+
+        .badge-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 1rem;
+            background-color: var(--secondary-light);
+            color: var(--secondary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            margin-bottom: 1.25rem;
+            border: 1px solid rgba(255, 122, 0, 0.2);
+        }
+
+        /* ==================================================
+           4. NAVBAR
+           ================================================== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .brand-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-logo {
+            height: 42px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-tagline {
+            font-size: 0.7rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Language Switcher */
+        .lang-switch-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--bg-alt);
+            border: 1px solid var(--border-color);
+            padding: 3px;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+        }
+
+        .lang-option {
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+            color: var(--text-muted);
+        }
+
+        .lang-option.active {
+            background-color: var(--primary);
+            color: var(--text-white);
+        }
+
+        /* Hamburger Toggle */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2.5px;
+            background-color: var(--primary);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(8.5px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-8.5px) rotate(-45deg);
+        }
+
+        /* ==================================================
+           5. HERO SECTION
+           ================================================== */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #061325 100%);
+            color: var(--text-white);
+            padding: 5rem 0 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 122, 0, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 4vw + 1rem, 3.5rem);
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-title span {
+            color: var(--secondary);
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            color: #94A3B8;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .hero-support-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #CBD5E1;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .hero-support-link:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero CSS Mockup Dashboard */
+        .hero-visual {
+            position: relative;
+            z-index: 2;
+        }
+
+        .mockup-window {
+            background-color: #1E293B;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .mockup-header {
+            background-color: #0F172A;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .dot-red { background-color: #EF4444; }
+        .dot-yellow { background-color: #F59E0B; }
+        .dot-green { background-color: #10B981; }
+
+        .mockup-address {
+            background-color: #1E293B;
+            color: #94A3B8;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.75rem;
+            border-radius: var(--radius-sm);
+            margin-left: 0.5rem;
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .mockup-body {
+            padding: 1.5rem;
+            background-color: #0F172A;
+        }
+
+        .mockup-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .mockup-stat-card {
+            background-color: #1E293B;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .mockup-stat-label {
+            font-size: 0.75rem;
+            color: #94A3B8;
+            margin-bottom: 0.25rem;
+        }
+
+        .mockup-stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-white);
+        }
+
+        .mockup-chart-box {
+            background-color: #1E293B;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            height: 130px;
+            display: flex;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--primary-light), var(--secondary));
+            border-radius: 4px 4px 0 0;
+            transition: height 1s ease;
+        }
+
+        .floating-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            padding: 0.85rem 1.25rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border: 1px solid var(--border-color);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ==================================================
+           6. TRUST / BANGLADESH SECTION
+           ================================================== */
+        .trust-section {
+            padding: 5rem 0;
+            background-color: var(--bg-body);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3.5rem auto;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 3vw, 2.3rem);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .trust-card {
+            background-color: var(--bg-alt);
+            border: 1px solid var(--border-color);
+            padding: 1.75rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+
+        .trust-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(255, 122, 0, 0.3);
+        }
+
+        .trust-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--secondary-light);
+            color: var(--secondary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .trust-card h3 {
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .trust-card p {
+            font-size: 0.925rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ==================================================
+           7. FEATURES SECTION
+           ================================================== */
+        .features-section {
+            padding: 5.5rem 0;
+            background-color: var(--bg-alt);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .feature-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary);
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            background-color: rgba(11, 31, 58, 0.05);
+            color: var(--primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            background-color: var(--secondary);
+            color: var(--text-white);
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            flex-grow: 1;
+        }
+
+        /* ==================================================
+           8. HOW IT WORKS
+           ================================================== */
+        .how-section {
+            padding: 5.5rem 0;
+            background-color: var(--bg-body);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        .step-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem 1.5rem;
+            border-radius: var(--radius-lg);
+            position: relative;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .step-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .step-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            opacity: 0.9;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1;
+        }
+
+        .step-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ==================================================
+           9. WHY GHOTI BUILDER
+           ================================================== */
+        .why-section {
+            padding: 5.5rem 0;
+            background-color: var(--primary);
+            color: var(--text-white);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .why-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+
+        .why-card:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            border-color: var(--secondary);
+            transform: translateY(-4px);
+        }
+
+        .why-card h3 {
+            font-size: 1.25rem;
+            color: var(--text-white);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .why-card h3 svg {
+            color: var(--secondary);
+            flex-shrink: 0;
+        }
+
+        .why-card p {
+            font-size: 0.95rem;
+            color: #94A3B8;
+            line-height: 1.65;
+        }
+
+        /* ==================================================
+           10. WHO CAN USE IT
+           ================================================== */
+        .persona-section {
+            padding: 5.5rem 0;
+            background-color: var(--bg-alt);
+        }
+
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .persona-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .persona-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+
+        .persona-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 1rem auto;
+            background-color: var(--secondary-light);
+            color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .persona-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* ==================================================
+           11. CTA & SUPPORT BANNER
+           ================================================== */
+        .cta-section {
+            padding: 5rem 0;
+            background-color: var(--bg-body);
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, var(--primary) 0%, #061325 100%);
+            border-radius: var(--radius-lg);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--text-white);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-desc {
+            font-size: 1.1rem;
+            color: #94A3B8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn-wrapper {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-forgot-link {
+            color: #CBD5E1;
+            font-size: 0.9rem;
+            text-decoration: underline;
+            transition: var(--transition);
+        }
+
+        .cta-forgot-link:hover {
+            color: var(--secondary);
+        }
+
+        /* Support Box */
+        .support-box {
+            margin-top: 3rem;
+            background-color: var(--bg-alt);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .support-info h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .support-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ==================================================
+           12. FOOTER
+           ================================================== */
+        .footer {
+            background-color: var(--primary);
+            color: var(--text-white);
+            padding: 4.5rem 0 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .footer-brand p {
+            color: #94A3B8;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .footer-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #94A3B8;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            transform: translateX(3px);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: #94A3B8;
+        }
+
+        .powered-by a {
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .powered-by a:hover {
+            text-decoration: underline;
+        }
+
+        /* ==================================================
+           13. FLOATING BACK TO TOP
+           ================================================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            background-color: var(--secondary);
+            color: var(--text-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-3px);
+        }
+
+        /* ==================================================
+           14. SCROLL REVEAL ANIMATION
+           ================================================== */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal-element.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-element {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* ==================================================
+           15. RESPONSIVE MEDIA QUERIES
+           ================================================== */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-subtitle {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-cta-group {
+                justify-content: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --nav-height: 70px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: var(--nav-height);
+                right: -100%;
+                width: 100%;
+                max-width: 300px;
+                height: calc(100vh - var(--nav-height));
+                background-color: var(--bg-card);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: var(--shadow-lg);
+                transition: right 0.3s ease;
+                border-left: 1px solid var(--border-color);
+            }
+
+            .nav-menu.open {
+                right: 0;
+            }
+
+            .nav-actions {
+                margin-left: auto;
+                margin-right: 0.75rem;
+            }
+
+            .floating-badge {
+                position: relative;
+                bottom: 0;
+                left: 0;
+                margin-top: 1rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .support-box {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-cta-group {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-cta-group .btn {
+                width: 100%;
+            }
+
+            .cta-card {
+                padding: 2.5rem 1rem;
+            }
+
+            .lang-option {
+                padding: 3px 8px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <img src="https://build.ghotimarket.com/logo.png" alt="GHOTI BUILDER" class="loader-logo">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Sticky Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <!-- Brand / Logo -->
+            <a href="https://build.ghotimarket.com/" class="brand-link" aria-label="GHOTI BUILDER Home">
+                <img src="https://build.ghotimarket.com/logo.png" alt="GHOTI BUILDER Logo" class="brand-logo" width="160" height="42">
+                <div class="brand-text">
+                    <span class="brand-name">GHOTI BUILDER</span>
+                    <span class="brand-tagline" data-i18n="brandTagline">সহজে, দ্রুত, নিজের মতো</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active" data-i18n="navHome">হোম</a>
+                <a href="#features" class="nav-link" data-i18n="navFeatures">ফিচারসমূহ</a>
+                <a href="#how-it-works" class="nav-link" data-i18n="navHowItWorks">কীভাবে কাজ করে</a>
+                <a href="https://build.ghotimarket.com/support" class="nav-link" data-i18n="navSupport">সহায়তা</a>
+            </nav>
+
+            <!-- Navbar Right Actions -->
+            <div class="nav-actions">
+                <!-- Language Switcher -->
+                <div class="lang-switch-btn" id="langToggle" role="button" aria-label="Switch Language" tabindex="0">
+                    <span class="lang-option active" id="langBn">বাংলা</span>
+                    <span class="lang-option" id="langEn">EN</span>
+                </div>
+
+                <a href="https://build.ghotimarket.com/login" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;" data-i18n="navLogin">লগইন</a>
+                <a href="https://build.ghotimarket.com/signup" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.875rem;" data-i18n="navSignup">সাইন আপ</a>
+            </div>
+
+            <!-- Hamburger Button -->
+            <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" role="button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero-section" id="home">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="badge-tag">
+                        <span>🇧🇩</span>
+                        <span data-i18n="heroBadge">বাংলাদেশি উদ্যোক্তা ও বিদেশী উদ্যোক্তাদের জধ্য বীশেষ বিল্ডার</span>
+                    </div>
+                    <h1 class="hero-title" data-i18n="heroTitle">
+                        আপনার অনলাইন ব্যবসা শুরু করুন <span>আরও সহজে</span>
+                    </h1>
+                    <p class="hero-subtitle" data-i18n="heroSub">
+                        কোনো কোডিং বা প্রযুক্তিগত অভিজ্ঞতা ছাড়াই মিনিটের মধ্যে তৈরি করুন আপনার নিজস্ব পেশাদার ই-কমার্স অনলাইন স্টোর। ঘটি বিল্ডারের সাথে ব্যবসা পরিচালনা করুন দ্রুত, নিরাপদে ও নিশ্চিন্তে।
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="https://build.ghotimarket.com/signup" class="btn btn-primary" data-i18n="heroCtaStart">
+                            শুরু করুন
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                        <a href="https://build.ghotimarket.com/login" class="btn btn-secondary" data-i18n="heroCtaLogin">লগইন করুন</a>
+                        <a href="https://build.ghotimarket.com/support" class="hero-support-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            <span data-i18n="heroSupportLink">সাহায্য বা প্রশ্নের জন্য সাপোর্ট সেন্টারে যোগাযোগ করুন &rarr;</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Visual CSS Mockup -->
+                <div class="hero-visual">
+                    <div class="mockup-window">
+                        <div class="mockup-header">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <div class="mockup-address">https://store.ghotimarket.com/yourusername</div>
+                        </div>
+                        <div class="mockup-body">
+                            <div class="mockup-stats-grid">
+                                <div class="mockup-stat-card">
+                                    <div class="mockup-stat-label" data-i18n="statSalesLabel">আজকের মোট বিক্রি</div>
+                                    <div class="mockup-stat-value">৳ ২৪,৫০০</div>
+                                </div>
+                                <div class="mockup-stat-card">
+                                    <div class="mockup-stat-label" data-i18n="statOrdersLabel">নতুন অর্ডার</div>
+                                    <div class="mockup-stat-value">১৪২ টি</div>
+                                </div>
+                            </div>
+                            <div class="mockup-chart-box">
+                                <div class="chart-bar" style="height: 40%;"></div>
+                                <div class="chart-bar" style="height: 65%;"></div>
+                                <div class="chart-bar" style="height: 50%;"></div>
+                                <div class="chart-bar" style="height: 85%;"></div>
+                                <div class="chart-bar" style="height: 70%;"></div>
+                                <div class="chart-bar" style="height: 95%;"></div>
+                                <div class="chart-bar" style="height: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-badge">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF7A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <div>
+                            <div style="font-weight: 700; font-size: 0.9rem;" data-i18n="floatBadgeTitle">লাইভ স্টোর চালু!</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="floatBadgeSub">খুব সহজের তৈরি করুন শপ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BANGLADESH / TRUST SECTION -->
+        <section class="trust-section">
+            <div class="container">
+                <div class="section-header reveal-element">
+                    <h2 class="section-title" data-i18n="trustTitle">বাংলাদেশি উদ্যোক্তাদের জন্য তৈরি</h2>
+                    <p class="section-subtitle" data-i18n="trustSub">আমরা স্থানীয় ব্যবসার চাহিদা ও চ্যালেঞ্জ গভীরভাবে বুঝি। তাই ঘটি বিল্ডার তৈরি করা হয়েছে অত্যন্ত সহজভাবে।</p>
+                </div>
+
+                <div class="trust-grid">
+                    <div class="trust-card reveal-element">
+                        <div class="trust-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                        </div>
+                        <h3 data-i18n="trustCard1Title">বাংলা ও ইংরেজি ড্যাশবোর্ড</h3>
+                        <p data-i18n="trustCard1Desc">সম্পূর্ণ বাংলা বা ইংরেজি ভাষায় নিজের সুবিধামতো অনলাইন স্টোর পরিচালনা করার পূর্ণ স্বাধীনতা।</p>
+                    </div>
+
+                    <div class="trust-card reveal-element">
+                        <div class="trust-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                        </div>
+                        <h3 data-i18n="trustCard2Title">সহজ পেমেন্ট সুবিধা</h3>
+                        <p data-i18n="trustCard2Desc">মোবাইল ব্যাংকিং ও ক্যাশ অন ডেলিভারি অর্ডারের জন্য উপযুক্ত রেডি সিস্টেম।</p>
+                    </div>
+
+                    <div class="trust-card reveal-element">
+                        <div class="trust-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                        </div>
+                        <h3 data-i18n="trustCard3Title">১০০% মোবাইল ফ্রেন্ডলি</h3>
+                        <p data-i18n="trustCard3Desc">আপনার কাস্টমার মোবাইল থেকে অত্যন্ত দ্রুত ও আরামে অর্ডার সম্পন্ন করতে পারবে।</p>
+                    </div>
+
+                    <div class="trust-card reveal-element">
+                        <div class="trust-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
+                        <h3 data-i18n="trustCard4Title">স্থানীয় ডেডিকেটেড সাপোর্ট</h3>
+                        <p data-i18n="trustCard4Desc">যেকোনো টেকনিক্যাল সহায়তায় আমাদের বাংলাদেশি টিম রয়েছে আপনার পাশে।</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES SECTION -->
+        <section class="features-section" id="features">
+            <div class="container">
+                <div class="section-header reveal-element">
+                    <h2 class="section-title" data-i18n="featSectionTitle">প্ল্যাটফর্মের সেরা ফিচারসমূহ</h2>
+                    <p class="section-subtitle" data-i18n="featSectionSub">একটি সফল অনলাইন ব্যবসা পরিচালনার জন্য প্রয়োজনীয় সকল আধুনিক সুবিধা পাবেন এক জায়গায়।</p>
+                </div>
+
+                <div class="features-grid">
+                    <!-- Feature 1 -->
+                    <div class="feature-card reveal-element">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        </div>
+                        <h3 class="feature-title" data-i18n="f1Title">সহজে অনলাইন শপ তৈরি</h3>
+                        <p class="feature-desc" data-i18n="f1Desc">কোনো ডেভেলপার ছাড়াই মাত্র কয়েক ক্লিকে আপনার নিজস্ব ব্র্যান্ডের সুন্দর ই-কমার্স ওয়েবসাইট তৈরি করুন।</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="feature-card reveal-element">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        </div>
+                        <h3 class="feature-title" data-i18n="f2Title">স্মার্ট পণ্য ম্যানেজমেন্ট</h3>
+                        <p class="feature-desc" data-i18n="f2Desc">সহজে প্রোডাক্ট যোগ করুন, দাম নির্ধারণ করুন, স্টক ট্র্যাক করুন ও ছবি আপলোড করুন কোনো ঝামেলা ছাড়াই।</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="feature-card reveal-element">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        </div>
+                        <h3 class="feature-title" data-i18n="f3Title">আকর্ষণীয় ও Responsive ডিজাইন</h3>
+                        <p class="feature-desc" data-i18n="f3Desc">কম্পিউটার, ট্যাবলেট কিংবা মোবাইল—সব ধরনের স্ক্রিনেই আপনার ওয়েবসাইট দেখাবে একদম নিখুঁত।</p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="feature-card reveal-element">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                        </div>
+                        <h3 class="feature-title" data-i18n="f4Title">মোবাইল অপ্টিমাইজড</h3>
+                        <p class="feature-desc" data-i18n="f4Desc">মোবাইল ব্যবহারকারীদের জন্য সুপার ফাস্ট লোডিং স্পিড ও সহজ চেকআউট সুবিধা।</p>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="feature-card reveal-element">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </div>
+                        <h3 class="feature-title" data-i18n="f5Title">সহজ কাস্টমাইজেশন</h3>
+                        <p class="feature-desc" data-i18n="f5Desc">লোগো, কালার স্কিম ও ব্যানার সাজিয়ে আপনার ব্র্যান্ডের সাথে মিলিয়ে স্টোরকে দিন নতুন রূপ।</p>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="feature-card reveal-element">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        </div>
+                        <h3 class="feature-title" data-i18n="f6Title">নিরাপদ প্ল্যাটফর্ম</h3>
+                        <p class="feature-desc" data-i18n="f6Desc">উচ্চমানের ডাটা সিকিউরিটি এনক্রিপশন যাতে আপনার ও আপনার কাস্টমারের তথ্য থাকে সবসময় নিরাপদ।</p>
+                    </div>
+
+                    <!-- Feature 7 -->
+                    <div class="feature-card reveal-element">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                        </div>
+                        <h3 class="feature-title" data-i18n="f7Title">স্মার্ট বিজনেস এনালিটিক্স</h3>
+                        <p class="feature-desc" data-i18n="f7Desc">দৈনিক বিক্রি, মোট অর্ডার ও জনপ্রিয় প্রোডাক্টের পরিসংখ্যান সহজেই দেখুন এক নজর ড্যাশবোর্ডে।</p>
+                    </div>
+
+                    <!-- Feature 8 -->
+                    <div class="feature-card reveal-element">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        </div>
+                        <h3 class="feature-title" data-i18n="f8Title">কাস্টমার সাপোর্ট</h3>
+                        <p class="feature-desc" data-i18n="f8Desc">যেকোনো সমস্যায় আপনাকে সঠিক দিকনির্দেশনা প্রদান করতে আমাদের টিম রয়েছে সর্বদা নিয়োজিত।</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="how-section" id="how-it-works">
+            <div class="container">
+                <div class="section-header reveal-element">
+                    <h2 class="section-title" data-i18n="howTitle">কীভাবে কাজ করে?</h2>
+                    <p class="section-subtitle" data-i18n="howSub">মাত্র ৪টি সহজ ধাপে শুরু করুন আপনার অনলাইন স্টোরের যাত্রা।</p>
+                </div>
+
+                <div class="steps-grid">
+                    <!-- Step 1 -->
+                    <div class="step-card reveal-element">
+                        <div class="step-number">01</div>
+                        <h3 class="step-title" data-i18n="step1Title">অ্যাকাউন্ট খুলুন</h3>
+                        <p class="step-desc" data-i18n="step1Desc">বিনামূল্যে সাইন আপ করুন এবং আপনার ইমেইল দিয়ে একাউন্ট তৈরি করুন।</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card reveal-element">
+                        <div class="step-number">02</div>
+                        <h3 class="step-title" data-i18n="step2Title">স্টোর সাজান</h3>
+                        <p class="step-desc" data-i18n="step2Desc">আপনার অনলাইন স্টোরের নাম দিন, লোগো আপলোড করুন ও ব্যাকগ্রাউন্ড পছন্দ করুন।</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card reveal-element">
+                        <div class="step-number">03</div>
+                        <h3 class="step-title" data-i18n="step3DescTitle">পণ্য যোগ করুন</h3>
+                        <p class="step-desc" data-i18n="step3Desc">আপনার প্রোডাক্টের ছবি, বিস্তারিত বিবরণ ও সঠিক মূল্য সেট করে লিস্ট করুন।</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-card reveal-element">
+                        <div class="step-number">04</div>
+                        <h3 class="step-title" data-i18n="step4Title">বিক্রি শুরু করুন</h3>
+                        <p class="step-desc" data-i18n="step4Desc">কাস্টমারদের সাথে আপনার স্টোর লিংক শেয়ার করুন এবং নতুন অর্ডার গ্রহণ করা শুরু করুন!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY GHOTI BUILDER -->
+        <section class="why-section">
+            <div class="container">
+                <div class="section-header reveal-element" style="color: var(--text-white);">
+                    <h2 class="section-title" style="color: var(--text-white);" data-i18n="whyTitle">কেন বেছে নেবেন GHOTI BUILDER?</h2>
+                    <p class="section-subtitle" style="color: #94A3B8;" data-i18n="whySub">ঘটি বিল্ডার সাধারণ কোনো প্ল্যাটফর্ম নয়, এটি আপনার ব্যবসার বিশ্বস্ত প্রযুক্তি সঙ্গী।</p>
+                </div>
+
+                <div class="why-grid">
+                    <div class="why-card reveal-element">
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            <span data-i18n="why1Title">ঝামেলাহীন সেটআপ</span>
+                        </h3>
+                        <p data-i18n="why1Desc">ডোমেইন, হোস্টিং বা জটিল সার্ভার কনফিগারেশনের কোনো বাড়তি ঝামেলা নেই। সবই আমরা হ্যান্ডেল করি।</p>
+                    </div>
+
+                    <div class="why-card reveal-element">
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                            <span data-i18n="why2Title">অতি দ্রুত স্পিড</span>
+                        </h3>
+                        <p data-i18n="why2Desc">লাইটিং-ফাস্ট লোডিং টাইম যা আপনার স্টোরের সেলস রূপান্তর বহুগুণে বাড়িয়ে দেয়।</p>
+                    </div>
+
+                    <div class="why-card reveal-element">
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span data-i18n="why3Title">ঘটি মার্কেটের পাওয়ার</span>
+                        </h3>
+                        <p data-i18n="why3Desc">GHOTI MARKET ইকোসিস্টেমের নির্ভরযোগ্য অবকাঠামো ও ভবিষ্যৎ স্কেলেবিলিটির সুবিধা।</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHO CAN USE IT -->
+        <section class="persona-section">
+            <div class="container">
+                <div class="section-header reveal-element">
+                    <h2 class="section-title" data-i18n="personaTitle">কারা ব্যবহার করতে পারবেন?</h2>
+                    <p class="section-subtitle" data-i18n="personaSub">যেকোনো ক্যাটাগরির অনলাইন ও অফলাইন ব্যবসার জন্য ঘটি বিল্ডার পারফেক্ট।</p>
+                </div>
+
+                <div class="persona-grid">
+                    <div class="persona-card reveal-element">
+                        <div class="persona-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                        </div>
+                        <div class="persona-title" data-i18n="p1">অনলাইন সেলার</div>
+                    </div>
+
+                    <div class="persona-card reveal-element">
+                        <div class="persona-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        </div>
+                        <div class="persona-title" data-i18n="p2">ক্ষুদ্র ও মাঝারি ব্যবসা</div>
+                    </div>
+
+                    <div class="persona-card reveal-element">
+                        <div class="persona-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        </div>
+                        <div class="persona-title" data-i18n="p3">নতুন উদ্যোক্তা</div>
+                    </div>
+
+                    <div class="persona-card reveal-element">
+                        <div class="persona-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        </div>
+                        <div class="persona-title" data-i18n="p4">লোকাল দোকান</div>
+                    </div>
+
+                    <div class="persona-card reveal-element">
+                        <div class="persona-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg>
+                        </div>
+                        <div class="persona-title" data-i18n="p5">ফ্যাশন ও ব্র্যান্ড</div>
+                    </div>
+
+                    <div class="persona-card reveal-element">
+                        <div class="persona-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="15" x2="23" y2="15"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="15" x2="4" y2="15"></line></svg>
+                        </div>
+                        <div class="persona-title" data-i18n="p6">ইলেকট্রনিক্স দোকান</div>
+                    </div>
+
+                    <div class="persona-card reveal-element">
+                        <div class="persona-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"></path></svg>
+                        </div>
+                        <div class="persona-title" data-i18n="p7">হোমমেড ও ক্রাফট</div>
+                    </div>
+
+                    <div class="persona-card reveal-element">
+                        <div class="persona-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        </div>
+                        <div class="persona-title" data-i18n="p8">গ্রোয়িং ব্র্যান্ডস</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-card reveal-element">
+                    <h2 class="cta-title" data-i18n="ctaTitle">আজই আপনার অনলাইন ব্যবসার যাত্রা শুরু করুন</h2>
+                    <p class="cta-desc" data-i18n="ctaDesc">সহজে ও দ্রুত আপনার অনলাইন শপ সাজিয়ে কাস্টমারদের কাছে প্রফেশনালভাবে নিজের পণ্য পৌঁছে দিন।</p>
+                    <div class="cta-btn-wrapper">
+                        <a href="https://build.ghotimarket.com/signup" class="btn btn-primary" data-i18n="ctaStartBtn">সাইন আপ করুন</a>
+                        <a href="https://build.ghotimarket.com/login" class="btn btn-secondary" data-i18n="ctaLoginBtn">লগইন করুন</a>
+                    </div>
+                    <div>
+                        <a href="https://build.ghotimarket.com/forgot-password" class="cta-forgot-link" data-i18n="ctaForgot">পাসওয়ার্ড ভুলে গেছেন?</a>
+                    </div>
+                </div>
+
+                <!-- Dedicated Support Box -->
+                <div class="support-box reveal-element">
+                    <div class="support-info">
+                        <h4 data-i18n="supportBoxTitle">সহায়তা প্রয়োজন?</h4>
+                        <p data-i18n="supportBoxDesc">আমাদের টিম যেকোনো প্রশ্ন বা টেকনিক্যাল সহযোগিতায় আপনাকে সাহায্য করতে প্রস্তুত।</p>
+                    </div>
+                    <a href="https://build.ghotimarket.com/support" class="btn btn-outline" data-i18n="supportBoxBtn">সাপোর্ট সেন্টার</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Col 1: Brand -->
+                <div class="footer-brand">
+                    <a href="https://build.ghotimarket.com/" class="brand-link" aria-label="GHOTI BUILDER Footer Logo">
+                        <img src="https://build.ghotimarket.com/logo.png" alt="GHOTI BUILDER Logo" class="brand-logo" loading="lazy">
+                        <div class="brand-text">
+                            <span class="brand-name" style="color: var(--text-white);">GHOTI BUILDER</span>
+                            <span class="brand-tagline">GHOTI MARKET</span>
+                        </div>
+                    </a>
+                    <p data-i18n="footerBrandDesc">
+                        বাংলাদেশি উদ্যোক্তা ও ব্যবসার প্রসার কল্পে নির্মিত একটি আধুনিক ও দ্রুততম ই-কমার্স স্টোর বিল্ডার প্ল্যাটফর্ম।
+                    </p>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div>
+                    <h4 class="footer-title" data-i18n="footCol1">নেভিগেশন</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://build.ghotimarket.com/" data-i18n="navHome">হোম</a></li>
+                        <li><a href="#features" data-i18n="navFeatures">ফিচারসমূহ</a></li>
+                        <li><a href="#how-it-works" data-i18n="navHowItWorks">কীভাবে কাজ করে</a></li>
+                        <li><a href="https://build.ghotimarket.com/support" data-i18n="navSupport">সহায়তা</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Account -->
+                <div>
+                    <h4 class="footer-title" data-i18n="footCol2">অ্যাকোউন্ট</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://build.ghotimarket.com/login" data-i18n="navLogin">লগইন</a></li>
+                        <li><a href="https://build.ghotimarket.com/signup" data-i18n="navSignup">সাইন আপ</a></li>
+                        <li><a href="https://build.ghotimarket.com/forgot-password" data-i18n="ctaForgot">পাসওয়ার্ড ভুলে গেছেন?</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Legal & Policy -->
+                <div>
+                    <h4 class="footer-title" data-i18n="footCol3">আইনি তথ্য</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://build.ghotimarket.com/privacy-policy" data-i18n="footPrivacy">প্রাইভেসি পলিসি</a></li>
+                        <li><a href="https://build.ghotimarket.com/terms" data-i18n="footTerms">টার্মস ও কন্ডিশনস</a></li>
+                        <li><a href="https://build.ghotimarket.com/support" data-i18n="navSupport">হেল্প ডেস্ক</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div>
+                    &copy; <span id="copyrightYear">2026</span> GHOTI BUILDER. All rights reserved.
+                </div>
+                <div class="powered-by">
+                    <span data-i18n="poweredBy">Powered by</span> 
+                    <a href="https://ghotimarket.com" target="_blank" rel="noopener noreferrer">GHOTI MARKET</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+    </button>
+
+    <!-- VANILLA JAVASCRIPT LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            /* ==================================================
+               1. DYNAMIC COPYRIGHT YEAR
+               ================================================== */
+            const yearSpan = document.getElementById('copyrightYear');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+
+            /* ==================================================
+               2. PRELOADER HIDE
+               ================================================== */
+            const preloader = document.getElementById('preloader');
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    if (preloader) preloader.classList.add('fade-out');
+                }, 300);
+            });
+            // Fallback safety timeout for preloader
+            setTimeout(() => {
+                if (preloader && !preloader.classList.contains('fade-out')) {
+                    preloader.classList.add('fade-out');
+                }
+            }, 2500);
+
+            /* ==================================================
+               3. TRANSLATION DICTIONARY & LANGUAGE SWITCHER
+               ================================================== */
+            const translations = {
+                bn: {
+                    brandTagline: "সহজে, দ্রুত, নিজের মতো",
+                    navHome: "হোম",
+                    navFeatures: "ফিচারসমূহ",
+                    navHowItWorks: "কীভাবে কাজ করে",
+                    navSupport: "সহায়তা",
+                    navLogin: "লগইন",
+                    navSignup: "সাইন আপ",
+                    heroBadge: "বাংলাদেশি উদ্যোক্তাদের জন্য বিশেষ বিল্ডার",
+                    heroTitle: "আপনার অনলাইন ব্যবসা শুরু করুন <span>আরও সহজে</span>",
+                    heroSub: "কোনো কোডিং বা প্রযুক্তিগত অভিজ্ঞতা ছাড়াই মিনিটের মধ্যে তৈরি করুন আপনার নিজস্ব পেশাদার ই-কমার্স অনলাইন স্টোর। ঘটি বিল্ডারের সাথে ব্যবসা পরিচালনা করুন দ্রুত, নিরাপদে ও নিশ্চিন্তে।",
+                    heroCtaStart: "শুরু করুন",
+                    heroCtaLogin: "লগইন করুন",
+                    heroSupportLink: "সাহায্য বা প্রশ্নের জন্য সাপোর্ট সেন্টারে যোগাযোগ করুন &rarr;",
+                    statSalesLabel: "আজকের মোট বিক্রি",
+                    statOrdersLabel: "নতুন অর্ডার",
+                    floatBadgeTitle: "লাইভ স্টোর চালু!",
+                    floatBadgeSub: "খুব সহজে তৈরি করুন শপ",
+                    trustTitle: "বাংলাদেশি উদ্যোক্তাদের জন্য তৈরি",
+                    trustSub: "আমরা স্থানীয় ব্যবসার চাহিদা ও চ্যালেঞ্জ গভীরভাবে বুঝি। তাই ঘটি বিল্ডার তৈরি করা হয়েছে অত্যন্ত সহজভাবে।",
+                    trustCard1Title: "বাংলা ও ইংরেজি ড্যাশবোর্ড",
+                    trustCard1Desc: "সম্পূর্ণ বাংলা বা ইংরেজি ভাষায় নিজের সুবিধামতো অনলাইন স্টোর পরিচালনা করার পূর্ণ স্বাধীনতা।",
+                    trustCard2Title: "সহজ পেমেন্ট সুবিধা",
+                    trustCard2Desc: "মোবাইল ব্যাংকিং ও ক্যাশ অন ডেলিভারি অর্ডারের জন্য উপযুক্ত রেডি সিস্টেম।",
+                    trustCard3Title: "১০০% মোবাইল ফ্রেন্ডলি",
+                    trustCard3Desc: "আপনার কাস্টমার মোবাইল থেকে অত্যন্ত দ্রুত ও আরামে অর্ডার সম্পন্ন করতে পারবে।",
+                    trustCard4Title: "স্থানীয় ডেডিকেটেড সাপোর্ট",
+                    trustCard4Desc: "যেকোনো টেকনিক্যাল সহায়তায় আমাদের বাংলাদেশি টিম রয়েছে আপনার পাশে।",
+                    featSectionTitle: "প্ল্যাটফর্মের সেরা ফিচারসমূহ",
+                    featSectionSub: "একটি সফল অনলাইন ব্যবসা পরিচালনার জন্য প্রয়োজনীয় সকল আধুনিক সুবিধা পাবেন এক জায়গায়।",
+                    f1Title: "সহজে অনলাইন শপ তৈরি",
+                    f1Desc: "কোনো ডেভেলপার ছাড়াই মাত্র কয়েক ক্লিকে আপনার নিজস্ব ব্র্যান্ডের সুন্দর ই-কমার্স ওয়েবসাইট তৈরি করুন।",
+                    f2Title: "স্মার্ট পণ্য ম্যানেজমেন্ট",
+                    f2Desc: "সহজে প্রোডাক্ট যোগ করুন, দাম নির্ধারণ করুন, স্টক ট্র্যাক করুন ও ছবি আপলোড করুন কোনো ঝামেলা ছাড়াই।",
+                    f3Title: "আকর্ষণীয় ও Responsive ডিজাইন",
+                    f3Desc: "কম্পিউটার, ট্যাবলেট কিংবা মোবাইল—সব ধরনের স্ক্রিনেই আপনার ওয়েবসাইট দেখাবে একদম নিখুঁত।",
+                    f4Title: "মোবাইল অপ্টিমাইজড",
+                    f4Desc: "মোবাইল ব্যবহারকারীদের জন্য সুপার ফাস্ট লোডিং স্পিড ও সহজ চেকআউট সুবিধা।",
+                    f5Title: "সহজ কাস্টমাইজেশন",
+                    f5Desc: "লোগো, কালার স্কিম ও ব্যানার সাজিয়ে আপনার ব্র্যান্ডের সাথে মিলিয়ে স্টোরকে দিন নতুন রূপ।",
+                    f6Title: "নিরাপদ প্ল্যাটফর্ম",
+                    f6Desc: "উচ্চমানের ডাটা সিকিউরিটি এনক্রিপশন যাতে আপনার ও আপনার কাস্টমারের তথ্য থাকে সবসময় নিরাপদ।",
+                    f7Title: "স্মার্ট বিজনেস এনালিটিক্স",
+                    f7Desc: "দৈনিক বিক্রি, মোট অর্ডার ও জনপ্রিয় প্রোডাক্টের পরিসংখ্যান সহজেই দেখুন এক নজর ড্যাশবোর্ডে।",
+                    f8Title: "কাস্টমার সাপোর্ট",
+                    f8Desc: "যেকোনো সমস্যায় আপনাকে সঠিক দিকনির্দেশনা প্রদান করতে আমাদের টিম রয়েছে সর্বদা নিয়োজিত।",
+                    howTitle: "কীভাবে কাজ করে?",
+                    howSub: "মাত্র ৪টি সহজ ধাপে শুরু করুন আপনার অনলাইন স্টোরের যাত্রা।",
+                    step1Title: "অ্যাকাউন্ট খুলুন",
+                    step1Desc: "বিনামূল্যে সাইন আপ করুন এবং আপনার ইমেইল দিয়ে একাউন্ট তৈরি করুন।",
+                    step2Title: "স্টোর সাজান",
+                    step2Desc: "আপনার অনলাইন স্টোরের নাম দিন, লোগো আপলোড করুন ও ব্যাকগ্রাউন্ড পছন্দ করুন।",
+                    step3DescTitle: "পণ্য যোগ করুন",
+                    step3Desc: "আপনার প্রোডাক্টের ছবি, বিস্তারিত বিবরণ ও সঠিক মূল্য সেট করে লিস্ট করুন।",
+                    step4Title: "বিক্রি শুরু করুন",
+                    step4Desc: "কাস্টমারদের সাথে আপনার স্টোর লিংক শেয়ার করুন এবং নতুন অর্ডার গ্রহণ করা শুরু করুন!",
+                    whyTitle: "কেন বেছে নেবেন GHOTI BUILDER?",
+                    whySub: "ঘটি বিল্ডার সাধারণ কোনো প্ল্যাটফর্ম নয়, এটি আপনার ব্যবসার বিশ্বস্ত প্রযুক্তি সঙ্গী।",
+                    why1Title: "ঝামেলাহীন সেটআপ",
+                    why1Desc: "ডোমেইন, হোস্টিং বা জটিল সার্ভার কনফিগারেশনের কোনো বাড়তি ঝামেলা নেই। সবই আমরা হ্যান্ডেল করি।",
+                    why2Title: "অতি দ্রুত স্পিড",
+                    why2Desc: "লাইটিং-ফাস্ট লোডিং টাইম যা আপনার স্টোরের সেলস রূপান্তর বহুগুণে বাড়িয়ে দেয়।",
+                    why3Title: "ঘটি মার্কেটের পাওয়ার",
+                    why3Desc: "GHOTI MARKET ইকোসিস্টেমের নির্ভরযোগ্য অবকাঠামো ও ভবিষ্যৎ স্কেলেবিলিটির সুবিধা।",
+                    personaTitle: "কারা ব্যবহার করতে পারবেন?",
+                    personaSub: "যেকোনো ক্যাটাগরির অনলাইন ও অফলাইন ব্যবসার জন্য ঘটি বিল্ডার পারফেক্ট।",
+                    p1: "অনলাইন সেলার",
+                    p2: "ক্ষুদ্র ও মাঝারি ব্যবসা",
+                    p3: "নতুন উদ্যোক্তা",
+                    p4: "লোকাল দোকান",
+                    p5: "ফ্যাশন ও ব্র্যান্ড",
+                    p6: "ইলেকট্রনিক্স দোকান",
+                    p7: "হোমমেড ও ক্রাফট",
+                    p8: "গ্রোয়িং ব্র্যান্ডস",
+                    ctaTitle: "আজই আপনার অনলাইন ব্যবসার যাত্রা শুরু করুন",
+                    ctaDesc: "সহজে ও দ্রুত আপনার অনলাইন শপ সাজিয়ে কাস্টমারদের কাছে প্রফেশনালভাবে নিজের পণ্য পৌঁছে দিন।",
+                    ctaStartBtn: "সাইন আপ করুন",
+                    ctaLoginBtn: "লগইন করুন",
+                    ctaForgot: "পাসওয়ার্ড ভুলে গেছেন?",
+                    supportBoxTitle: "সহায়তা প্রয়োজন?",
+                    supportBoxDesc: "আমাদের টিম যেকোনো প্রশ্ন বা টেকনিক্যাল সহযোগিতায় আপনাকে সাহায্য করতে প্রস্তুত।",
+                    supportBoxBtn: "সাপোর্ট সেন্টার",
+                    footerBrandDesc: "বাংলাদেশি উদ্যোক্তা ও ব্যবসার প্রসার কল্পে নির্মিত একটি আধুনিক ও দ্রুততম ই-কমার্স স্টোর বিল্ডার প্ল্যাটফর্ম।",
+                    footCol1: "নেভিগেশন",
+                    footCol2: "অ্যাকোউন্ট",
+                    footCol3: "আইনি তথ্য",
+                    footPrivacy: "প্রাইভেসি পলিসি",
+                    footTerms: "টার্মস ও কন্ডিশনস",
+                    poweredBy: "Powered by"
+                },
+                en: {
+                    brandTagline: "Easy. Fast. Your Way.",
+                    navHome: "Home",
+                    navFeatures: "Features",
+                    navHowItWorks: "How It Works",
+                    navSupport: "Support",
+                    navLogin: "Login",
+                    navSignup: "Sign Up",
+                    heroBadge: "Built for Bangladeshi Businesses",
+                    heroTitle: "Build Your Online Business <span>Easily</span>",
+                    heroSub: "Create & manage your professional e-commerce store in minutes without any coding experience. Scale your business fast, securely and easily with GHOTI BUILDER.",
+                    heroCtaStart: "Get Started",
+                    heroCtaLogin: "Login Now",
+                    heroSupportLink: "Need help? Contact our Support Center &rarr;",
+                    statSalesLabel: "Today's Sales",
+                    statOrdersLabel: "New Orders",
+                    floatBadgeTitle: "Store Live!",
+                    floatBadgeSub: "Easily set up your shop",
+                    trustTitle: "Built for Bangladeshi Businesses",
+                    trustSub: "We deeply understand local business needs. GHOTI BUILDER is tailored to simplify your online journey.",
+                    trustCard1Title: "Bangla & English Control Panel",
+                    trustCard1Desc: "Full freedom to manage your store smoothly in either Bangla or English language.",
+                    trustCard2Title: "Easy Payment Readiness",
+                    trustCard2Desc: "Built-in support structure for mobile banking and Cash on Delivery orders.",
+                    trustCard3Title: "100% Mobile Friendly",
+                    trustCard3Desc: "Optimized mobile experience ensuring fast and seamless checkout for your shoppers.",
+                    trustCard4Title: "Local Dedicated Support",
+                    trustCard4Desc: "Our dedicated local team is always ready to assist you with technical help.",
+                    featSectionTitle: "Powerful SaaS Features",
+                    featSectionSub: "Everything you need to build, launch and grow your online business in one place.",
+                    f1Title: "Easy Store Creation",
+                    f1Desc: "Launch your custom branded e-commerce store in minutes without hiring developers.",
+                    f2Title: "Smart Product Management",
+                    f2Desc: "Easily list products, manage inventory, set prices and upload high-res images seamlessly.",
+                    f3Title: "Beautiful & Responsive",
+                    f3Desc: "Your storefront looks pixel-perfect across desktop, tablet, and mobile devices.",
+                    f4Title: "Mobile Optimized",
+                    f4Desc: "Lightning-fast loading speeds and smooth mobile shopping experience.",
+                    f5Title: "Simple Customization",
+                    f5Desc: "Customize colors, logos, and hero banners to reflect your unique brand identity.",
+                    f6Title: "Secure Platform",
+                    f6Desc: "High-grade data encryption ensuring robust protection for you and your customers.",
+                    f7Title: "Business Analytics",
+                    f7Desc: "Track daily revenue, order counts, and best-selling items from a single dashboard.",
+                    f8Title: "Customer Support",
+                    f8Desc: "Continuous technical guidance and prompt customer service whenever you need it.",
+                    howTitle: "How It Works",
+                    howSub: "Get your store up and running in just 4 simple steps.",
+                    step1Title: "Sign Up Account",
+                    step1Desc: "Register for free with your email and set up your seller profile.",
+                    step2Title: "Customize Store",
+                    step2Desc: "Set your store name, upload your logo, and choose your favorite theme styling.",
+                    step3DescTitle: "Add Products",
+                    step3Desc: "Upload product photos, set prices, write descriptions, and publish instantly.",
+                    step4Title: "Start Selling",
+                    step4Desc: "Share your store link with customers and start receiving online orders!",
+                    whyTitle: "Why Choose GHOTI BUILDER?",
+                    whySub: "Not just another site builder—we are your business's reliable tech engine.",
+                    why1Title: "Hassle-free Setup",
+                    why1Desc: "No complex server configurations, hosting setups, or technical overheads.",
+                    why2Title: "Ultra Fast Performance",
+                    why2Desc: "Optimized response times to maximize conversion rates and delight buyers.",
+                    why3Title: "GHOTI MARKET Ecosystem",
+                    why3Desc: "Backed by the reliable infrastructure and scalability of GHOTI MARKET.",
+                    personaTitle: "Who Can Use It?",
+                    personaSub: "Designed to empower sellers, merchants, and brands across all industries.",
+                    p1: "Online Sellers",
+                    p2: "Small Businesses",
+                    p3: "Entrepreneurs",
+                    p4: "Local Shops",
+                    p5: "Fashion Brands",
+                    p6: "Electronics Stores",
+                    p7: "Home Businesses",
+                    p8: "Growing Brands",
+                    ctaTitle: "Start Your Online Business Today",
+                    ctaDesc: "Create your professional store in minutes and take your business to the next level.",
+                    ctaStartBtn: "Sign Up Now",
+                    ctaLoginBtn: "Login",
+                    ctaForgot: "Forgot Password?",
+                    supportBoxTitle: "Need Assistance?",
+                    supportBoxDesc: "Our dedicated support team is here to answer your questions and guide you.",
+                    supportBoxBtn: "Support Center",
+                    footerBrandDesc: "A modern, ultra-fast SaaS website builder platform designed to empower Bangladeshi businesses.",
+                    footCol1: "Navigation",
+                    footCol2: "Account",
+                    footCol3: "Legal Info",
+                    footPrivacy: "Privacy Policy",
+                    footTerms: "Terms & Conditions",
+                    poweredBy: "Powered by"
+                }
+            };
+
+            let currentLang = localStorage.getItem('ghoti_builder_language') || 'bn';
+
+            function updateLanguage(lang) {
+                currentLang = lang;
+                localStorage.setItem('ghoti_builder_language', lang);
+                document.documentElement.lang = lang;
+
+                // Toggle Active Button Styling
+                const langBn = document.getElementById('langBn');
+                const langEn = document.getElementById('langEn');
+                if (lang === 'bn') {
+                    langBn.classList.add('active');
+                    langEn.classList.remove('active');
+                } else {
+                    langEn.classList.add('active');
+                    langBn.classList.remove('active');
+                }
+
+                // Update text for data-i18n elements
+                const elements = document.querySelectorAll('[data-i18n]');
+                elements.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key]) {
+                        el.innerHTML = translations[lang][key];
+                    }
+                });
+            }
+
+            // Language Toggle Event Listener
+            const langToggleBtn = document.getElementById('langToggle');
+            if (langToggleBtn) {
+                langToggleBtn.addEventListener('click', () => {
+                    const nextLang = currentLang === 'bn' ? 'en' : 'bn';
+                    updateLanguage(nextLang);
+                });
+
+                langToggleBtn.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const nextLang = currentLang === 'bn' ? 'en' : 'bn';
+                        updateLanguage(nextLang);
+                    }
+                });
+            }
+
+            // Initial Language Load
+            updateLanguage(currentLang);
+
+            /* ==================================================
+               4. MOBILE HAMBURGER MENU
+               ================================================== */
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            function toggleMenu() {
+                const isOpen = navMenu.classList.contains('open');
+                navMenu.classList.toggle('open');
+                hamburger.classList.toggle('open');
+                hamburger.setAttribute('aria-expanded', !isOpen);
+            }
+
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', toggleMenu);
+
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (navMenu.classList.contains('open')) {
+                            toggleMenu();
+                        }
+                    });
+                });
+
+                // Close on click outside
+                document.addEventListener('click', (e) => {
+                    if (navMenu.classList.contains('open') && 
+                        !navMenu.contains(e.target) && 
+                        !hamburger.contains(e.target)) {
+                        toggleMenu();
+                    }
+                });
+
+                // Close on Escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && navMenu.classList.contains('open')) {
+                        toggleMenu();
+                    }
+                });
+            }
+
+            /* ==================================================
+               5. BACK TO TOP BUTTON
+               ================================================== */
+            const backToTopBtn = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 350) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            /* ==================================================
+               6. INTERSECTION OBSERVER (SCROLL ANIMATIONS)
+               ================================================== */
+            const revealElements = document.querySelectorAll('.reveal-element');
+            
+            if ('IntersectionObserver' in window) {
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('revealed');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    threshold: 0.12,
+                    rootMargin: '0px 0px -40px 0px'
+                });
+
+                revealElements.forEach(el => revealObserver.observe(el));
+            } else {
+                // Fallback for older browsers
+                revealElements.forEach(el => el.classList.add('revealed'));
+            }
+        });
+    </script>
+</body>
+</html>

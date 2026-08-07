@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - GHOTI BUILDER</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==================================================
+           CSS VARIABLES & DESIGN SYSTEM
+           ================================================== */
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --primary-light: #EEF2FF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --bg-body: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --border-color: #E2E8F0;
+            --border-hover: #CBD5E1;
+            --error-color: #EF4444;
+            --error-bg: #FEF2F2;
+            --success-color: #10B981;
+            --success-bg: #ECFDF5;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-card: 0 20px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ==================================================
+           BASE & RESET
+           ================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-body);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ==================================================
+           LAYOUT & CONTAINER
+           ================================================== */
+        .login-wrapper {
+            width: 100%;
+            max-width: 430px;
+            margin: auto;
+        }
+
+        .login-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: 2.5rem 2rem;
+            width: 100%;
+        }
+
+        /* ==================================================
+           HEADER & LOGO
+           ================================================== */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            min-height: 50px;
+        }
+
+        .logo {
+            max-width: 180px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .brand-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.025em;
+            margin-bottom: 0.375rem;
+        }
+
+        .brand-header p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* ==================================================
+           FORM & INPUTS
+           ================================================== */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            color: var(--text-muted);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 48px;
+            padding: 0 1rem 0 2.75rem;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            color: var(--text-main);
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-input.has-toggle {
+            padding-right: 2.75rem;
+        }
+
+        .form-input::placeholder {
+            color: #94A3B8;
+        }
+
+        .form-input:hover {
+            border-color: var(--border-hover);
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-light);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .password-toggle:hover {
+            color: var(--text-main);
+            background-color: var(--bg-body);
+        }
+
+        .password-toggle:focus-visible {
+            outline: 2px solid var(--primary);
+        }
+
+        /* ==================================================
+           FORGOT PASSWORD LINK
+           ================================================== */
+        .forgot-password-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: -0.25rem;
+        }
+
+        .forgot-password-btn {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .forgot-password-btn:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        .forgot-password-btn:focus-visible {
+            outline: 2px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        /* ==================================================
+           BUTTONS
+           ================================================== */
+        .btn {
+            width: 100%;
+            height: 48px;
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #FFFFFF;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-primary:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--bg-body);
+            border-color: var(--border-hover);
+        }
+
+        .btn-secondary:focus-visible {
+            outline: 2px solid var(--text-main);
+            outline-offset: 2px;
+        }
+
+        /* ==================================================
+           DIVIDER & SIGNUP SECTION
+           ================================================== */
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 1.5rem 0 1.25rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .divider span {
+            padding: 0 0.75rem;
+            color: var(--text-muted);
+            font-size: 0.8125rem;
+            font-weight: 500;
+        }
+
+        /* ==================================================
+           LOADING SPINNER
+           ================================================== */
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #FFFFFF;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ==================================================
+           TOAST NOTIFICATION SYSTEM
+           ================================================== */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            width: calc(100% - 2rem);
+            max-width: 400px;
+            pointer-events: none;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            background: #FFFFFF;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            font-size: 0.875rem;
+            font-weight: 500;
+            pointer-events: auto;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid var(--border-color);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast-error {
+            background-color: var(--error-bg);
+            border-color: rgba(239, 68, 68, 0.2);
+            color: #991B1B;
+        }
+
+        .toast-success {
+            background-color: var(--success-bg);
+            border-color: rgba(16, 185, 129, 0.2);
+            color: #065F46;
+        }
+
+        .toast-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ==================================================
+           FOOTER
+           ================================================== */
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
+        /* ==================================================
+           RESPONSIVE DESIGN
+           ================================================== */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 1.75rem 1.25rem;
+                border-radius: var(--radius-md);
+            }
+            .brand-header h1 {
+                font-size: 1.35rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <div class="login-wrapper">
+        <main class="login-card">
+            <!-- Brand Header -->
+            <header class="brand-header">
+                <div class="logo-container">
+                    <img src="https://build.ghotimarket.com/logo.png" alt="GHOTI Builder Logo" class="logo">
+                </div>
+                <h1>Welcome Back</h1>
+                <p>Login to your GHOTI Builder account</p>
+            </header>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="login-form" novalidate>
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </span>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input" 
+                            placeholder="Enter your email address" 
+                            required 
+                            autocomplete="email"
+                        >
+                    </div>
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </span>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="form-input has-toggle" 
+                            placeholder="Enter your password" 
+                            required 
+                            autocomplete="current-password"
+                        >
+                        <button 
+                            type="button" 
+                            id="togglePassword" 
+                            class="password-toggle" 
+                            aria-label="Toggle password visibility"
+                        >
+                            <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <svg id="eyeOffIcon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.52 13.52 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Forgot Password -->
+                <div class="forgot-password-container">
+                    <button type="button" id="forgotPasswordBtn" class="forgot-password-btn">Forgot Password?</button>
+                </div>
+
+                <!-- Login Button -->
+                <button type="submit" id="loginBtn" class="btn btn-primary">
+                    <span id="btnSpinner" class="spinner hidden"></span>
+                    <span id="btnText">Login</span>
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="divider">
+                <span>Don't have an account?</span>
+            </div>
+
+            <!-- Sign Up Button -->
+            <button type="button" id="signupBtn" class="btn btn-secondary">Create Account</button>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 GHOTI BUILDER. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Firebase v9+ Modular Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            onAuthStateChanged 
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // ==================================================
+        // CONFIGURATION & CONSTANTS
+        // ==================================================
+        const firebaseConfig = {
+  apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
+  authDomain: "ghotimarket.firebaseapp.com",
+  databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
+  projectId: "ghotimarket",
+  storageBucket: "ghotimarket.firebasestorage.app",
+  messagingSenderId: "481257644093",
+  appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
+  measurementId: "G-4SR8V2EKC1"
+};
+
+        const DASHBOARD_URL = "YOUR_DASHBOARD_URL";
+        const SIGNUP_URL = "https://build.ghotimarket.com/signup";
+        const FORGOT_PASSWORD_URL = "https://build.ghotimarket.com/forgot-password";
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // DOM Elements
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const togglePasswordBtn = document.getElementById('togglePassword');
+        const eyeIcon = document.getElementById('eyeIcon');
+        const eyeOffIcon = document.getElementById('eyeOffIcon');
+        const loginBtn = document.getElementById('loginBtn');
+        const btnText = document.getElementById('btnText');
+        const btnSpinner = document.getElementById('btnSpinner');
+        const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const toastContainer = document.getElementById('toastContainer');
+
+        // ==================================================
+        // AUTH STATE LISTENER
+        // ==================================================
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.location.href = DASHBOARD_URL;
+            }
+        });
+
+        // ==================================================
+        // TOAST NOTIFICATION SYSTEM
+        // ==================================================
+        function showToast(message, type = 'error') {
+            toastContainer.innerHTML = ''; // Clear previous toasts
+
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            
+            const iconSvg = type === 'success' 
+                ? `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
+                : `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+
+            toast.innerHTML = `
+                <span class="toast-icon">${iconSvg}</span>
+                <span>${message}</span>
+            `;
+
+            toastContainer.appendChild(toast);
+
+            // Force reflow for animation
+            setTimeout(() => toast.classList.add('show'), 10);
+
+            // Dismiss toast automatically
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // ==================================================
+        // UI HELPERS & TOGGLES
+        // ==================================================
+        togglePasswordBtn.addEventListener('click', () => {
+            const isPassword = passwordInput.getAttribute('type') === 'password';
+            passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+            eyeIcon.classList.toggle('hidden', isPassword);
+            eyeOffIcon.classList.toggle('hidden', !isPassword);
+        });
+
+        function setLoading(isLoading) {
+            loginBtn.disabled = isLoading;
+            if (isLoading) {
+                btnText.textContent = "Logging in...";
+                btnSpinner.classList.remove('hidden');
+            } else {
+                btnText.textContent = "Login";
+                btnSpinner.classList.add('hidden');
+            }
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        // ==================================================
+        // NAVIGATION HANDLERS
+        // ==================================================
+        forgotPasswordBtn.addEventListener('click', () => {
+            window.location.href = FORGOT_PASSWORD_URL;
+        });
+
+        signupBtn.addEventListener('click', () => {
+            window.location.href = SIGNUP_URL;
+        });
+
+        // ==================================================
+        // LOGIN SUBMISSION HANDLER
+        // ==================================================
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            // Form Validation
+            if (!email) {
+                showToast("Please enter your email address.");
+                emailInput.focus();
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                showToast("Please enter a valid email address.");
+                emailInput.focus();
+                return;
+            }
+
+            if (!password) {
+                showToast("Please enter your password.");
+                passwordInput.focus();
+                return;
+            }
+
+            setLoading(true);
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                showToast("Login successful!", "success");
+                setTimeout(() => {
+                    window.location.href = DASHBOARD_URL;
+                }, 500);
+            } catch (error) {
+                setLoading(false);
+                let errorMessage = "Something went wrong. Please try again.";
+
+                switch (error.code) {
+                    case 'auth/invalid-credential':
+                    case 'auth/wrong-password':
+                        errorMessage = "Email or password is incorrect.";
+                        break;
+                    case 'auth/user-not-found':
+                        errorMessage = "No account found with this email.";
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = "Please enter a valid email address.";
+                        break;
+                    case 'auth/user-disabled':
+                        errorMessage = "This account has been disabled.";
+                        break;
+                    case 'auth/too-many-requests':
+                        errorMessage = "Too many login attempts. Please try again later.";
+                        break;
+                    case 'auth/network-request-failed':
+                        errorMessage = "Network error. Please check your internet connection.";
+                        break;
+                }
+
+                showToast(errorMessage, "error");
+            }
+        });
+    </script>
+</body>
+</html>

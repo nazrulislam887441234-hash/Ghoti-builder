@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Domain Setup - GHOTI BUILDER</title>
+
+  <!-- Google Fonts: Hind Siliguri (Bangla) & Plus Jakarta Sans (English) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================================
+       GHOTI BUILDER - BRANDING & PURE CSS STYLES
+       Navy: #0A192F | Accent: #FF6B00 | Slate BG: #F8FAFC
+       ======================================================== */
+    :root {
+      --bg-color: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --primary-navy: #0A192F;
+      --accent-orange: #FF6B00;
+      --accent-orange-hover: #E05D00;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --input-bg: #F8FAFC;
+      --success-color: #16A34A;
+      --success-bg: #F0FDF4;
+      --error-color: #DC2626;
+      --error-bg: #FEF2F2;
+      --warning-color: #D97706;
+      --warning-bg: #FFFBEB;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --radius-sm: 8px;
+      --font-main: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.25rem 1rem 3rem 1rem;
+      line-height: 1.5;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+
+    .brand-logo-badge {
+      background-color: var(--primary-navy);
+      color: var(--accent-orange);
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+    }
+
+    /* Language Switcher Toggle */
+    .lang-switcher {
+      display: flex;
+      background-color: #E2E8F0;
+      border-radius: 30px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .lang-btn.active {
+      background-color: var(--primary-navy);
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(10, 25, 47, 0.15);
+    }
+
+    /* Main Container */
+    .main-container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Card Base */
+    .section-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.03);
+    }
+
+    .card-header {
+      margin-bottom: 1.25rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .card-desc {
+      font-size: 0.925rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Banner Banner Card */
+    .top-explanation-card {
+      background: linear-gradient(135deg, #0A192F 0%, #1E293B 100%);
+      color: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .top-explanation-card h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #FFFFFF;
+    }
+
+    .top-explanation-card p {
+      font-size: 0.95rem;
+      color: #94A3B8;
+      line-height: 1.6;
+    }
+
+    /* Form & Input Controls */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--primary-navy);
+    }
+
+    .input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .domain-input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background-color: var(--input-bg);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      color: var(--text-main);
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .domain-input:focus {
+      border-color: var(--accent-orange);
+      box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.12);
+      background-color: #FFFFFF;
+    }
+
+    .validation-msg {
+      font-size: 0.85rem;
+      color: var(--error-color);
+      margin-top: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: var(--accent-orange);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.875rem 1.75rem;
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 12px rgba(255, 107, 0, 0.2);
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--accent-orange-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:disabled {
+      background-color: #CBD5E1;
+      color: #94A3B8;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background-color: #F1F5F9;
+      color: var(--primary-navy);
+      border: 1px solid var(--border-color);
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: #E2E8F0;
+    }
+
+    .btn-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-top-color: #FFFFFF;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Active Domain Display Card */
+    .active-domain-box {
+      background-color: var(--success-bg);
+      border: 1px solid #BBF7D0;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .active-domain-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background-color: var(--success-color);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+    }
+
+    .active-domain-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-navy);
+      word-break: break-all;
+    }
+
+    /* DNS Record Table */
+    .dns-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .dns-table th {
+      background-color: #F1F5F9;
+      color: var(--primary-navy);
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .dns-table td {
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.925rem;
+      color: var(--text-main);
+      background-color: #FFFFFF;
+    }
+
+    .dns-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .code-badge {
+      background-color: #F1F5F9;
+      color: var(--primary-navy);
+      font-family: monospace;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .btn-copy {
+      background-color: #F1F5F9;
+      border: 1px solid var(--border-color);
+      color: var(--primary-navy);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-copy:hover {
+      background-color: var(--primary-navy);
+      color: #FFFFFF;
+    }
+
+    /* Warning Card */
+    .warning-card {
+      background-color: var(--warning-bg);
+      border: 1px solid #FDE68A;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      gap: 0.875rem;
+      color: #92400E;
+    }
+
+    .warning-icon {
+      flex-shrink: 0;
+      color: var(--warning-color);
+    }
+
+    .warning-title {
+      font-weight: 700;
+      font-size: 0.975rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .warning-text {
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    /* Step-by-Step List */
+    .steps-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background-color: var(--input-bg);
+      padding: 0.875rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .step-num {
+      background-color: var(--primary-navy);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.8rem;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-text {
+      font-size: 0.925rem;
+      color: var(--text-main);
+    }
+
+    /* Domain Providers Tags */
+    .providers-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .provider-chip {
+      background-color: #F1F5F9;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.825rem;
+      font-weight: 600;
+    }
+
+    /* Page Loader Screen */
+    .page-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1rem;
+      gap: 1rem;
+      color: var(--text-muted);
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--border-color);
+      border-top-color: var(--accent-orange);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .toast {
+      background-color: var(--primary-navy);
+      color: #FFFFFF;
+      padding: 0.875rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.925rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success { border-left: 4px solid var(--success-color); }
+    .toast.error { border-left: 4px solid var(--error-color); }
+    .toast.info { border-left: 4px solid #3B82F6; }
+
+    .footer {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hidden { display: none !important; }
+
+    /* Responsive Design */
+    @media (max-width: 640px) {
+      body { padding: 0.875rem 0.5rem 2rem 0.5rem; }
+      .section-card { padding: 1.25rem; border-radius: 12px; }
+      .top-explanation-card { padding: 1.25rem; }
+      .toast-container { left: 1rem; right: 1rem; bottom: 1rem; }
+      .toast { justify-content: center; text-align: center; }
+      
+      .dns-table, .dns-table tbody, .dns-table tr, .dns-table td {
+        display: block;
+        width: 100%;
+      }
+      .dns-table thead { display: none; }
+      .dns-table tr {
+        margin-bottom: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+      }
+      .dns-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        padding: 0.75rem;
+      }
+      .dns-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header with Brand & Language Switcher -->
+  <header class="top-header">
+    <div class="brand-wrap">
+      <div class="brand-logo-badge">GHOTI</div>
+      <div class="brand-title">BUILDER</div>
+    </div>
+    
+    <div class="lang-switcher">
+      <button type="button" id="btn-lang-bn" class="lang-btn active" onclick="setLanguage('bn')">বাংলা</button>
+      <button type="button" id="btn-lang-en" class="lang-btn" onclick="setLanguage('en')">English</button>
+    </div>
+  </header>
+
+  <!-- Page Loader State -->
+  <div id="page-loader" class="page-loader">
+    <div class="spinner"></div>
+    <p id="loader-text">তথ্য লোড হচ্ছে...</p>
+  </div>
+
+  <!-- Main Content Container -->
+  <main id="main-content" class="main-container hidden">
+
+    <!-- Top Banner Card -->
+    <section class="top-explanation-card">
+      <h1 id="top-title">আপনার কাস্টম ডোমেইন সেটআপ করুন</h1>
+      <p id="top-desc">আপনার নিজের কেনা ডোমেইন এখানে সেটআপ করতে পারবেন। আপনার যদি নিজের কেনা ডোমেইন থাকে, যেমন example.com, তাহলে সেটি এখানে লিখে আপনার GHOTI BUILDER স্টোরের সাথে কানেক্ট করতে পারবেন।</p>
+    </section>
+
+    <!-- Domain Input & Edit Card -->
+    <section class="section-card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" color="var(--accent-orange)"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <span id="input-card-title">আপনার কাস্টম ডোমেইন</span>
+        </h2>
+        <p class="card-desc" id="input-card-desc">আপনার নিজের কেনা ডোমেইন সেটআপ করতে পারবেন।</p>
+      </div>
+
+      <!-- State A: Active Saved Domain View -->
+      <div id="active-domain-view" class="hidden">
+        <div class="active-domain-box">
+          <div class="active-domain-info">
+            <span class="status-dot"></span>
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);" id="current-domain-label">আপনার বর্তমান ডোমেইন:</div>
+              <div id="display-custom-domain" class="active-domain-name">example.com</div>
+            </div>
+          </div>
+          <button type="button" class="btn-secondary" onclick="enableDomainEdit()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+            <span id="btn-edit-label">ডোমেইন পরিবর্তন করুন</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- State B: Input Form -->
+      <form id="domain-form" onsubmit="handleSaveDomain(event)">
+        <div class="form-group">
+          <label class="form-label" for="custom-domain-input" id="lbl-domain-input">আপনার কাস্টম ডোমেইন নাম</label>
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              id="custom-domain-input" 
+              class="domain-input" 
+              placeholder="আপনার কেনা ডোমেইন লিখুন যেমন: example.com"
+              autocomplete="off"
+              spellcheck="false"
+              oninput="handleInputClean()"
+            />
+          </div>
+          <div id="validation-error" class="validation-msg hidden">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <span id="validation-text">সঠিক ডোমেইন লিখুন।</span>
+          </div>
+        </div>
+
+        <button type="submit" id="btn-save-domain" class="btn-primary">
+          <span id="btn-save-text">ডোমেইন সেভ করুন</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- Important Notice Warning Card -->
+    <section class="warning-card">
+      <div class="warning-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      </div>
+      <div>
+        <div class="warning-title" id="warn-title">গুরুত্বপূর্ণ</div>
+        <div class="warning-text" id="warn-text">ডোমেইন সেভ করলেই আপনার DNS স্বয়ংক্রিয়ভাবে পরিবর্তন হবে না। আপনাকে আপনার Domain Provider-এর DNS Settings থেকে CNAME Record নিজে যুক্ত করতে হবে।</div>
+      </div>
+    </section>
+
+    <!-- DNS Setup Instruction Card -->
+    <section class="section-card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" color="var(--accent-orange)"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          <span id="dns-card-title">আপনার ডোমেইনে CNAME যুক্ত করুন</span>
+        </h2>
+        <p class="card-desc" id="dns-card-desc">আপনার ডোমেইন যেখান থেকে কিনেছেন, সেই Domain Provider-এর DNS Management / DNS Settings-এ গিয়ে নিচের CNAME Record যুক্ত করুন।</p>
+      </div>
+
+      <!-- CNAME Table -->
+      <table class="dns-table">
+        <thead>
+          <tr>
+            <th id="th-type">Type</th>
+            <th id="th-name">Name / Host</th>
+            <th id="th-target">Target / Points to</th>
+            <th id="th-ttl">TTL</th>
+            <th id="th-action">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Type"><span class="code-badge">CNAME</span></td>
+            <td data-label="Name / Host"><span class="code-badge">www</span></td>
+            <td data-label="Target"><span class="code-badge">store.ghotimarket.com</span></td>
+            <td data-label="TTL"><span class="code-badge">Auto</span></td>
+            <td data-label="Action">
+              <button type="button" class="btn-copy" onclick="copyToClipboard('store.ghotimarket.com')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span class="copy-btn-text">Copy Target</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Step by Step DNS Instructions Card -->
+    <section class="section-card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" color="var(--accent-orange)"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+          <span id="steps-card-title">DNS কোথায় পরিবর্তন করবেন?</span>
+        </h2>
+        <p class="card-desc" id="steps-card-desc">আপনি যেখান থেকে ডোমেইন কিনেছেন, সেই ওয়েবসাইটে লগইন করুন। তারপর Domain Management → DNS Management / DNS Settings এ যান।</p>
+      </div>
+
+      <ul class="steps-list">
+        <li class="step-item"><span class="step-num">১</span><span class="step-text" id="step-1">আপনার Domain Provider-এ Login করুন।</span></li>
+        <li class="step-item"><span class="step-num">২</span><span class="step-text" id="step-2">আপনার Domain নির্বাচন করুন।</span></li>
+        <li class="step-item"><span class="step-num">৩</span><span class="step-text" id="step-3">DNS Management / DNS Settings খুলুন।</span></li>
+        <li class="step-item"><span class="step-num">৪</span><span class="step-text" id="step-4">Add Record / Add DNS Record এ ক্লিক করুন।</span></li>
+        <li class="step-item"><span class="step-num">৫</span><span class="step-text" id="step-5">Type = CNAME নির্বাচন করুন।</span></li>
+        <li class="step-item"><span class="step-num">৬</span><span class="step-text" id="step-6">Name/Host = www লিখুন।</span></li>
+        <li class="step-item"><span class="step-num">৭</span><span class="step-text" id="step-7">Target/Points To = store.ghotimarket.com লিখুন।</span></li>
+        <li class="step-item"><span class="step-num">৮</span><span class="step-text" id="step-8">Save Record করুন।</span></li>
+      </ul>
+
+      <div style="margin-top: 1.5rem; border-top: 1px dashed var(--border-color); padding-top: 1rem;">
+        <p style="font-size: 0.875rem; color: var(--text-muted);" id="providers-desc">আপনার ডোমেইন যেখান থেকেই কেনা হোক, DNS Settings থেকেই CNAME যুক্ত করতে হবে:</p>
+        <div class="providers-wrap">
+          <span class="provider-chip">Namecheap</span>
+          <span class="provider-chip">GoDaddy</span>
+          <span class="provider-chip">Cloudflare</span>
+          <span class="provider-chip">Hostinger</span>
+          <span class="provider-chip">Porkbun</span>
+          <span class="provider-chip">Other Providers</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Extra Formatting & Root/Apex Domain Notes -->
+    <section class="section-card">
+      <div class="card-header">
+        <h3 class="card-title" style="font-size: 1.05rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" color="var(--accent-orange)"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          <span id="note-card-title">ডোমেইন ফরম্যাট ও আপডেট নোটিশ</span>
+        </h3>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem; color: var(--text-muted);">
+        <p id="note-format">১. <strong>শুধু ডোমেইন লিখুন।</strong> যেমন: example.com অথবা www.example.com (কোনো https:// বা trailing slash লিখবেন না)।</p>
+        <p id="note-propagate">২. CNAME পরিবর্তনের পর ইন্টারনেট জুড়ে DNS আপডেট হতে কিছু সময় (কয়েক মিনিট থেকে ২৪ ঘণ্টা পর্যন্ত) লাগতে পারে।</p>
+        <p id="note-www">৩. আপনি যদি www.example.com ব্যবহার করতে চান, তাহলে CNAME-এর Host/Name হবে www। আপনার root domain example.com থেকে www.example.com ব্যবহার করার জন্য DNS provider অনুযায়ী অতিরিক্ত configuration (যেমন: Domain Forwarding) প্রয়োজন হতে পারে।</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    &copy; GHOTI BUILDER — Powering Independent Online Stores.
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container">
+    <div id="app-toast" class="toast">
+      <span id="toast-message"></span>
+    </div>
+  </div>
+
+  <!-- Firebase v11 Modular SDK Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+    // ========================================================
+    // 1. FIREBASE CONFIGURATION
+    // ========================================================
+    const firebaseConfig = {
+  apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
+  authDomain: "ghotimarket.firebaseapp.com",
+  databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
+  projectId: "ghotimarket",
+  storageBucket: "ghotimarket.firebasestorage.app",
+  messagingSenderId: "481257644093",
+  appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
+  measurementId: "G-4SR8V2EKC1"
+};
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Global State
+    let currentUser = null;
+    let currentShopData = null;
+    let isSaving = false;
+    let currentLang = localStorage.getItem('ghoti_lang') || 'bn';
+
+    // DOM References
+    const pageLoader = document.getElementById('page-loader');
+    const mainContent = document.getElementById('main-content');
+    const domainForm = document.getElementById('domain-form');
+    const domainInput = document.getElementById('custom-domain-input');
+    const validationError = document.getElementById('validation-error');
+    const validationText = document.getElementById('validation-text');
+    const btnSaveDomain = document.getElementById('btn-save-domain');
+    const btnSaveText = document.getElementById('btn-save-text');
+    const activeDomainView = document.getElementById('active-domain-view');
+    const displayCustomDomain = document.getElementById('display-custom-domain');
+
+    // ========================================================
+    // 2. BILINGUAL TRANSLATION DICTIONARY
+    // ========================================================
+    const i18n = {
+      bn: {
+        loaderText: "তথ্য লোড হচ্ছে...",
+        topTitle: "আপনার কাস্টম ডোমেইন সেটআপ করুন",
+        topDesc: "আপনার নিজের কেনা ডোমেইন এখানে সেটআপ করতে পারবেন। আপনার যদি নিজের কেনা ডোমেইন থাকে, যেমন example.com, তাহলে সেটি এখানে লিখে আপনার GHOTI BUILDER স্টোরের সাথে কানেক্ট করতে পারবেন।",
+        inputCardTitle: "আপনার কাস্টম ডোমেইন",
+        inputCardDesc: "আপনার নিজের কেনা ডোমেইন সেটআপ করতে পারবেন।",
+        currentDomainLabel: "আপনার বর্তমান ডোমেইন:",
+        btnEditLabel: "ডোমেইন পরিবর্তন করুন",
+        lblDomainInput: "আপনার কাস্টম ডোমেইন নাম",
+        inputPlaceholder: "আপনার কেনা ডোমেইন লিখুন যেমন: example.com",
+        validationErr: "সঠিক ডোমেইন লিখুন (যেমন: example.com বা www.example.com)।",
+        btnSave: "ডোমেইন সেভ করুন",
+        btnSaving: "সেভ হচ্ছে...",
+        warnTitle: "গুরুত্বপূর্ণ",
+        warnText: "ডোমেইন সেভ করলেই আপনার DNS স্বয়ংক্রিয়ভাবে পরিবর্তন হবে না। আপনাকে আপনার Domain Provider-এর DNS Settings থেকে CNAME Record নিজে যুক্ত করতে হবে।",
+        dnsCardTitle: "আপনার ডোমেইনে CNAME যুক্ত করুন",
+        dnsCardDesc: "আপনার ডোমেইন যেখান থেকে কিনেছেন, সেই Domain Provider-এর DNS Management / DNS Settings-এ গিয়ে নিচের CNAME Record যুক্ত করুন।",
+        thType: "Type",
+        thName: "Name / Host",
+        thTarget: "Target / Points to",
+        thTTL: "TTL",
+        thAction: "Action",
+        copyBtnText: "কপি করুন",
+        stepsCardTitle: "DNS কোথায় পরিবর্তন করবেন?",
+        stepsCardDesc: "আপনি যেখান থেকে ডোমেইন কিনেছেন, সেই ওয়েবসাইটে লগইন করুন। তারপর Domain Management → DNS Management / DNS Settings এ যান।",
+        step1: "আপনার Domain Provider-এ Login করুন।",
+        step2: "আপনার Domain নির্বাচন করুন।",
+        step3: "DNS Management / DNS Settings খুলুন।",
+        step4: "Add Record / Add DNS Record এ ক্লিক করুন।",
+        step5: "Type = CNAME নির্বাচন করুন।",
+        step6: "Name/Host = www লিখুন।",
+        step7: "Target/Points To = store.ghotimarket.com লিখুন।",
+        step8: "Save Record করুন।",
+        providersDesc: "আপনার ডোমেইন যেখান থেকেই কেনা হোক, DNS Settings থেকেই CNAME যুক্ত করতে হবে:",
+        noteCardTitle: "ডোমেইন ফরম্যাট ও আপডেট নোটিশ",
+        noteFormat: "১. <strong>শুধু ডোমেইন লিখুন।</strong> যেমন: example.com অথবা www.example.com (কোনো https:// বা trailing slash লিখবেন না)।",
+        notePropagate: "২. CNAME পরিবর্তনের পর ইন্টারনেট জুড়ে DNS আপডেট হতে কিছু সময় (কয়েক মিনিট থেকে ২৪ ঘণ্টা পর্যন্ত) লাগতে পারে।",
+        noteWww: "৩. আপনি যদি www.example.com ব্যবহার করতে চান, তাহলে CNAME-এর Host/Name হবে www। আপনার root domain example.com থেকে www.example.com ব্যবহার করার জন্য DNS provider অনুযায়ী অতিরিক্ত configuration প্রয়োজন হতে পারে।",
+        toastNotLoggedIn: "আপনি লগইন করা নেই।",
+        toastSaveSuccessTitle: "ডোমেইন সেভ হয়েছে!",
+        toastSaveSuccessDesc: "আপনার ডোমেইন সফলভাবে GHOTI BUILDER-এ যুক্ত হয়েছে।",
+        toastSaveFailed: "ডোমেইন সেভ করা যায়নি। আবার চেষ্টা করুন।",
+        toastInvalidDomain: "এই ডোমেইনটি সঠিক নয়।",
+        toastShopNotFound: "আপনার Shop পাওয়া যায়নি।",
+        toastCopied: "কপি হয়েছে!"
+      },
+      en: {
+        loaderText: "Loading details...",
+        topTitle: "Setup Your Custom Domain",
+        topDesc: "You can connect your own purchased domain to your store. If you own a domain such as example.com, enter it here to link it with your GHOTI BUILDER store.",
+        inputCardTitle: "Your Custom Domain",
+        inputCardDesc: "You can set up your own purchased domain.",
+        currentDomainLabel: "Your Current Domain:",
+        btnEditLabel: "Change Domain",
+        lblDomainInput: "Your Custom Domain Name",
+        inputPlaceholder: "Enter your purchased domain e.g. example.com",
+        validationErr: "Please enter a valid domain (e.g. example.com or www.example.com).",
+        btnSave: "Save Domain",
+        btnSaving: "Saving...",
+        warnTitle: "Important",
+        warnText: "Saving your domain here does not automatically change your DNS. You must add the CNAME record from your domain provider's DNS settings.",
+        dnsCardTitle: "Add CNAME Record to Your Domain",
+        dnsCardDesc: "Log in to your domain provider's DNS Management / DNS Settings page where you purchased your domain and add the CNAME record below.",
+        thType: "Type",
+        thName: "Name / Host",
+        thTarget: "Target / Points to",
+        thTTL: "TTL",
+        thAction: "Action",
+        copyBtnText: "Copy Target",
+        stepsCardTitle: "Where to Change DNS Settings?",
+        stepsCardDesc: "Log in to the website where you registered your domain, then navigate to Domain Management → DNS Management / DNS Settings.",
+        step1: "Log in to your domain provider.",
+        step2: "Select your domain.",
+        step3: "Open DNS Management / DNS Settings.",
+        step4: "Click Add Record / Add DNS Record.",
+        step5: "Select CNAME as the Type.",
+        step6: "Set Name/Host to www.",
+        step7: "Set Target/Points To to store.ghotimarket.com.",
+        step8: "Save the DNS record.",
+        providersDesc: "Regardless of where your domain was purchased, you must add the CNAME record in its DNS settings:",
+        noteCardTitle: "Domain Format & Propagation Notice",
+        noteFormat: "1. <strong>Enter only your domain.</strong> Example: example.com or www.example.com (Do not include https:// or trailing slash).",
+        notePropagate: "2. DNS changes may take some time (up to 24-48 hours) to propagate across the internet.",
+        noteWww: "3. If you wish to use www.example.com, set the CNAME Host/Name to www. Routing your root domain (example.com) to www may require additional provider configurations.",
+        toastNotLoggedIn: "Please login first.",
+        toastSaveSuccessTitle: "Domain Saved!",
+        toastSaveSuccessDesc: "Your domain has been successfully added to GHOTI BUILDER.",
+        toastSaveFailed: "Failed to save domain. Please try again.",
+        toastInvalidDomain: "Please enter a valid domain.",
+        toastShopNotFound: "Your shop document was not found.",
+        toastCopied: "Copied!"
+      }
+    };
+
+    // ========================================================
+    // 3. LANGUAGE SYSTEM TOGGLE & RENDER
+    // ========================================================
+    window.setLanguage = function(lang) {
+      currentLang = lang;
+      localStorage.setItem('ghoti_lang', lang);
+
+      // Update Switcher Buttons UI
+      document.getElementById('btn-lang-bn').classList.toggle('active', lang === 'bn');
+      document.getElementById('btn-lang-en').classList.toggle('active', lang === 'en');
+
+      const dict = i18n[lang];
+
+      // Update Text Content
+      document.getElementById('loader-text').textContent = dict.loaderText;
+      document.getElementById('top-title').textContent = dict.topTitle;
+      document.getElementById('top-desc').textContent = dict.topDesc;
+      document.getElementById('input-card-title').textContent = dict.inputCardTitle;
+      document.getElementById('input-card-desc').textContent = dict.inputCardDesc;
+      document.getElementById('current-domain-label').textContent = dict.currentDomainLabel;
+      document.getElementById('btn-edit-label').textContent = dict.btnEditLabel;
+      document.getElementById('lbl-domain-input').textContent = dict.lblDomainInput;
+      domainInput.placeholder = dict.inputPlaceholder;
+      validationText.textContent = dict.validationErr;
+      
+      if (!isSaving) {
+        btnSaveText.textContent = dict.btnSave;
+      } else {
+        btnSaveText.textContent = dict.btnSaving;
+      }
+
+      document.getElementById('warn-title').textContent = dict.warnTitle;
+      document.getElementById('warn-text').textContent = dict.warnText;
+      document.getElementById('dns-card-title').textContent = dict.dnsCardTitle;
+      document.getElementById('dns-card-desc').textContent = dict.dnsCardDesc;
+
+      document.getElementById('th-type').textContent = dict.thType;
+      document.getElementById('th-name').textContent = dict.thName;
+      document.getElementById('th-target').textContent = dict.thTarget;
+      document.getElementById('th-ttl').textContent = dict.thTTL;
+      document.getElementById('th-action').textContent = dict.thAction;
+
+      const copyTexts = document.querySelectorAll('.copy-btn-text');
+      copyTexts.forEach(el => el.textContent = dict.copyBtnText);
+
+      document.getElementById('steps-card-title').textContent = dict.stepsCardTitle;
+      document.getElementById('steps-card-desc').textContent = dict.stepsCardDesc;
+
+      // Update Steps Numbers for Bangla / En
+      const numMap = ['১', '২', '৩', '৪', '৫', '৬', '৭', '৮'];
+      for (let i = 1; i <= 8; i++) {
+        const stepElem = document.getElementById(`step-${i}`);
+        if (stepElem) stepElem.textContent = dict[`step${i}`];
+        const numElem = stepElem.previousElementSibling;
+        if (numElem) numElem.textContent = (lang === 'bn') ? numMap[i-1] : i;
+      }
+
+      document.getElementById('providers-desc').textContent = dict.providersDesc;
+      document.getElementById('note-card-title').textContent = dict.noteCardTitle;
+      document.getElementById('note-format').innerHTML = dict.noteFormat;
+      document.getElementById('note-propagate').textContent = dict.notePropagate;
+      document.getElementById('note-www').textContent = dict.noteWww;
+    };
+
+    // ========================================================
+    // 4. AUTHENTICATION & INITIALIZATION
+    // ========================================================
+    onAuthStateChanged(auth, async (user) => {
+      setLanguage(currentLang);
+
+      if (!user) {
+        showToast(i18n[currentLang].toastNotLoggedIn, "error");
+        setTimeout(() => { window.location.href = "login.html"; }, 1500);
+        return;
+      }
+
+      currentUser = user;
+      const shopRef = doc(db, "shops", currentUser.uid);
+
+      try {
+        const shopSnap = await getDoc(shopRef);
+
+        if (!shopSnap.exists()) {
+          showToast(i18n[currentLang].toastShopNotFound, "error");
+          pageLoader.classList.add('hidden');
+          return;
+        }
+
+        currentShopData = shopSnap.data();
+
+        if (currentShopData && currentShopData.customDomain) {
+          // Custom domain already exists -> Show Active View
+          renderActiveDomainState(currentShopData.customDomain);
+        } else {
+          // Show Form View
+          renderEditFormState();
+        }
+
+        pageLoader.classList.add('hidden');
+        mainContent.classList.remove('hidden');
+
+      } catch (err) {
+        console.error("Error loading shop data:", err);
+        showToast(i18n[currentLang].toastSaveFailed, "error");
+        pageLoader.classList.add('hidden');
+      }
+    });
+
+    // ========================================================
+    // 5. DOMAIN SANITIZATION & VALIDATION ENGINE
+    // ========================================================
+    
+    // Automatically cleans http://, https://, trailing slashes, and spaces
+    function sanitizeDomainInput(rawInput) {
+      if (!rawInput) return "";
+      let clean = rawInput.trim().toLowerCase();
+      clean = clean.replace(/^(https?:\/\/)/, '');
+      clean = clean.split('/')[0];
+      clean = clean.split('?')[0];
+      clean = clean.split('#')[0];
+      return clean;
+    }
+
+    // Validates domain structure (e.g., example.com, www.example.com, shop.example.co.bd)
+    function isValidDomain(domain) {
+      if (!domain) return false;
+      if (/\s/.test(domain)) return false;
+      const domainRegex = /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/i;
+      return domainRegex.test(domain);
+    }
+
+    window.handleInputClean = function() {
+      validationError.classList.add('hidden');
+    };
+
+    // ========================================================
+    // 6. SAVE DOMAIN TO FIRESTORE
+    // ========================================================
+    window.handleSaveDomain = async function(event) {
+      event.preventDefault();
+      if (isSaving || !currentUser) return;
+
+      const rawVal = domainInput.value;
+      const cleanedDomain = sanitizeDomainInput(rawVal);
+
+      // Validate
+      if (!isValidDomain(cleanedDomain)) {
+        validationError.classList.remove('hidden');
+        showToast(i18n[currentLang].toastInvalidDomain, "error");
+        return;
+      }
+
+      // UI Loading State
+      isSaving = true;
+      btnSaveDomain.disabled = true;
+      btnSaveText.innerHTML = `<div class="btn-spinner"></div> ${i18n[currentLang].btnSaving}`;
+
+      try {
+        const shopRef = doc(db, "shops", currentUser.uid);
+
+        // Update ONLY the customDomain field in shops/{currentUser.uid}
+        await updateDoc(shopRef, {
+          customDomain: cleanedDomain
+        });
+
+        // Update local state
+        if (!currentShopData) currentShopData = {};
+        currentShopData.customDomain = cleanedDomain;
+
+        // Success Feedback
+        showToast(`${i18n[currentLang].toastSaveSuccessTitle} ${i18n[currentLang].toastSaveSuccessDesc}`, "success");
+        renderActiveDomainState(cleanedDomain);
+
+      } catch (err) {
+        console.error("Firestore Save Error:", err);
+        showToast(i18n[currentLang].toastSaveFailed, "error");
+      } finally {
+        isSaving = false;
+        btnSaveDomain.disabled = false;
+        btnSaveText.textContent = i18n[currentLang].btnSave;
+      }
+    };
+
+    // View State Switchers
+    function renderActiveDomainState(domainName) {
+      displayCustomDomain.textContent = domainName;
+      activeDomainView.classList.remove('hidden');
+      domainForm.classList.add('hidden');
+    }
+
+    window.enableDomainEdit = function() {
+      domainInput.value = currentShopData?.customDomain || '';
+      activeDomainView.classList.add('hidden');
+      domainForm.classList.remove('hidden');
+      domainInput.focus();
+    };
+
+    // ========================================================
+    // 7. COPY TO CLIPBOARD FUNCTIONALITY
+    // ========================================================
+    window.copyToClipboard = function(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(i18n[currentLang].toastCopied, "success");
+        }).catch(() => {
+          fallbackCopy(text);
+        });
+      } else {
+        fallbackCopy(text);
+      }
+    };
+
+    function fallbackCopy(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast(i18n[currentLang].toastCopied, "success");
+      } catch (err) {
+        showToast("Copy failed", "error");
+      }
+      document.body.removeChild(textArea);
+    }
+
+    // ========================================================
+    // 8. TOAST SYSTEM
+    // ========================================================
+    function showToast(message, type = "info") {
+      const toast = document.getElementById('app-toast');
+      const toastMsg = document.getElementById('toast-message');
+
+      toastMsg.textContent = message;
+      toast.className = `toast ${type} active`;
+
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 4000);
+    }
+  </script>
+</body>
+</html>

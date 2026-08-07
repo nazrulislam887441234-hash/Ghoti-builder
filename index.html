@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GHOTI Builder — Create Your Shop</title>
+    <style>
+        /* ==========================================================================
+           GHOTI BUILDER PREMIUM STYLING (PURE CSS, MOBILE-FIRST, ZERO FRAMEWORKS)
+           ========================================================================== */
+        
+        :root {
+            --primary-color: #0f766e;
+            --primary-hover: #0d9488;
+            --primary-light: #ccfbf1;
+            --accent-color: #2563eb;
+            --bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 50%, #f3e8ff 100%);
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --border-focus: #0f766e;
+            --error-color: #dc2626;
+            --error-bg: #fef2f2;
+            --success-color: #16a34a;
+            --success-bg: #f0fdf4;
+            --warning-color: #d97706;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 20px 30px -10px rgba(15, 118, 110, 0.15);
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --radius-sm: 6px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 12px;
+            line-height: 1.5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        /* Card Container */
+        .registration-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Header Section */
+        .card-header {
+            background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+            color: #ffffff;
+            padding: 32px 24px 28px;
+            text-align: center;
+            position: relative;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(4px);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .card-header h1 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .card-header p {
+            font-size: 0.92rem;
+            color: #ccfbf1;
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        /* Form Body */
+        .card-body {
+            padding: 28px 24px 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .form-label svg {
+            width: 16px;
+            height: 16px;
+            color: var(--primary-color);
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-control, .form-select {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            background-color: #f8fafc;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            outline: none;
+            appearance: none;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background-color: #ffffff;
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
+        }
+
+        .form-control.is-invalid, .form-select.is-invalid {
+            border-color: var(--error-color);
+            background-color: #fff5f5;
+        }
+
+        .form-control.is-valid {
+            border-color: var(--success-color);
+        }
+
+        textarea.form-control {
+            min-height: 85px;
+            resize: vertical;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: '';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 6px solid var(--text-muted);
+            pointer-events: none;
+        }
+
+        /* Toggle Password Button */
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .toggle-password:hover {
+            color: var(--text-main);
+        }
+
+        .toggle-password svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Error Text */
+        .invalid-feedback {
+            display: none;
+            color: var(--error-color);
+            font-size: 0.78rem;
+            font-weight: 500;
+            margin-top: 5px;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .invalid-feedback.visible {
+            display: flex;
+        }
+
+        /* Radio Pill Selection for Language */
+        .language-pill-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .language-pill {
+            position: relative;
+        }
+
+        .language-pill input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .language-pill label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px;
+            background-color: #f8fafc;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .language-pill input[type="radio"]:checked + label {
+            background-color: var(--primary-light);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+        }
+
+        /* Password Strength Meter */
+        .strength-meter-container {
+            margin-top: 8px;
+        }
+
+        .strength-bar-bg {
+            height: 5px;
+            background-color: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+
+        .strength-bar-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .strength-text {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Checklist Requirements */
+        .password-checklist {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 10px 12px;
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+        }
+
+        @media (min-width: 480px) {
+            .password-checklist {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .check-item.valid {
+            color: var(--success-color);
+        }
+
+        .check-item svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1.02rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(15, 118, 110, 0.4);
+        }
+
+        .btn-submit:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.75;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2.5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer Branding */
+        .card-footer {
+            text-align: center;
+            padding: 16px;
+            background-color: #f8fafc;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .card-footer strong {
+            color: var(--primary-color);
+        }
+
+        /* Custom Modal System */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 420px;
+            padding: 28px 24px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.9);
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .modal-icon.error {
+            background-color: var(--error-bg);
+            color: var(--error-color);
+        }
+
+        .modal-icon.success {
+            background-color: var(--success-bg);
+            color: var(--success-color);
+        }
+
+        .modal-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .modal-message {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+
+        .btn-modal {
+            width: 100%;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-modal-error {
+            background-color: #1e293b;
+            color: #ffffff;
+        }
+
+        .btn-modal-error:hover {
+            background-color: #0f172a;
+        }
+
+        .btn-modal-success {
+            background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+            color: #ffffff;
+        }
+
+        .btn-modal-success:hover {
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="registration-card">
+            
+            <!-- Header -->
+         <div class="card-header">
+    <div class="brand-badge">
+        <img src="build.ghotimarket.com/logo.png" alt="GHOTI Builder" style="height: 28px; width: auto;">
+    </div>
+    <h1 id="ui-title">GHOTI Builder</h1>
+    <p id="ui-subtitle">Create Your Shop</p>
+</div>
+
+            <!-- Body Form -->
+            <div class="card-body">
+                <form id="shopRegistrationForm" novalidate>
+                    
+                    <!-- 1. Country -->
+                    <div class="form-group">
+                        <label class="form-label" for="country" id="lbl-country">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Country
+                        </label>
+                        <div class="select-wrapper">
+                            <select id="country" class="form-select" required>
+                                <option value="Bangladesh" selected>🇧🇩 Bangladesh</option>
+                                <option value="India">🇮🇳 India</option>
+                                <option value="Pakistan">🇵🇰 Pakistan</option>
+                                <option value="Nepal">🇳🇵 Nepal</option>
+                                <option value="Bhutan">🇧🇹 Bhutan</option>
+                                <option value="United States">🇺🇸 United States</option>
+                                <option value="United Kingdom">🇬🇧 United Kingdom</option>
+                                <option value="Saudi Arabia">🇸🇦 Saudi Arabia</option>
+                                <option value="United Arab Emirates">🇦🇪 United Arab Emirates</option>
+                                <option value="Malaysia">🇲🇾 Malaysia</option>
+                                <option value="Singapore">🇸🇬 Singapore</option>
+                                <option value="Canada">🇨🇦 Canada</option>
+                                <option value="Australia">🇦🇺 Australia</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 2. Language -->
+                    <div class="form-group">
+                        <label class="form-label" id="lbl-language">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            Language
+                        </label>
+                        <div class="language-pill-group">
+                            <div class="language-pill">
+                                <input type="radio" id="lang-en" name="language" value="English" checked>
+                                <label for="lang-en">English</label>
+                            </div>
+                            <div class="language-pill">
+                                <input type="radio" id="lang-bn" name="language" value="বাংলা">
+                                <label for="lang-bn">বাংলা</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Shop Name -->
+                    <div class="form-group">
+                        <label class="form-label" for="shopName" id="lbl-shopName">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            Shop Name
+                        </label>
+                        <input type="text" id="shopName" class="form-control" placeholder="Enter your shop name" autocomplete="off" required>
+                        <div class="invalid-feedback" id="err-shopName">Shop name must be 2 to 100 characters.</div>
+                    </div>
+
+                    <!-- 4. Business Number -->
+                    <div class="form-group">
+                        <label class="form-label" for="businessNumber" id="lbl-businessNumber">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            Business Number
+                        </label>
+                        <input type="tel" id="businessNumber" class="form-control" placeholder="Enter your business number (e.g. 01700000000)" required>
+                        <div class="invalid-feedback" id="err-businessNumber">Please enter a valid business contact number.</div>
+                    </div>
+
+                    <!-- 5. Address -->
+                    <div class="form-group">
+                        <label class="form-label" for="address" id="lbl-address">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Address
+                        </label>
+                        <textarea id="address" class="form-control" placeholder="Enter your business address" required></textarea>
+                        <div class="invalid-feedback" id="err-address">Address must be between 5 and 300 characters.</div>
+                    </div>
+
+                    <!-- 6. Email Address -->
+                    <div class="form-group">
+                        <label class="form-label" for="email" id="lbl-email">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            Email Address
+                        </label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your active email" autocomplete="email" required>
+                        <div class="invalid-feedback" id="err-email">Please enter a valid email address.</div>
+                    </div>
+
+                    <!-- 7. Password -->
+                    <div class="form-group">
+                        <label class="form-label" for="password" id="lbl-password">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            Password
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="password" id="password" class="form-control" placeholder="Create a strong password" required>
+                            <button type="button" class="toggle-password" id="btn-toggle-pass" aria-label="Toggle password visibility">
+                                <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            </button>
+                        </div>
+                        
+                        <!-- Strength Meter Bar -->
+                        <div class="strength-meter-container">
+                            <div class="strength-bar-bg">
+                                <div class="strength-bar-fill" id="strengthBar"></div>
+                            </div>
+                            <div class="strength-text">
+                                <span id="lbl-pass-strength-text">Password Strength:</span>
+                                <span id="strengthLabel">-</span>
+                            </div>
+                        </div>
+
+                        <!-- Requirements Checklist -->
+                        <div class="password-checklist">
+                            <div class="check-item" id="chk-min">
+                                <svg class="chk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span id="lbl-chk-min">At least 8 characters</span>
+                            </div>
+                            <div class="check-item" id="chk-upper">
+                                <svg class="chk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span id="lbl-chk-upper">Uppercase letter</span>
+                            </div>
+                            <div class="check-item" id="chk-lower">
+                                <svg class="chk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span id="lbl-chk-lower">Lowercase letter</span>
+                            </div>
+                            <div class="check-item" id="chk-num">
+                                <svg class="chk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span id="lbl-chk-num">Number (0-9)</span>
+                            </div>
+                            <div class="check-item" id="chk-special">
+                                <svg class="chk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span id="lbl-chk-special">Special character</span>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback" id="err-password">Password does not meet required strength criteria.</div>
+                    </div>
+
+                    <!-- 8. Confirm Password -->
+                    <div class="form-group">
+                        <label class="form-label" for="confirmPassword" id="lbl-confirmPassword">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            Confirm Password
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
+                            <button type="button" class="toggle-password" id="btn-toggle-confirm" aria-label="Toggle confirm password visibility">
+                                <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback" id="err-confirmPassword">Passwords do not match.</div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-submit" id="btnSubmit">
+                        <span class="spinner" id="btnSpinner"></span>
+                        <span id="btnText">Create Shop</span>
+                    </button>
+
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div class="card-footer">
+                Powered by <strong>GHOTI MARKET Platform</strong> &copy; 2026
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Custom Error Modal -->
+    <div class="modal-overlay" id="errorModal">
+        <div class="modal-box">
+            <div class="modal-icon error">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            </div>
+            <h3 class="modal-title" id="errorModalTitle">Registration Failed</h3>
+            <p class="modal-message" id="errorModalMsg">An unexpected error occurred. Please try again.</p>
+            <button class="btn-modal btn-modal-error" id="btnModalErrorClose">Close</button>
+        </div>
+    </div>
+
+    <!-- Custom Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-box">
+            <div class="modal-icon success">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3 class="modal-title" id="successModalTitle">Shop Created Successfully! 🎉</h3>
+            <p class="modal-message" id="successModalMsg">Your GHOTI Shop has been created successfully.</p>
+            <button class="btn-modal btn-modal-success" id="btnModalSuccessContinue">Continue</button>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       FIREBASE MODULAR SDK INTEGRATION & APPLICATION LOGIC
+       ========================================================================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+        // =========================================================
+        // 1. Firebase Configuration (Replace with your API credentials)
+        // =========================================================
+        const firebaseConfig = {
+  apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
+  authDomain: "ghotimarket.firebaseapp.com",
+  databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
+  projectId: "ghotimarket",
+  storageBucket: "ghotimarket.firebasestorage.app",
+  messagingSenderId: "481257644093",
+  appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
+  measurementId: "G-4SR8V2EKC1"
+};
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // =========================================================
+        // 2. Language Dictionary (Internationalization Structure)
+        // =========================================================
+        const translations = {
+            English: {
+                title: "GHOTI Builder",
+                subtitle: "Create Your Shop",
+                country: "Country",
+                language: "Language",
+                shopName: "Shop Name",
+                shopNamePlace: "Enter your shop name",
+                businessNumber: "Business Number",
+                businessNumberPlace: "Enter your business number (e.g. 01700000000)",
+                address: "Address",
+                addressPlace: "Enter your business address",
+                email: "Email Address",
+                emailPlace: "Enter your active email",
+                password: "Password",
+                passwordPlace: "Create a strong password",
+                confirmPassword: "Confirm Password",
+                confirmPasswordPlace: "Confirm your password",
+                createShop: "Create Shop",
+                creatingShop: "Creating Shop...",
+                strengthText: "Password Strength:",
+                chkMin: "At least 8 characters",
+                chkUpper: "Uppercase letter",
+                chkLower: "Lowercase letter",
+                chkNum: "Number (0-9)",
+                chkSpecial: "Special character",
+                errShopName: "Shop name must be between 2 and 100 characters.",
+                errBusinessNumber: "Please enter a valid business contact number.",
+                errAddress: "Address must be between 5 and 300 characters.",
+                errEmail: "Please enter a valid email address.",
+                errPassword: "Password does not meet required strength criteria.",
+                errConfirmPassword: "Passwords do not match.",
+                successTitle: "Shop Created Successfully! 🎉",
+                successMsg: "Your GHOTI Shop has been created successfully."
+            },
+            বাংলা: {
+                title: "ঘোটি বিল্ডার",
+                subtitle: "আপনার শপ তৈরি করুন",
+                country: "দেশ (Country)",
+                language: "ভাষা (Language)",
+                shopName: "শপের নাম",
+                shopNamePlace: "আপনার শপের নাম লিখুন",
+                businessNumber: "বিজনেস নম্বর",
+                businessNumberPlace: "আপনার নম্বর লিখুন (যেমন: 01700000000)",
+                address: "ঠিকানা",
+                addressPlace: "আপনার শপের ঠিকানা লিখুন",
+                email: "ইমেইল অ্যাড্রেস",
+                emailPlace: "আপনার সচল ইমেইল লিখুন",
+                password: "পাসওয়ার্ড",
+                passwordPlace: "একটি শক্তিশালী পাসওয়ার্ড দিন",
+                confirmPassword: "পাসওয়ার্ড নিশ্চিত করুন",
+                confirmPasswordPlace: "পুনরায় পাসওয়ার্ড লিখুন",
+                createShop: "শপ তৈরি করুন",
+                creatingShop: "শপ তৈরি হচ্ছে...",
+                strengthText: "পাসওয়ার্ড স্ট্রেংথ:",
+                chkMin: "সর্বনিম্ন ৮টি অক্ষর",
+                chkUpper: "কমপক্ষে ১টি বড় হাতের অক্ষর (A-Z)",
+                chkLower: "কমপক্ষে ১টি ছোট হাতের অক্ষর (a-z)",
+                chkNum: "কমপক্ষে ১টি সংখ্যা (0-9)",
+                chkSpecial: "কমপক্ষে ১টি বিশেষ চিহ্ন (!@#$)",
+                errShopName: "শপের নাম ২ থেকে ১০০ অক্ষরের মধ্যে হতে হবে।",
+                errBusinessNumber: "সঠিক বিজনেস নম্বর প্রদান করুন।",
+                errAddress: "ঠিকানা ৫ থেকে ৩০০ অক্ষরের মধ্যে হতে হবে।",
+                errEmail: "সঠিক ইমেইল অ্যাড্রেস প্রদান করুন।",
+                errPassword: "পাসওয়ার্ডটি নিরাপত্তা শর্ত পূরণ করেনি।",
+                errConfirmPassword: "পাসওয়ার্ড দুটি মেলেনি।",
+                successTitle: "শপ সফলভাবে তৈরি হয়েছে! 🎉",
+                successMsg: "আপনার GHOTI Shop সফলভাবে তৈরি এবং রেজিস্টার করা হয়েছে।"
+            }
+        };
+
+        // DOM Elements
+        const form = document.getElementById('shopRegistrationForm');
+        const countrySelect = document.getElementById('country');
+        const langRadios = document.querySelectorAll('input[name="language"]');
+        const shopNameInput = document.getElementById('shopName');
+        const businessNumberInput = document.getElementById('businessNumber');
+        const addressInput = document.getElementById('address');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+
+        const btnSubmit = document.getElementById('btnSubmit');
+        const btnText = document.getElementById('btnText');
+        const btnSpinner = document.getElementById('btnSpinner');
+
+        // Modals
+        const errorModal = document.getElementById('errorModal');
+        const errorModalTitle = document.getElementById('errorModalTitle');
+        const errorModalMsg = document.getElementById('errorModalMsg');
+        const btnModalErrorClose = document.getElementById('btnModalErrorClose');
+
+        const successModal = document.getElementById('successModal');
+        const successModalTitle = document.getElementById('successModalTitle');
+        const successModalMsg = document.getElementById('successModalMsg');
+        const btnModalSuccessContinue = document.getElementById('btnModalSuccessContinue');
+
+        // Toggles
+        const btnTogglePass = document.getElementById('btnTogglePass');
+        const btnToggleConfirm = document.getElementById('btnToggleConfirm');
+
+        // Checklists & Strength
+        const strengthBar = document.getElementById('strengthBar');
+        const strengthLabel = document.getElementById('strengthLabel');
+        const chkMin = document.getElementById('chk-min');
+        const chkUpper = document.getElementById('chk-upper');
+        const chkLower = document.getElementById('chk-lower');
+        const chkNum = document.getElementById('chk-num');
+        const chkSpecial = document.getElementById('chk-special');
+
+        // Eye icons SVG HTML
+        const eyeOpenSvg = `<svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+        const eyeClosedSvg = `<svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+
+        // =========================================================
+        // 3. UI Language Switcher Handler
+        // =========================================================
+        function updateUILanguage(lang) {
+            const dict = translations[lang] || translations.English;
+            document.getElementById('ui-title').innerText = dict.title;
+            document.getElementById('ui-subtitle').innerText = dict.subtitle;
+            document.getElementById('lbl-country').childNodes[2].nodeValue = " " + dict.country;
+            document.getElementById('lbl-language').childNodes[2].nodeValue = " " + dict.language;
+            document.getElementById('lbl-shopName').childNodes[2].nodeValue = " " + dict.shopName;
+            shopNameInput.placeholder = dict.shopNamePlace;
+            document.getElementById('lbl-businessNumber').childNodes[2].nodeValue = " " + dict.businessNumber;
+            businessNumberInput.placeholder = dict.businessNumberPlace;
+            document.getElementById('lbl-address').childNodes[2].nodeValue = " " + dict.address;
+            addressInput.placeholder = dict.addressPlace;
+            document.getElementById('lbl-email').childNodes[2].nodeValue = " " + dict.email;
+            emailInput.placeholder = dict.emailPlace;
+            document.getElementById('lbl-password').childNodes[2].nodeValue = " " + dict.password;
+            passwordInput.placeholder = dict.passwordPlace;
+            document.getElementById('lbl-confirmPassword').childNodes[2].nodeValue = " " + dict.confirmPassword;
+            confirmPasswordInput.placeholder = dict.confirmPasswordPlace;
+
+            document.getElementById('lbl-pass-strength-text').innerText = dict.strengthText;
+            document.getElementById('lbl-chk-min').innerText = dict.chkMin;
+            document.getElementById('lbl-chk-upper').innerText = dict.chkUpper;
+            document.getElementById('lbl-chk-lower').innerText = dict.chkLower;
+            document.getElementById('lbl-chk-num').innerText = dict.chkNum;
+            document.getElementById('lbl-chk-special').innerText = dict.chkSpecial;
+
+            document.getElementById('err-shopName').innerText = dict.errShopName;
+            document.getElementById('err-businessNumber').innerText = dict.errBusinessNumber;
+            document.getElementById('err-address').innerText = dict.errAddress;
+            document.getElementById('err-email').innerText = dict.errEmail;
+            document.getElementById('err-password').innerText = dict.errPassword;
+            document.getElementById('err-confirmPassword').innerText = dict.errConfirmPassword;
+
+            successModalTitle.innerText = dict.successTitle;
+            successModalMsg.innerText = dict.successMsg;
+
+            if (!btnSubmit.disabled) {
+                btnText.innerText = dict.createShop;
+            } else {
+                btnText.innerText = dict.creatingShop;
+            }
+        }
+
+        langRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                updateUILanguage(e.target.value);
+            });
+        });
+
+        // =========================================================
+        // 4. Password Visibility Toggles
+        // =========================================================
+        btnTogglePass.addEventListener('click', () => {
+            const isPass = passwordInput.type === 'password';
+            passwordInput.type = isPass ? 'text' : 'password';
+            btnTogglePass.innerHTML = isPass ? eyeClosedSvg : eyeOpenSvg;
+        });
+
+        btnToggleConfirm.addEventListener('click', () => {
+            const isPass = confirmPasswordInput.type === 'password';
+            confirmPasswordInput.type = isPass ? 'text' : 'password';
+            btnToggleConfirm.innerHTML = isPass ? eyeClosedSvg : eyeOpenSvg;
+        });
+
+        // =========================================================
+        // 5. Password Live Validation & Strength Checker
+        // =========================================================
+        function checkPasswordRules(val) {
+            const hasMin = val.length >= 8;
+            const hasUpper = /[A-Z]/.test(val);
+            const hasLower = /[a-z]/.test(val);
+            const hasNum = /[0-9]/.test(val);
+            const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(val);
+
+            // Update Checklist visual
+            updateCheckState(chkMin, hasMin);
+            updateCheckState(chkUpper, hasUpper);
+            updateCheckState(chkLower, hasLower);
+            updateCheckState(chkNum, hasNum);
+            updateCheckState(chkSpecial, hasSpecial);
+
+            const score = [hasMin, hasUpper, hasLower, hasNum, hasSpecial].filter(Boolean).length;
+
+            // Update bar UI
+            if (val.length === 0) {
+                strengthBar.style.width = '0%';
+                strengthBar.style.backgroundColor = '#e2e8f0';
+                strengthLabel.innerText = '-';
+                strengthLabel.style.color = 'var(--text-muted)';
+            } else if (score <= 2) {
+                strengthBar.style.width = '33%';
+                strengthBar.style.backgroundColor = '#dc2626';
+                strengthLabel.innerText = 'Weak';
+                strengthLabel.style.color = '#dc2626';
+            } else if (score < 5) {
+                strengthBar.style.width = '66%';
+                strengthBar.style.backgroundColor = '#d97706';
+                strengthLabel.innerText = 'Medium';
+                strengthLabel.style.color = '#d97706';
+            } else {
+                strengthBar.style.width = '100%';
+                strengthBar.style.backgroundColor = '#16a34a';
+                strengthLabel.innerText = 'Strong';
+                strengthLabel.style.color = '#16a34a';
+            }
+
+            return score === 5;
+        }
+
+        function updateCheckState(elem, isValid) {
+            if (isValid) {
+                elem.classList.add('valid');
+            } else {
+                elem.classList.remove('valid');
+            }
+        }
+
+        passwordInput.addEventListener('input', (e) => {
+            checkPasswordRules(e.target.value);
+            if (confirmPasswordInput.value.length > 0) {
+                validateConfirmPassword();
+            }
+        });
+
+        confirmPasswordInput.addEventListener('input', () => {
+            validateConfirmPassword();
+        });
+
+        function validateConfirmPassword() {
+            const isMatch = passwordInput.value === confirmPasswordInput.value && confirmPasswordInput.value !== '';
+            showFieldError('confirmPassword', !isMatch);
+            return isMatch;
+        }
+
+        // Helper for displaying field level errors
+        function showFieldError(fieldId, hasError) {
+            const input = document.getElementById(fieldId);
+            const errDiv = document.getElementById(`err-${fieldId}`);
+            if (hasError) {
+                input.classList.add('is-invalid');
+                input.classList.remove('is-valid');
+                if (errDiv) errDiv.classList.add('visible');
+            } else {
+                input.classList.remove('is-invalid');
+                input.classList.add('is-valid');
+                if (errDiv) errDiv.classList.remove('visible');
+            }
+        }
+
+        // =========================================================
+        // 6. Comprehensive Field Validation
+        // =========================================================
+        function validateForm() {
+            let isValid = true;
+
+            // Shop Name: 2-100 chars, non-whitespace
+            const shopName = shopNameInput.value.trim();
+            if (shopName.length < 2 || shopName.length > 100) {
+                showFieldError('shopName', true);
+                isValid = false;
+            } else {
+                showFieldError('shopName', false);
+            }
+
+            // Business Number: Valid BD format or international digits
+            const phone = businessNumberInput.value.trim();
+            const phoneRegex = /^(\+?[0-9]{1,4})?[0-9]{7,14}$/;
+            if (!phoneRegex.test(phone) || phone.length < 7) {
+                showFieldError('businessNumber', true);
+                isValid = false;
+            } else {
+                showFieldError('businessNumber', false);
+            }
+
+            // Address: 5-300 chars
+            const address = addressInput.value.trim();
+            if (address.length < 5 || address.length > 300) {
+                showFieldError('address', true);
+                isValid = false;
+            } else {
+                showFieldError('address', false);
+            }
+
+            // Email: Standard email pattern
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showFieldError('email', true);
+                isValid = false;
+            } else {
+                showFieldError('email', false);
+            }
+
+            // Password: Must pass all 5 rules
+            const isPasswordStrong = checkPasswordRules(passwordInput.value);
+            if (!isPasswordStrong) {
+                showFieldError('password', true);
+                isValid = false;
+            } else {
+                showFieldError('password', false);
+            }
+
+            // Confirm Password
+            const isConfirmMatching = validateConfirmPassword();
+            if (!isConfirmMatching) {
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Live validation on blur
+        shopNameInput.addEventListener('blur', () => showFieldError('shopName', shopNameInput.value.trim().length < 2 || shopNameInput.value.trim().length > 100));
+        businessNumberInput.addEventListener('blur', () => {
+            const phoneRegex = /^(\+?[0-9]{1,4})?[0-9]{7,14}$/;
+            showFieldError('businessNumber', !phoneRegex.test(businessNumberInput.value.trim()));
+        });
+        addressInput.addEventListener('blur', () => showFieldError('address', addressInput.value.trim().length < 5 || addressInput.value.trim().length > 300));
+        emailInput.addEventListener('blur', () => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            showFieldError('email', !emailRegex.test(emailInput.value.trim()));
+        });
+
+        // =========================================================
+        // 7. Modal Helper Functions
+        // =========================================================
+        function showErrorPopup(title, message) {
+            errorModalTitle.innerText = title;
+            errorModalMsg.innerText = message;
+            errorModal.classList.add('active');
+        }
+
+        function showSuccessPopup() {
+            successModal.classList.add('active');
+        }
+
+        btnModalErrorClose.addEventListener('click', () => {
+            errorModal.classList.remove('active');
+        });
+
+        btnModalSuccessContinue.addEventListener('click', () => {
+            successModal.classList.remove('active');
+            // Redirect to dashboard.html as requested
+            try {
+                window.location.href = "dashboard.html";
+            } catch (e) {
+                console.log("Redirect fallback:", e);
+            }
+        });
+
+        // Close modal on background tap
+        errorModal.addEventListener('click', (e) => {
+            if (e.target === errorModal) errorModal.classList.remove('active');
+        });
+
+        // =========================================================
+        // 8. Firebase Error Mapper
+        // =========================================================
+        function getFriendlyFirebaseError(error) {
+            const code = error.code || '';
+            switch (code) {
+                case 'auth/email-already-in-use':
+                    return {
+                        title: "Email Already Registered",
+                        message: "This email is already registered. Please use another email or sign in to your existing account."
+                    };
+                case 'auth/weak-password':
+                    return {
+                        title: "Weak Password",
+                        message: "Your password is too weak. Use at least 8 characters with uppercase, lowercase, number and special character."
+                    };
+                case 'auth/invalid-email':
+                    return {
+                        title: "Invalid Email",
+                        message: "Please enter a valid email address."
+                    };
+                case 'auth/network-request-failed':
+                    return {
+                        title: "Network Error",
+                        message: "Network connection failed. Please check your internet connection and try again."
+                    };
+                case 'auth/too-many-requests':
+                    return {
+                        title: "Too Many Attempts",
+                        message: "Access to this account has been temporarily disabled due to many failed attempts. Please try again later."
+                    };
+                default:
+                    return {
+                        title: "Registration Error",
+                        message: error.message || "Shop creation failed. Please check your details and try again."
+                    };
+            }
+        }
+
+        // =========================================================
+        // 9. Form Submission Handler & Firebase Registration Flow
+        // =========================================================
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Check frontend validation first
+            if (!validateForm()) {
+                const selectedLang = document.querySelector('input[name="language"]:checked').value;
+                showErrorPopup(
+                    selectedLang === 'বাংলা' ? 'যাচাইকরণ ব্যর্থ' : 'Validation Error',
+                    selectedLang === 'বাংলা' ? 'অনুগ্রহ করে ফরমের সকল ঘর সঠিকভাবে পূরণ করুন।' : 'Please fix the errors in the registration form before submitting.'
+                );
+                return;
+            }
+
+            // Extract Values
+            const country = countrySelect.value;
+            const language = document.querySelector('input[name="language"]:checked').value;
+            const shopName = shopNameInput.value.trim();
+            const businessNumber = businessNumberInput.value.trim();
+            const address = addressInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            // UI Loading State (Prevent duplicate clicks)
+            btnSubmit.disabled = true;
+            btnSpinner.style.display = 'inline-block';
+            btnText.innerText = translations[language].creatingShop;
+
+            try {
+                // STEP 1: Firebase Authentication Account Creation
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const uid = userCredential.user.uid;
+
+                // STEP 2: Calculate 3-day profileUnlolked timestamp (Current time + 3 days in ms)
+                const profileUnlockedUntil = Date.now() + (3 * 24 * 60 * 60 * 1000);
+
+                // STEP 3: Create Firestore Document at shops/{uid}
+                try {
+                    await setDoc(doc(db, "shops", uid), {
+                        uid: uid,
+                        shopName: shopName,
+                        businessNumber: businessNumber,
+                        address: address,
+                        email: email,
+                        country: country,
+                        language: language,
+                        profileUnlolked: profileUnlockedUntil,
+                        createTime: serverTimestamp()
+                    });
+
+                    // SUCCESS: Reset Form & Show Success Modal
+                    form.reset();
+                    // Reset strength meter UI
+                    strengthBar.style.width = '0%';
+                    strengthLabel.innerText = '-';
+                    document.querySelectorAll('.check-item').forEach(el => el.classList.remove('valid'));
+                    document.querySelectorAll('.form-control').forEach(el => el.classList.remove('is-valid', 'is-invalid'));
+                    // Reset country and lang defaults
+                    countrySelect.value = "Bangladesh";
+                    document.getElementById('lang-en').checked = true;
+                    updateUILanguage('English');
+
+                    showSuccessPopup();
+
+                } catch (firestoreError) {
+                    console.error("Firestore document creation failed:", firestoreError);
+                    showErrorPopup(
+                        "Shop Setup Failed",
+                        "Authentication account was created, but failed to save shop details. Please contact support or try again."
+                    );
+                }
+
+            } catch (authError) {
+                console.error("Firebase Auth Error:", authError);
+                const errorInfo = getFriendlyFirebaseError(authError);
+                showErrorPopup(errorInfo.title, errorInfo.message);
+            } finally {
+                // Restore button state
+                btnSubmit.disabled = false;
+                btnSpinner.style.display = 'none';
+                const currentLang = document.querySelector('input[name="language"]:checked').value;
+                btnText.innerText = translations[currentLang].createShop;
+            }
+        });
+
+        // Initialize default UI language
+        updateUILanguage('English');
+    </script>
+</body>
+</html>

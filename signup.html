@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -519,13 +519,13 @@
         <div class="registration-card">
             
             <!-- Header -->
-         <div class="card-header">
-    <div class="brand-badge">
-        <img src="https://build.ghotimarket.com/logo.png" alt="GHOTI Builder" style="height: 28px; width: auto;">
-    </div>
-    <h1 id="ui-title">GHOTI Builder</h1>
-    <p id="ui-subtitle">Create Your Shop</p>
-</div>
+            <div class="card-header">
+                <div class="brand-badge">
+                    <img src="https://build.ghotimarket.com/logo.png" alt="GHOTI Builder" style="height: 28px; width: auto;">
+                </div>
+                <h1 id="ui-title">GHOTI Builder</h1>
+                <p id="ui-subtitle">Create Your Shop</p>
+            </div>
 
             <!-- Body Form -->
             <div class="card-body">
@@ -591,7 +591,7 @@
                             Business Number
                         </label>
                         <input type="tel" id="businessNumber" class="form-control" placeholder="Enter your business number (e.g. 01700000000)" required>
-                        <div class="invalid-feedback" id="err-businessNumber">Please enter a valid business contact number.</div>
+                        <div class="invalid-feedback" id="err-businessNumber">Please enter a valid business contact number (7 to 20 digits).</div>
                     </div>
 
                     <!-- 5. Address -->
@@ -725,22 +725,22 @@
        ========================================================================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, deleteUser } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
         import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
         // =========================================================
-        // 1. Firebase Configuration (Replace with your API credentials)
+        // 1. Firebase Configuration
         // =========================================================
         const firebaseConfig = {
-  apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
-  authDomain: "ghotimarket.firebaseapp.com",
-  databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
-  projectId: "ghotimarket",
-  storageBucket: "ghotimarket.firebasestorage.app",
-  messagingSenderId: "481257644093",
-  appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
-  measurementId: "G-4SR8V2EKC1"
-};
+            apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
+            authDomain: "ghotimarket.firebaseapp.com",
+            databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
+            projectId: "ghotimarket",
+            storageBucket: "ghotimarket.firebasestorage.app",
+            messagingSenderId: "481257644093",
+            appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
+            measurementId: "G-4SR8V2EKC1"
+        };
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -777,7 +777,7 @@
                 chkNum: "Number (0-9)",
                 chkSpecial: "Special character",
                 errShopName: "Shop name must be between 2 and 100 characters.",
-                errBusinessNumber: "Please enter a valid business contact number.",
+                errBusinessNumber: "Please enter a valid business contact number (7 to 20 digits).",
                 errAddress: "Address must be between 5 and 300 characters.",
                 errEmail: "Please enter a valid email address.",
                 errPassword: "Password does not meet required strength criteria.",
@@ -811,7 +811,7 @@
                 chkNum: "কমপক্ষে ১টি সংখ্যা (0-9)",
                 chkSpecial: "কমপক্ষে ১টি বিশেষ চিহ্ন (!@#$)",
                 errShopName: "শপের নাম ২ থেকে ১০০ অক্ষরের মধ্যে হতে হবে।",
-                errBusinessNumber: "সঠিক বিজনেস নম্বর প্রদান করুন।",
+                errBusinessNumber: "সঠিক বিজনেস নম্বর প্রদান করুন (৭ থেকে ২০ সংখ্যা)।",
                 errAddress: "ঠিকানা ৫ থেকে ৩০০ অক্ষরের মধ্যে হতে হবে।",
                 errEmail: "সঠিক ইমেইল অ্যাড্রেস প্রদান করুন।",
                 errPassword: "পাসওয়ার্ডটি নিরাপত্তা শর্ত পূরণ করেনি।",
@@ -848,8 +848,8 @@
         const btnModalSuccessContinue = document.getElementById('btnModalSuccessContinue');
 
         // Toggles
-        const btnTogglePass = document.getElementById('btnTogglePass');
-        const btnToggleConfirm = document.getElementById('btnToggleConfirm');
+        const btnTogglePass = document.getElementById('btn-toggle-pass');
+        const btnToggleConfirm = document.getElementById('btn-toggle-confirm');
 
         // Checklists & Strength
         const strengthBar = document.getElementById('strengthBar');
@@ -919,17 +919,21 @@
         // =========================================================
         // 4. Password Visibility Toggles
         // =========================================================
-        btnTogglePass.addEventListener('click', () => {
-            const isPass = passwordInput.type === 'password';
-            passwordInput.type = isPass ? 'text' : 'password';
-            btnTogglePass.innerHTML = isPass ? eyeClosedSvg : eyeOpenSvg;
-        });
+        if (btnTogglePass) {
+            btnTogglePass.addEventListener('click', () => {
+                const isPass = passwordInput.type === 'password';
+                passwordInput.type = isPass ? 'text' : 'password';
+                btnTogglePass.innerHTML = isPass ? eyeClosedSvg : eyeOpenSvg;
+            });
+        }
 
-        btnToggleConfirm.addEventListener('click', () => {
-            const isPass = confirmPasswordInput.type === 'password';
-            confirmPasswordInput.type = isPass ? 'text' : 'password';
-            btnToggleConfirm.innerHTML = isPass ? eyeClosedSvg : eyeOpenSvg;
-        });
+        if (btnToggleConfirm) {
+            btnToggleConfirm.addEventListener('click', () => {
+                const isPass = confirmPasswordInput.type === 'password';
+                confirmPasswordInput.type = isPass ? 'text' : 'password';
+                btnToggleConfirm.innerHTML = isPass ? eyeClosedSvg : eyeOpenSvg;
+            });
+        }
 
         // =========================================================
         // 5. Password Live Validation & Strength Checker
@@ -1022,7 +1026,7 @@
         function validateForm() {
             let isValid = true;
 
-            // Shop Name: 2-100 chars, non-whitespace
+            // Shop Name: 2-100 chars
             const shopName = shopNameInput.value.trim();
             if (shopName.length < 2 || shopName.length > 100) {
                 showFieldError('shopName', true);
@@ -1031,10 +1035,10 @@
                 showFieldError('shopName', false);
             }
 
-            // Business Number: Valid BD format or international digits
+            // Business Number: Rule compatible (7 to 20 chars)
             const phone = businessNumberInput.value.trim();
-            const phoneRegex = /^(\+?[0-9]{1,4})?[0-9]{7,14}$/;
-            if (!phoneRegex.test(phone) || phone.length < 7) {
+            const phoneRegex = /^\+?[0-9]{7,19}$/;
+            if (!phoneRegex.test(phone) || phone.length < 7 || phone.length > 20) {
                 showFieldError('businessNumber', true);
                 isValid = false;
             } else {
@@ -1060,7 +1064,7 @@
                 showFieldError('email', false);
             }
 
-            // Password: Must pass all 5 rules
+            // Password: Must pass all 5 criteria
             const isPasswordStrong = checkPasswordRules(passwordInput.value);
             if (!isPasswordStrong) {
                 showFieldError('password', true);
@@ -1081,8 +1085,9 @@
         // Live validation on blur
         shopNameInput.addEventListener('blur', () => showFieldError('shopName', shopNameInput.value.trim().length < 2 || shopNameInput.value.trim().length > 100));
         businessNumberInput.addEventListener('blur', () => {
-            const phoneRegex = /^(\+?[0-9]{1,4})?[0-9]{7,14}$/;
-            showFieldError('businessNumber', !phoneRegex.test(businessNumberInput.value.trim()));
+            const phone = businessNumberInput.value.trim();
+            const phoneRegex = /^\+?[0-9]{7,19}$/;
+            showFieldError('businessNumber', !phoneRegex.test(phone) || phone.length < 7 || phone.length > 20);
         });
         addressInput.addEventListener('blur', () => showFieldError('address', addressInput.value.trim().length < 5 || addressInput.value.trim().length > 300));
         emailInput.addEventListener('blur', () => {
@@ -1109,15 +1114,9 @@
 
         btnModalSuccessContinue.addEventListener('click', () => {
             successModal.classList.remove('active');
-            // Redirect to dashboard.html as requested
-            try {
-                window.location.href = "dashboard.html";
-            } catch (e) {
-                console.log("Redirect fallback:", e);
-            }
+            window.location.href = "dashboard.html";
         });
 
-        // Close modal on background tap
         errorModal.addEventListener('click', (e) => {
             if (e.target === errorModal) errorModal.classList.remove('active');
         });
@@ -1167,7 +1166,7 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Check frontend validation first
+            // Check frontend validation
             if (!validateForm()) {
                 const selectedLang = document.querySelector('input[name="language"]:checked').value;
                 showErrorPopup(
@@ -1186,41 +1185,39 @@
             const email = emailInput.value.trim();
             const password = passwordInput.value;
 
-            // UI Loading State (Prevent duplicate clicks)
+            // UI Loading State
             btnSubmit.disabled = true;
             btnSpinner.style.display = 'inline-block';
             btnText.innerText = translations[language].creatingShop;
 
+            let userCredential = null;
+
             try {
-                // STEP 1: Firebase Authentication Account Creation
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                // STEP 1: Firebase Auth Account Creation
+                userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const uid = userCredential.user.uid;
 
-                // STEP 2: Calculate 3-day profileUnlolked timestamp (Current time + 3 days in ms)
-                const profileUnlockedUntil = Date.now() + (3 * 24 * 60 * 60 * 1000);
-
-                // STEP 3: Create Firestore Document at shops/{uid}
+                // STEP 2: Save Firestore Document with safe default values & uid consistency
                 try {
                     await setDoc(doc(db, "shops", uid), {
-                        uid: uid,
-                        shopName: shopName,
-                        businessNumber: businessNumber,
-                        address: address,
-                        email: email,
-                        country: country,
-                        language: language,
-                        profileUnlolked: profileUnlockedUntil,
-                        createTime: serverTimestamp()
-                    });
+    uid: uid,
+    shopName: shopName,
+    businessNumber: businessNumber,
+    address: address,
+    email: email,
+    country: country,
+    language: language,
+    profileUnlocked: 0,
+    verified: false,
+    createTime: serverTimestamp()
+});
 
-                    // SUCCESS: Reset Form & Show Success Modal
+                    // SUCCESS: Reset Form, UI States & Language Defaults
                     form.reset();
-                    // Reset strength meter UI
                     strengthBar.style.width = '0%';
                     strengthLabel.innerText = '-';
                     document.querySelectorAll('.check-item').forEach(el => el.classList.remove('valid'));
                     document.querySelectorAll('.form-control').forEach(el => el.classList.remove('is-valid', 'is-invalid'));
-                    // Reset country and lang defaults
                     countrySelect.value = "Bangladesh";
                     document.getElementById('lang-en').checked = true;
                     updateUILanguage('English');
@@ -1228,19 +1225,34 @@
                     showSuccessPopup();
 
                 } catch (firestoreError) {
-                    console.error("Firestore document creation failed:", firestoreError);
+                    console.error("Firestore Error Code:", firestoreError.code);
+                    console.error("Firestore Error Message:", firestoreError.message);
+                    console.error("Full Firestore Error Object:", firestoreError);
+
+                    // Auth Cleanup: Delete orphaned user if Firestore creation fails
+                    if (userCredential && userCredential.user) {
+                        try {
+                            await deleteUser(userCredential.user);
+                            console.log("Newly created user successfully rolled back/deleted.");
+                        } catch (deleteError) {
+                            console.error("User deletion rollback failed:", deleteError);
+                        }
+                    }
+
                     showErrorPopup(
-                        "Shop Setup Failed",
-                        "Authentication account was created, but failed to save shop details. Please contact support or try again."
+                        "Database Error",
+                        "Failed to save shop details in Firestore. Registration was safely rolled back."
                     );
                 }
 
             } catch (authError) {
-                console.error("Firebase Auth Error:", authError);
+                console.error("Firebase Auth Error Code:", authError.code);
+                console.error("Firebase Auth Error Message:", authError.message);
+                console.error("Full Auth Error Object:", authError);
                 const errorInfo = getFriendlyFirebaseError(authError);
                 showErrorPopup(errorInfo.title, errorInfo.message);
             } finally {
-                // Restore button state
+                // Restore submit button state
                 btnSubmit.disabled = false;
                 btnSpinner.style.display = 'none';
                 const currentLang = document.querySelector('input[name="language"]:checked').value;
@@ -1248,7 +1260,7 @@
             }
         });
 
-        // Initialize default UI language
+        // Initialize UI language on load
         updateUILanguage('English');
     </script>
 </body>

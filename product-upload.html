@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Product - GHOTI BUILDER</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================
+       CSS STYLES & RESET
+       ========================================== */
+    :root {
+      --primary: #0f172a;
+      --secondary: #2563eb;
+      --secondary-hover: #1d4ed8;
+      --accent: #f97316;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #cbd5e1;
+      --border-light: #e2e8f0;
+      --danger: #ef4444;
+      --danger-bg: #fef2f2;
+      --success: #10b981;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+      --font-family: 'Poppins', 'Hind Siliguri', -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      padding-bottom: 3rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 768px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem;
+    }
+
+    /* Header */
+    .header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-light);
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-content {
+      max-width: 768px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .brand-title span {
+      color: var(--secondary);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Form Controls */
+    .form-group {
+      margin-bottom: 1.15rem;
+    }
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      font-family: inherit;
+      font-size: 0.925rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background-color: var(--card-bg);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus {
+      border-color: var(--secondary);
+    }
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+    .char-count {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: right;
+      margin-top: 0.25rem;
+    }
+
+    /* Grid layout */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.925rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      gap: 0.5rem;
+    }
+    .btn-primary {
+      background: var(--secondary);
+      color: #fff;
+      width: 100%;
+      font-size: 1rem;
+      padding: 0.9rem;
+    }
+    .btn-primary:hover {
+      background: var(--secondary-hover);
+    }
+    .btn-secondary {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-danger {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid #fca5a5;
+    }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Images Picker */
+    .image-picker-wrap {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .img-preview-box {
+      width: 90px;
+      height: 90px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      position: relative;
+      overflow: hidden;
+      background: #f1f5f9;
+    }
+    .img-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .btn-remove-img {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: rgba(239, 68, 68, 0.9);
+      color: #fff;
+      border: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .add-img-btn {
+      width: 90px;
+      height: 90px;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      gap: 4px;
+      background: #fafafa;
+    }
+    .add-img-btn:hover {
+      border-color: var(--secondary);
+      color: var(--secondary);
+    }
+
+    /* Keywords Chips */
+    .input-with-btn {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .chips-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .chip {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.825rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 500;
+    }
+    .chip-remove {
+      cursor: pointer;
+      color: var(--text-muted);
+      font-weight: bold;
+    }
+    .chip-remove:hover {
+      color: var(--danger);
+    }
+
+    /* Variant Box */
+    .variant-group-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .variant-option-list {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .variant-option-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-light);
+      font-size: 0.875rem;
+    }
+
+    /* Active Toggle */
+    .toggle-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .3s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: var(--secondary);
+    }
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    /* Subscription Warning Card */
+    .alert-card {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .alert-card h3 {
+      color: #c2410c;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .alert-card p {
+      color: #9a3412;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Fullscreen Overlay Loader */
+    .overlay-loader {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      border-top-color: var(--secondary);
+      border-radius: 50%;
+      animation: spin 1s infinite linear;
+      margin-bottom: 1rem;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Custom Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .toast {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+      animation: slideIn 0.3s ease;
+      max-width: 320px;
+    }
+    .toast.error { background: var(--danger); }
+    .toast.success { background: var(--success); }
+    @keyframes slideIn {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 600px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="brand-title">GHOTI <span>BUILDER</span></div>
+      <div id="user-status" style="font-size: 0.85rem; color: var(--text-muted);">Checking...</div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Auth Required State -->
+    <div id="auth-warning" class="alert-card hidden">
+      <h3>লগইন আবশ্যক</h3>
+      <p>প্রোডাক্ট আপলোড করতে আপনাকে আপনার শপ অ্যাকাউন্টে লগইন করতে হবে।</p>
+      <button class="btn btn-primary" onclick="window.location.href='https://build.ghotimarket.com/login'">লগইন করুন</button>
+    </div>
+
+    <!-- Subscription Expired State -->
+    <div id="subscription-warning" class="alert-card hidden">
+      <h3>সাবস্ক্রিপশন মেয়াদ শেষ</h3>
+      <p>আপনার Product Upload সুবিধার মেয়াদ শেষ হয়েছে। Product Upload করতে Subscription Renew করুন।</p>
+      <button class="btn btn-primary" onclick="window.location.href='https://build.ghotimarket.com/subscription'">Subscription Renew করুন</button>
+    </div>
+
+    <!-- MAIN PRODUCT UPLOAD FORM -->
+    <form id="product-form" onsubmit="handleProductSubmit(event)">
+
+      <!-- 1. Product Images -->
+      <div class="card">
+        <div class="card-title">
+          <span>Product Images *</span>
+          <span style="font-size: 0.825rem; color: var(--text-muted);" id="img-count-text">Selected: 0 / 3</span>
+        </div>
+        <div class="image-picker-wrap" id="image-picker-container">
+          <!-- Dynamically previewed images will be inserted here -->
+          <label class="add-img-btn" id="add-img-label" for="img-input">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Add Image
+          </label>
+          <input type="file" id="img-input" accept="image/*" class="hidden" onchange="handleImageSelect(event)">
+        </div>
+      </div>
+
+      <!-- 2. Product Name -->
+      <div class="card">
+        <div class="form-group">
+          <label for="productName">Product Name *</label>
+          <input type="text" id="productName" maxlength="100" placeholder="যেমন: Smart Bluetooth Watch" required oninput="updateCharCount('productName', 'name-count', 100)">
+          <div class="char-count" id="name-count">0 / 100</div>
+        </div>
+      </div>
+
+      <!-- 3. Pricing -->
+      <div class="card grid-2">
+        <div class="form-group">
+          <label for="productPrice">Product Price (৳) *</label>
+          <input type="number" id="productPrice" min="1" step="any" placeholder="1200" required>
+        </div>
+        <div class="form-group">
+          <label for="productOldPrice">Old Price (৳) <small style="color:var(--text-muted)">(Optional)</small></label>
+          <input type="number" id="productOldPrice" min="1" step="any" placeholder="1500">
+        </div>
+      </div>
+
+      <!-- 4. Product Description -->
+      <div class="card">
+        <div class="form-group">
+          <label for="description">Description *</label>
+          <textarea id="description" maxlength="300" placeholder="প্রোডাক্টের সংক্ষিপ্ত বিবরণ লিখুন..." required oninput="updateCharCount('description', 'desc-count', 300)"></textarea>
+          <div class="char-count" id="desc-count">0 / 300</div>
+        </div>
+      </div>
+
+      <!-- 5. Search Keywords -->
+      <div class="card">
+        <div class="card-title">Search Keywords</div>
+        <div class="input-with-btn">
+          <input type="text" id="keyword-input" placeholder="যেমন: smart watch">
+          <button type="button" class="btn btn-secondary" onclick="addKeyword()">Add</button>
+        </div>
+        <div class="chips-container" id="keywords-container"></div>
+      </div>
+
+      <!-- 6. Variants -->
+      <div class="card">
+        <div class="card-title">
+          <span>Product Variants</span>
+          <button type="button" class="btn btn-secondary" style="padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="addVariantGroup()">+ Add Variant</button>
+        </div>
+        <div id="variants-wrapper"></div>
+      </div>
+
+      <!-- 7. Product Status -->
+      <div class="card">
+        <div class="toggle-wrap">
+          <div>
+            <div style="font-weight: 600; font-size: 0.95rem;">Product Status</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">শপে প্রোডাক্ট প্রদর্শিত হবে কিনা</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="activeToggle" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 8. Submit Button -->
+      <button type="submit" id="btn-submit" class="btn btn-primary">Upload Product</button>
+
+    </form>
+  </div>
+
+  <!-- Fullscreen Loading Overlay -->
+  <div id="overlay-loader" class="overlay-loader hidden">
+    <div class="spinner"></div>
+    <div id="loader-text" style="font-weight: 600; font-size: 1.1rem;">Uploading Product...</div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ==========================================
+       JAVASCRIPT & FIREBASE INTEGRATION
+       ========================================== -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { 
+      getFirestore, 
+      collection, 
+      doc, 
+      getDoc, 
+      addDoc, 
+      serverTimestamp 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // ------------------------------------------
+    // CONFIGURATIONS (Placeholders)
+    // ------------------------------------------
+    const firebaseConfig = {
+  apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
+  authDomain: "ghotimarket.firebaseapp.com",
+  databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
+  projectId: "ghotimarket",
+  storageBucket: "ghotimarket.firebasestorage.app",
+  messagingSenderId: "481257644093",
+  appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
+  measurementId: "G-4SR8V2EKC1"
+};
+
+    const IMGBB_API_KEY = "e1da51b6d309ac3a5a235b5088ebc334";
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Global Application State
+    let currentUser = null;
+    let isProfileUnlockedValid = false;
+    let selectedImageFiles = []; // Max 3
+    let searchKeywordsList = []; // Max 10
+    let variantGroups = [];      // Max 5
+
+    // UI Elements
+    const authWarning = document.getElementById('auth-warning');
+    const subscriptionWarning = document.getElementById('subscription-warning');
+    const productForm = document.getElementById('product-form');
+    const btnSubmit = document.getElementById('btn-submit');
+    const overlayLoader = document.getElementById('overlay-loader');
+    const loaderText = document.getElementById('loader-text');
+    const userStatusText = document.getElementById('user-status');
+
+    // ------------------------------------------
+    // AUTH & PROFILE UNLOCK CHECK
+    // ------------------------------------------
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        // Not logged in
+        currentUser = null;
+        userStatusText.textContent = "Not logged in";
+        productForm.classList.add('hidden');
+        authWarning.classList.remove('hidden');
+      } else {
+        currentUser = user;
+        userStatusText.textContent = `Shop ID: ${user.uid.substring(0,6)}...`;
+        authWarning.classList.add('hidden');
+        
+        // Verify profileUnlocked timestamp from Firestore
+        await checkProfileUnlocked(user.uid);
+      }
+    });
+
+    async function checkProfileUnlocked(uid) {
+      try {
+        const userDocRef = doc(db, "users", uid);
+        const userDocSnap = await getDoc(userDocRef);
+
+        if (userDocSnap.exists()) {
+          const data = userDocSnap.data();
+          const profileUnlocked = data.profileUnlocked;
+
+          // Check if profileUnlocked exists and is valid (Future Timestamp)
+          if (profileUnlocked && profileUnlocked.toMillis) {
+            const expireTime = profileUnlocked.toMillis();
+            const currentTime = Date.now();
+
+            if (expireTime > currentTime) {
+              isProfileUnlockedValid = true;
+            }
+          }
+        }
+
+        if (isProfileUnlockedValid) {
+          productForm.classList.remove('hidden');
+          subscriptionWarning.classList.add('hidden');
+        } else {
+          // Locked/Expired Subscription
+          productForm.classList.add('hidden');
+          subscriptionWarning.classList.remove('hidden');
+        }
+      } catch (err) {
+        showToast("Error checking subscription status", "error");
+        productForm.classList.add('hidden');
+      }
+    }
+
+    // ------------------------------------------
+    // IMAGE SELECTION & PREVIEW MANAGEMENT
+    // ------------------------------------------
+    window.handleImageSelect = function(event) {
+      const files = event.target.files;
+      if (!files || files.length === 0) return;
+
+      if (selectedImageFiles.length >= 3) {
+        showToast("Maximum 3 images allowed", "error");
+        return;
+      }
+
+      const file = files[0];
+      selectedImageFiles.push(file);
+      renderImages();
+      event.target.value = ''; // Reset input
+    };
+
+    function renderImages() {
+      const container = document.getElementById('image-picker-container');
+      const addBtn = document.getElementById('add-img-label');
+      const countText = document.getElementById('img-count-text');
+
+      // Remove existing previews
+      const existingPreviews = container.querySelectorAll('.img-preview-box');
+      existingPreviews.forEach(el => el.remove());
+
+      // Render previews
+      selectedImageFiles.forEach((file, index) => {
+        const box = document.createElement('div');
+        box.className = 'img-preview-box';
+        
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'btn-remove-img';
+        removeBtn.type = 'button';
+        removeBtn.innerHTML = '✕';
+        removeBtn.onclick = () => removeImage(index);
+
+        box.appendChild(img);
+        box.appendChild(removeBtn);
+        container.insertBefore(box, addBtn);
+      });
+
+      countText.textContent = `Selected: ${selectedImageFiles.length} / 3`;
+
+      // Hide add button if 3 images are selected
+      if (selectedImageFiles.length >= 3) {
+        addBtn.classList.add('hidden');
+      } else {
+        addBtn.classList.remove('hidden');
+      }
+    }
+
+    function removeImage(index) {
+      selectedImageFiles.splice(index, 1);
+      renderImages();
+    }
+
+    // ------------------------------------------
+    // CHARACTER COUNTERS & KEYWORDS
+    // ------------------------------------------
+    window.updateCharCount = function(inputId, targetId, max) {
+      const val = document.getElementById(inputId).value;
+      document.getElementById(targetId).textContent = `${val.length} / ${max}`;
+    };
+
+    window.addKeyword = function() {
+      const input = document.getElementById('keyword-input');
+      const val = input.value.trim();
+
+      if (!val) return;
+
+      if (searchKeywordsList.length >= 10) {
+        showToast("Maximum 10 keywords allowed", "error");
+        return;
+      }
+
+      if (searchKeywordsList.includes(val.toLowerCase())) {
+        showToast("Keyword already added", "error");
+        return;
+      }
+
+      searchKeywordsList.push(val.toLowerCase());
+      input.value = '';
+      renderKeywords();
+    };
+
+    function renderKeywords() {
+      const container = document.getElementById('keywords-container');
+      container.innerHTML = '';
+
+      searchKeywordsList.forEach((kw, index) => {
+        const chip = document.createElement('div');
+        chip.className = 'chip';
+        chip.innerHTML = `${kw} <span class="chip-remove" onclick="removeKeyword(${index})">×</span>`;
+        container.appendChild(chip);
+      });
+    }
+
+    window.removeKeyword = function(index) {
+      searchKeywordsList.splice(index, 1);
+      renderKeywords();
+    };
+
+    // ------------------------------------------
+    // VARIANT MANAGEMENT SYSTEM
+    // ------------------------------------------
+    window.addVariantGroup = function() {
+      if (variantGroups.length >= 5) {
+        showToast("Maximum 5 variants allowed", "error");
+        return;
+      }
+
+      variantGroups.push({
+        title: "",
+        options: []
+      });
+
+      renderVariants();
+    };
+
+    function renderVariants() {
+      const wrapper = document.getElementById('variants-wrapper');
+      wrapper.innerHTML = '';
+
+      variantGroups.forEach((group, gIndex) => {
+        const card = document.createElement('div');
+        card.className = 'variant-group-card';
+
+        card.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <strong>Variant Group #${gIndex + 1}</strong>
+            <button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeVariantGroup(${gIndex})">Remove Group</button>
+          </div>
+          
+          <div class="form-group">
+            <label>Title (Optional)</label>
+            <input type="text" placeholder="e.g. Color, Size" value="${group.title}" onchange="updateVariantTitle(${gIndex}, this.value)">
+          </div>
+
+          <div style="background:#fff; border:1px solid var(--border-light); padding:0.75rem; border-radius:var(--radius-sm);">
+            <div class="grid-2">
+              <div class="form-group" style="margin:0;">
+                <label>Option Name *</label>
+                <input type="text" id="v-opt-name-${gIndex}" placeholder="e.g. Black, XL">
+              </div>
+              <div class="form-group" style="margin:0;">
+                <label>Extra Price (৳)</label>
+                <input type="number" id="v-opt-price-${gIndex}" placeholder="0" min="0">
+              </div>
+            </div>
+            <button type="button" class="btn btn-secondary" style="width:100%; margin-top:0.75rem; padding:0.5rem;" onclick="addVariantOption(${gIndex})">Add Option</button>
+          </div>
+
+          <div class="variant-option-list">
+            ${group.options.map((opt, oIndex) => `
+              <div class="variant-option-item">
+                <span><strong>${opt.name}</strong> (+৳${opt.extraPrice})</span>
+                <span style="cursor:pointer; color:var(--danger); font-weight:bold;" onclick="removeVariantOption(${gIndex}, ${oIndex})">×</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+
+        wrapper.appendChild(card);
+      });
+    }
+
+    window.updateVariantTitle = function(gIndex, val) {
+      variantGroups[gIndex].title = val.trim();
+    };
+
+    window.removeVariantGroup = function(gIndex) {
+      variantGroups.splice(gIndex, 1);
+      renderVariants();
+    };
+
+    window.addVariantOption = function(gIndex) {
+      const nameInput = document.getElementById(`v-opt-name-${gIndex}`);
+      const priceInput = document.getElementById(`v-opt-price-${gIndex}`);
+
+      const name = nameInput.value.trim();
+      const extraPrice = parseFloat(priceInput.value) || 0;
+
+      if (!name) {
+        showToast("Option name is required", "error");
+        return;
+      }
+
+      variantGroups[gIndex].options.push({
+        name: name,
+        extraPrice: extraPrice < 0 ? 0 : extraPrice
+      });
+
+      renderVariants();
+    };
+
+    window.removeVariantOption = function(gIndex, oIndex) {
+      variantGroups[gIndex].options.splice(oIndex, 1);
+      renderVariants();
+    };
+
+    // ------------------------------------------
+    // IMGBB API UPLOAD HELPER
+    // ------------------------------------------
+    async function uploadImageToImgBB(file, imageIndex, totalImages) {
+      loaderText.textContent = `Uploading image ${imageIndex} of ${totalImages}...`;
+      
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+        method: "POST",
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        return result.data.url;
+      } else {
+        throw new Error(`Image ${imageIndex} upload failed`);
+      }
+    }
+
+    // ------------------------------------------
+    // FORM SUBMISSION & VALIDATION
+    // ------------------------------------------
+    window.handleProductSubmit = async function(event) {
+      event.preventDefault();
+
+      // 1. Guard Checks
+      if (!currentUser) {
+        showToast("Please login first", "error");
+        return;
+      }
+
+      if (!isProfileUnlockedValid) {
+        showToast("Your subscription has expired", "error");
+        window.location.href = "https://build.ghotimarket.com/subscription";
+        return;
+      }
+
+      // 2. Front-end Validations
+      if (selectedImageFiles.length < 1) {
+        showToast("Please select at least one image", "error");
+        return;
+      }
+
+      if (selectedImageFiles.length > 3) {
+        showToast("Maximum 3 images allowed", "error");
+        return;
+      }
+
+      const productName = document.getElementById('productName').value.trim();
+      if (!productName || productName.length > 100) {
+        showToast("Product name cannot exceed 100 characters", "error");
+        return;
+      }
+
+      const productPrice = parseFloat(document.getElementById('productPrice').value);
+      if (isNaN(productPrice) || productPrice <= 0) {
+        showToast("Product price must be greater than 0", "error");
+        return;
+      }
+
+      const oldPriceVal = document.getElementById('productOldPrice').value;
+      let productOldPrice = null;
+      if (oldPriceVal) {
+        productOldPrice = parseFloat(oldPriceVal);
+        if (productOldPrice <= productPrice) {
+          showToast("Old Price must be greater than Product Price", "error");
+          return;
+        }
+      }
+
+      const description = document.getElementById('description').value.trim();
+      if (!description || description.length > 300) {
+        showToast("Description cannot exceed 300 characters", "error");
+        return;
+      }
+
+      if (searchKeywordsList.length > 10) {
+        showToast("Maximum 10 keywords allowed", "error");
+        return;
+      }
+
+      if (variantGroups.length > 5) {
+        showToast("Maximum 5 variants allowed", "error");
+        return;
+      }
+
+      // Lock Form & Show Loader
+      setFormLoading(true);
+
+      try {
+        // Step A: Upload Images to ImgBB
+        const uploadedImageUrls = [];
+        for (let i = 0; i < selectedImageFiles.length; i++) {
+          const url = await uploadImageToImgBB(selectedImageFiles[i], i + 1, selectedImageFiles.length);
+          uploadedImageUrls.push(url);
+        }
+
+        // Step B: Prepare Firestore Payload
+        loaderText.textContent = "Saving Product...";
+
+        const productPayload = {
+          shopsId: currentUser.uid,
+          productName: productName,
+          productPrice: productPrice,
+          ...(productOldPrice && { productOldPrice: productOldPrice }),
+          description: description,
+          images: uploadedImageUrls,
+          searchKeywords: searchKeywordsList,
+          variants: variantGroups.map(vg => ({
+            title: vg.title || "",
+            options: vg.options
+          })),
+          active: document.getElementById('activeToggle').checked,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        };
+
+        // Step C: Save to Firestore
+        await addDoc(collection(db, "shops_products"), productPayload);
+
+        showToast("Product uploaded successfully!", "success");
+        resetForm();
+
+      } catch (err) {
+        console.error(err);
+        showToast(err.message || "Product upload failed", "error");
+      } finally {
+        setFormLoading(false);
+      }
+    };
+
+    // Helper: Reset Form
+    function resetForm() {
+      document.getElementById('product-form').reset();
+      selectedImageFiles = [];
+      searchKeywordsList = [];
+      variantGroups = [];
+      renderImages();
+      renderKeywords();
+      renderVariants();
+      updateCharCount('productName', 'name-count', 100);
+      updateCharCount('description', 'desc-count', 300);
+    }
+
+    // Helper: Lock UI while submitting
+    function setFormLoading(isLoading) {
+      if (isLoading) {
+        btnSubmit.disabled = true;
+        overlayLoader.classList.remove('hidden');
+      } else {
+        btnSubmit.disabled = false;
+        overlayLoader.classList.add('hidden');
+      }
+    }
+
+    // Helper: Custom Toast System
+    function showToast(message, type = 'normal') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.textContent = message;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>পণ্য সম্পাদনা ও পরিচালনা - GHOTI BUILDER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-light: #eef2ff;
+      --success: #10b981;
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      --warning: #f59e0b;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Hind Siliguri', sans-serif;
+    }
+
+    body {
+      background-color: #f1f5f9;
+      color: var(--gray-800);
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* Top App Header */
+    .app-header {
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+      border: 1px solid var(--gray-200);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .app-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .header-info h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    .header-info p {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    /* Toolbar & Search */
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 280px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      outline: none;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      fill: var(--gray-400);
+    }
+
+    .stats-badge {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-700);
+      white-space: nowrap;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Product Grid & Cards */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 20px;
+    }
+
+    @media (min-width: 640px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .product-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 1280px) {
+      .product-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .product-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-image-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 75%; /* 4:3 Aspect Ratio */
+      background: var(--gray-100);
+      overflow: hidden;
+    }
+
+    .card-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .no-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-400);
+      font-size: 13px;
+    }
+
+    .status-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .status-active { background: #d1fae5; color: #065f46; }
+    .status-inactive { background: #fee2e2; color: #991b1b; }
+
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 48px;
+    }
+
+    .price-container {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .current-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .old-price {
+      font-size: 14px;
+      color: var(--gray-400);
+      text-decoration: line-through;
+    }
+
+    .meta-info {
+      font-size: 12px;
+      color: var(--gray-500);
+      border-top: 1px solid var(--gray-100);
+      padding-top: 10px;
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-100);
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+
+    .btn-danger { background: #fef2f2; color: var(--danger); border: 1px solid #fca5a5; }
+    .btn-danger:hover:not(:disabled) { background: var(--danger); color: white; }
+
+    .btn-secondary { background: white; border: 1px solid var(--gray-300); color: var(--gray-700); }
+    .btn-secondary:hover:not(:disabled) { background: var(--gray-100); }
+
+    .btn-sm { padding: 6px 12px; font-size: 12px; }
+
+    /* Load More Section */
+    .load-more-container {
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .btn-load-more {
+      min-width: 240px;
+      padding: 12px 28px;
+      font-size: 15px;
+      background: white;
+      border: 1px solid var(--gray-300);
+      color: var(--gray-800);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-load-more:hover:not(:disabled) {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .end-message {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-top: 24px;
+      font-weight: 500;
+    }
+
+    /* Skeleton Loading */
+    .skeleton-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+      height: 360px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+    }
+
+    @keyframes skeleton-loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Empty States */
+    .empty-state {
+      background: white;
+      border-radius: var(--radius);
+      padding: 48px 24px;
+      text-align: center;
+      border: 1px dashed var(--gray-300);
+      grid-column: 1 / -1;
+    }
+
+    .empty-state svg {
+      width: 64px;
+      height: 64px;
+      fill: var(--gray-300);
+      margin-bottom: 16px;
+    }
+
+    .empty-state h3 {
+      font-size: 18px;
+      color: var(--gray-800);
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      color: var(--gray-500);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-container {
+      background: white;
+      border-radius: var(--radius);
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(20px);
+      transition: transform 0.2s ease;
+      overflow: hidden;
+    }
+
+    .modal-overlay.active .modal-container {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--gray-50);
+    }
+
+    .modal-header h2 {
+      font-size: 18px;
+      color: var(--gray-900);
+    }
+
+    .close-btn {
+      background: transparent;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--gray-500);
+      line-height: 1;
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      background: var(--gray-50);
+    }
+
+    /* Edit Form Section Styling */
+    .form-section {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gray-800);
+      border-bottom: 1px solid var(--gray-100);
+      padding-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .form-row { grid-template-columns: 1fr 1fr; }
+    }
+
+    .form-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    .form-control {
+      padding: 10px 14px;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+    }
+
+    .form-control[readonly] {
+      background-color: var(--gray-100);
+      color: var(--gray-500);
+      cursor: not-allowed;
+    }
+
+    textarea.form-control {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    /* Active Switch */
+    .switch-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 24px;
+    }
+
+    .switch input { opacity: 0; width: 0; height: 0; }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--gray-300);
+      transition: .3s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider { background-color: var(--primary); }
+    input:checked + .slider:before { transform: translateX(22px); }
+
+    /* Image List & Keywords Tags */
+    .image-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .image-preview-item {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+      background: var(--gray-50);
+    }
+
+    .image-preview-item img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .image-preview-remove {
+      position: absolute;
+      top: 4px; right: 4px;
+      background: rgba(239, 68, 68, 0.9);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 22px; height: 22px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chip-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .chip-remove {
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .chip-remove:hover { color: var(--danger); }
+
+    /* Variants Dynamic Box */
+    .variant-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .variant-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .option-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: var(--gray-900);
+      color: white;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: slideIn 0.3s ease;
+    }
+
+    .toast-success { background: #065f46; }
+    .toast-error { background: #991b1b; }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-info">
+        <h1>আমার পণ্য</h1>
+        <p>আপনার দোকানের সব পণ্য এখানে পরিচালনা করুন</p>
+      </div>
+      <div>
+        <a href="product-add.html" class="btn btn-primary">+ নতুন পণ্য যোগ করুন</a>
+      </div>
+    </header>
+
+    <!-- Unauthenticated View -->
+    <div id="authAlert" class="empty-state" style="display: none;">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+      <h3>লগইন আবশ্যক</h3>
+      <p>পণ্য পরিচালনা করতে আপনার শপ অ্যাকাউন্টে লগইন করুন।</p>
+      <a href="login.html" class="btn btn-primary">লগইন পেজে যান</a>
+    </div>
+
+    <!-- Main Content View -->
+    <main id="mainContent" style="display: none;">
+      
+      <!-- Toolbar -->
+      <section class="toolbar">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="পণ্যের নাম, বিবরণ বা কিওয়ার্ড দিয়ে খুঁজুন...">
+        </div>
+        <div class="stats-badge" id="productCountBadge">
+          এখন পর্যন্ত 0টি পণ্য লোড হয়েছে
+        </div>
+      </section>
+
+      <!-- Product Grid -->
+      <section id="productGrid" class="product-grid">
+        <!-- Skeleton Loaders -->
+        <div class="skeleton-card skeleton"></div>
+        <div class="skeleton-card skeleton"></div>
+        <div class="skeleton-card skeleton"></div>
+        <div class="skeleton-card skeleton"></div>
+      </section>
+
+      <!-- Empty Filter State -->
+      <div id="emptyState" class="empty-state" style="display: none;">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4V8h16v10zm-2-1h-6v-2h6v2z"/></svg>
+        <h3>কোনো পণ্য পাওয়া যায়নি</h3>
+        <p>আপনার দোকানে কোনো পণ্য পাওয়া যায়নি অথবা সার্চ ফিল্টারে মিলছে না।</p>
+      </div>
+
+      <!-- Pagination Load More -->
+      <div id="loadMoreContainer" class="load-more-container" style="display: none;">
+        <button id="loadMoreBtn" class="btn btn-load-more">
+          আরও ২০টি পণ্য দেখুন
+        </button>
+        <p id="endMessage" class="end-message" style="display: none;">সব পণ্য দেখানো হয়েছে</p>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- EDIT PRODUCT MODAL -->
+  <div id="editModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2>পণ্য সম্পাদনা করুন</h2>
+        <button class="close-btn" id="closeEditModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Basic Information -->
+        <div class="form-section">
+          <div class="section-title">১. মৌলিক তথ্য</div>
+          <div class="form-group">
+            <label class="form-label">Shop ID (Read-only)</label>
+            <input type="text" id="editShopsId" class="form-control" readonly>
+          </div>
+          <div class="form-group">
+            <label class="form-label">পণ্যের নাম *</label>
+            <input type="text" id="editProductName" class="form-control" placeholder="পণ্যের নাম লিখুন">
+          </div>
+          <div class="form-group">
+            <label class="form-label">বিবরণ (Description)</label>
+            <textarea id="editDescription" class="form-control" placeholder="পণ্যের বিবরণ লিখুন... (সরিয়ে ফেলতে ফাঁকা রাখুন)"></textarea>
+          </div>
+        </div>
+
+        <!-- Pricing & Status -->
+        <div class="form-section">
+          <div class="section-title">২. মূল্য ও স্ট্যাটাস</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">বর্তমান মূল্য (Price) ৳ *</label>
+              <input type="number" id="editProductPrice" class="form-control" min="0" placeholder="1200">
+            </div>
+            <div class="form-group">
+              <label class="form-label">পূর্বের মূল্য (Old Price) ৳</label>
+              <input type="number" id="editProductOldPrice" class="form-control" min="0" placeholder="ঐচ্ছিক (সরিয়ে ফেলতে ফাঁকা রাখুন)">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="switch-label">
+              <div class="switch">
+                <input type="checkbox" id="editActive">
+                <span class="slider"></span>
+              </div>
+              <span class="form-label">পণ্য সক্রিয় (Active Product)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Images Section -->
+        <div class="form-section">
+          <div class="section-title">৩. পণ্যের ছবিসমূহ</div>
+          <div class="form-group">
+            <div style="display: flex; gap: 8px;">
+              <input type="url" id="newImageUrlInput" class="form-control" placeholder="https://example.com/image.jpg">
+              <button type="button" class="btn btn-secondary btn-sm" id="addImageUrlBtn">যোগ করুন</button>
+            </div>
+            <div id="imagePreviewContainer" class="image-preview-grid"></div>
+          </div>
+        </div>
+
+        <!-- Search Keywords Section -->
+        <div class="form-section">
+          <div class="section-title">৪. খোঁজার কিওয়ার্ড (Search Keywords)</div>
+          <div class="form-group">
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="newKeywordInput" class="form-control" placeholder="যেমন: watch, smart watch">
+              <button type="button" class="btn btn-secondary btn-sm" id="addKeywordBtn">+ Add</button>
+            </div>
+            <div id="keywordsChipContainer" class="chip-container"></div>
+          </div>
+        </div>
+
+        <!-- Variants Section -->
+        <div class="form-section">
+          <div class="section-title">
+            <span>৫. ভেরিয়েন্ট ব্যবস্থাপনা (Variants)</span>
+            <button type="button" class="btn btn-secondary btn-sm" id="addVariantBtn">+ Add Variant</button>
+          </div>
+          <div id="variantsContainer"></div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelEditBtn">বাতিল</button>
+        <button class="btn btn-primary" id="saveProductBtn">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRMATION MODAL -->
+  <div id="deleteModal" class="modal-overlay">
+    <div class="modal-container" style="max-width: 420px;">
+      <div class="modal-header">
+        <h2 style="color: var(--danger);">পণ্য মুছে ফেলার নিশ্চয়তা</h2>
+        <button class="close-btn" id="closeDeleteModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>আপনি কি নিশ্চিত যে এই পণ্যটি মুছে ফেলতে চান?</p>
+        <p style="font-weight: bold; margin-top: 8px;" id="deleteProductName"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn">Delete Product</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIRTY STATE WARNING MODAL -->
+  <div id="dirtyWarningModal" class="modal-overlay" style="z-index: 1100;">
+    <div class="modal-container" style="max-width: 400px;">
+      <div class="modal-header">
+        <h2>সতর্কতা</h2>
+      </div>
+      <div class="modal-body">
+        <p>আপনার কিছু পরিবর্তন এখনো Save করা হয়নি। আপনি কি নিশ্চিত যে বের হয়ে যেতে চান?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="stayInEditBtn">এখানেই থাকুন</button>
+        <button class="btn btn-danger" id="forceCloseEditBtn">বন্ধ করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- FIREBASE ES MODULE SCRIPT -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { 
+      getFirestore, 
+      collection, 
+      query, 
+      where, 
+      orderBy, 
+      limit, 
+      startAfter, 
+      getDocs, 
+      doc, 
+      updateDoc, 
+      deleteDoc, 
+      deleteField, 
+      serverTimestamp 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // ----------------------------------------------------
+    // 1. FIREBASE INITIALIZATION
+    // ----------------------------------------------------
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // ----------------------------------------------------
+    // GLOBAL APP STATE
+    // ----------------------------------------------------
+    let currentUid = null;
+    let loadedProducts = [];
+    let lastVisibleDoc = null;
+    let hasMore = true;
+    let isLoadingMore = false;
+    
+    // Modal Edit State
+    let currentEditProduct = null;
+    let originalEditSnapshot = null;
+    let targetDeleteId = null;
+
+    // DOM Elements
+    const authAlert = document.getElementById('authAlert');
+    const mainContent = document.getElementById('mainContent');
+    const productGrid = document.getElementById('productGrid');
+    const productCountBadge = document.getElementById('productCountBadge');
+    const loadMoreContainer = document.getElementById('loadMoreContainer');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const endMessage = document.getElementById('endMessage');
+    const emptyState = document.getElementById('emptyState');
+    const searchInput = document.getElementById('searchInput');
+
+    // Modals
+    const editModal = document.getElementById('editModal');
+    const deleteModal = document.getElementById('deleteModal');
+    const dirtyWarningModal = document.getElementById('dirtyWarningModal');
+
+    // ----------------------------------------------------
+    // 2. AUTHENTICATION CHECK
+    // ----------------------------------------------------
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUid = user.uid;
+        authAlert.style.display = 'none';
+        mainContent.style.display = 'block';
+        loadProducts(true);
+      } else {
+        currentUid = null;
+        mainContent.style.display = 'none';
+        authAlert.style.display = 'block';
+      }
+    });
+
+    // ----------------------------------------------------
+    // 3. PAGINATED FIRESTORE FETCH (shops_products ONLY)
+    // ----------------------------------------------------
+    async function loadProducts(isInitial = false) {
+      if (!currentUid || isLoadingMore) return;
+
+      isLoadingMore = true;
+
+      if (isInitial) {
+        loadedProducts = [];
+        lastVisibleDoc = null;
+        hasMore = true;
+        renderSkeletons();
+      } else {
+        loadMoreBtn.disabled = true;
+        loadMoreBtn.innerText = "আরও পণ্য লোড হচ্ছে...";
+      }
+
+      try {
+        const collectionRef = collection(db, "shops_products");
+        let q;
+
+        // Query MUST filter by shopsId == currentUid
+        // Designed to avoid composite index issues
+        if (isInitial || !lastVisibleDoc) {
+          try {
+            q = query(
+              collectionRef,
+              where("shopsId", "==", currentUid),
+              orderBy("createdAt", "desc"),
+              limit(20)
+            );
+          } catch (e) {
+            // Fallback query if index fails
+            q = query(
+              collectionRef,
+              where("shopsId", "==", currentUid),
+              limit(20)
+            );
+          }
+        } else {
+          try {
+            q = query(
+              collectionRef,
+              where("shopsId", "==", currentUid),
+              orderBy("createdAt", "desc"),
+              startAfter(lastVisibleDoc),
+              limit(20)
+            );
+          } catch (e) {
+            q = query(
+              collectionRef,
+              where("shopsId", "==", currentUid),
+              startAfter(lastVisibleDoc),
+              limit(20)
+            );
+          }
+        }
+
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          lastVisibleDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+
+          const newBatch = [];
+          querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            // Double check ownership safety
+            if (data.shopsId === currentUid) {
+              newBatch.push({
+                id: docSnap.id,
+                ...data
+              });
+            }
+          });
+
+          loadedProducts = [...loadedProducts, ...newBatch];
+
+          if (querySnapshot.docs.length < 20) {
+            hasMore = false;
+          }
+        } else {
+          hasMore = false;
+        }
+
+        renderProducts();
+
+      } catch (error) {
+        console.error("Firestore Fetch Error:", error);
+        showToast("পণ্য লোড করতে সমস্যা হয়েছে।", "error");
+      } finally {
+        isLoadingMore = false;
+        loadMoreBtn.disabled = false;
+        loadMoreBtn.innerText = "আরও ২০টি পণ্য দেখুন";
+
+        updatePaginationUI();
+      }
+    }
+
+    function updatePaginationUI() {
+      if (hasMore) {
+        loadMoreContainer.style.display = 'block';
+        loadMoreBtn.style.display = 'inline-flex';
+        endMessage.style.display = 'none';
+      } else {
+        if (loadedProducts.length > 0) {
+          loadMoreContainer.style.display = 'block';
+          loadMoreBtn.style.display = 'none';
+          endMessage.style.display = 'block';
+        } else {
+          loadMoreContainer.style.display = 'none';
+        }
+      }
+    }
+
+    // ----------------------------------------------------
+    // 4. UI RENDER FUNCTIONS
+    // ----------------------------------------------------
+    function renderSkeletons() {
+      productGrid.innerHTML = Array(4).fill(0).map(() => `
+        <div class="skeleton-card skeleton"></div>
+      `).join('');
+      emptyState.style.display = 'none';
+    }
+
+    function renderProducts() {
+      const queryStr = searchInput.value.trim().toLowerCase();
+
+      // Client-side search over currently loaded products only
+      const filtered = loadedProducts.filter(p => {
+        const nameMatch = (p.productName || '').toLowerCase().includes(queryStr);
+        const descMatch = (p.description || '').toLowerCase().includes(queryStr);
+        const keywordMatch = Array.isArray(p.searchKeywords) && p.searchKeywords.some(k => k.toLowerCase().includes(queryStr));
+        return nameMatch || descMatch || keywordMatch;
+      });
+
+      productCountBadge.innerText = `এখন পর্যন্ত ${loadedProducts.length}টি পণ্য লোড হয়েছে`;
+
+      if (filtered.length === 0) {
+        productGrid.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      productGrid.innerHTML = filtered.map(product => createCardHTML(product)).join('');
+
+      attachCardEvents();
+    }
+
+    function createCardHTML(p) {
+      const firstImg = (Array.isArray(p.images) && p.images.length > 0) ? p.images[0] : null;
+      const createdDate = p.createdAt?.toDate ? p.createdAt.toDate().toLocaleDateString('bn-BD') : 'N/A';
+      const updatedDate = p.updatedAt?.toDate ? p.updatedAt.toDate().toLocaleDateString('bn-BD') : 'N/A';
+      const imageCount = Array.isArray(p.images) ? p.images.length : 0;
+      const variantCount = Array.isArray(p.variants) ? p.variants.length : 0;
+
+      return `
+        <div class="product-card" id="card-${p.id}">
+          <div class="card-image-wrapper">
+            ${firstImg 
+              ? `<img src="${escapeHtml(firstImg)}" alt="${escapeHtml(p.productName)}" class="card-image" loading="lazy" onerror="this.src='https://via.placeholder.com/300x225?text=No+Image'">` 
+              : `<div class="no-image"><svg style="width:32px;height:32px;fill:var(--gray-300)" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>ছবি নেই</div>`}
+            <span class="status-badge ${p.active !== false ? 'status-active' : 'status-inactive'}">
+              ${p.active !== false ? '● Active' : '● Inactive'}
+            </span>
+          </div>
+          <div class="card-body">
+            <h3 class="product-title" title="${escapeHtml(p.productName || '')}">${escapeHtml(p.productName || 'Unnamed Product')}</h3>
+            <div class="price-container">
+              <span class="current-price">৳${p.productPrice ?? 0}</span>
+              ${p.productOldPrice ? `<span class="old-price">৳${p.productOldPrice}</span>` : ''}
+            </div>
+            <div class="meta-info">
+              <div>${imageCount} Images • ${variantCount} Variants</div>
+              <div>তৈরি: ${createdDate} | আপডেট: ${updatedDate}</div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-secondary btn-sm edit-btn" data-id="${p.id}">Edit</button>
+            <button class="btn btn-danger btn-sm delete-btn" data-id="${p.id}">Delete</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function attachCardEvents() {
+      document.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.getAttribute('data-id');
+          openEditModal(id);
+        });
+      });
+
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.getAttribute('data-id');
+          openDeleteModal(id);
+        });
+      });
+    }
+
+    // ----------------------------------------------------
+    // 5. EDIT MODAL LOGIC & DYNAMIC FIELD MANAGEMENT
+    // ----------------------------------------------------
+    function openEditModal(productId) {
+      const original = loadedProducts.find(p => p.id === productId);
+      if (!original) return;
+
+      // Ownership Pre-check
+      if (original.shopsId !== currentUid) {
+        showToast("এই পণ্যটি আপনার নয়।", "error");
+        return;
+      }
+
+      // Clone object for editing
+      currentEditProduct = JSON.parse(JSON.stringify(original));
+      currentEditProduct.id = original.id;
+
+      // Ensure arrays exist
+      if (!Array.isArray(currentEditProduct.images)) currentEditProduct.images = [];
+      if (!Array.isArray(currentEditProduct.searchKeywords)) currentEditProduct.searchKeywords = [];
+      if (!Array.isArray(currentEditProduct.variants)) currentEditProduct.variants = [];
+
+      // Save Snapshot for dirty checking
+      originalEditSnapshot = JSON.stringify(currentEditProduct);
+
+      // Populate Form
+      document.getElementById('editShopsId').value = currentEditProduct.shopsId || currentUid;
+      document.getElementById('editProductName').value = currentEditProduct.productName || '';
+      document.getElementById('editDescription').value = currentEditProduct.description || '';
+      document.getElementById('editProductPrice').value = currentEditProduct.productPrice ?? '';
+      document.getElementById('editProductOldPrice').value = currentEditProduct.productOldPrice ?? '';
+      document.getElementById('editActive').checked = currentEditProduct.active !== false;
+
+      renderImagesList();
+      renderKeywordsList();
+      renderVariantsList();
+
+      editModal.classList.add('active');
+    }
+
+    // Images Editor
+    function renderImagesList() {
+      const container = document.getElementById('imagePreviewContainer');
+      container.innerHTML = currentEditProduct.images.map((url, idx) => `
+        <div class="image-preview-item">
+          <img src="${escapeHtml(url)}" onerror="this.src='https://via.placeholder.com/100?text=Error'">
+          <button type="button" class="image-preview-remove" data-idx="${idx}">&times;</button>
+        </div>
+      `).join('');
+
+      container.querySelectorAll('.image-preview-remove').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(e.currentTarget.getAttribute('data-idx'));
+          currentEditProduct.images.splice(idx, 1);
+          renderImagesList();
+        });
+      });
+    }
+
+    document.getElementById('addImageUrlBtn').addEventListener('click', () => {
+      const input = document.getElementById('newImageUrlInput');
+      const url = input.value.trim();
+      if (url) {
+        currentEditProduct.images.push(url);
+        input.value = '';
+        renderImagesList();
+      }
+    });
+
+    // Keywords Editor
+    function renderKeywordsList() {
+      const container = document.getElementById('keywordsChipContainer');
+      container.innerHTML = currentEditProduct.searchKeywords.map((kw, idx) => `
+        <span class="chip">
+          ${escapeHtml(kw)}
+          <span class="chip-remove" data-idx="${idx}">&times;</span>
+        </span>
+      `).join('');
+
+      container.querySelectorAll('.chip-remove').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(e.currentTarget.getAttribute('data-idx'));
+          currentEditProduct.searchKeywords.splice(idx, 1);
+          renderKeywordsList();
+        });
+      });
+    }
+
+    document.getElementById('addKeywordBtn').addEventListener('click', () => {
+      const input = document.getElementById('newKeywordInput');
+      const kw = input.value.trim();
+      if (kw) {
+        if (!currentEditProduct.searchKeywords.includes(kw)) {
+          currentEditProduct.searchKeywords.push(kw);
+          renderKeywordsList();
+        }
+        input.value = '';
+      }
+    });
+
+    // Variants Editor
+    function renderVariantsList() {
+      const container = document.getElementById('variantsContainer');
+      container.innerHTML = currentEditProduct.variants.map((v, vIdx) => `
+        <div class="variant-card">
+          <div class="variant-header">
+            <input type="text" class="form-control variant-title-input" value="${escapeHtml(v.title || '')}" placeholder="Variant Title (যেমন: Color)" data-vidx="${vIdx}">
+            <button type="button" class="btn btn-danger btn-sm remove-variant-btn" data-vidx="${vIdx}">Remove Variant</button>
+          </div>
+          <div>
+            <label class="form-label" style="font-size:12px;">Options:</label>
+            ${(v.options || []).map((opt, oIdx) => `
+              <div class="option-row">
+                <input type="text" class="form-control opt-name-input" value="${escapeHtml(opt.name || '')}" placeholder="Option (যেমন: Red)" data-vidx="${vIdx}" data-oidx="${oIdx}">
+                <input type="number" class="form-control opt-price-input" value="${opt.extraPrice ?? 0}" placeholder="Extra ৳" data-vidx="${vIdx}" data-oidx="${oIdx}" style="width: 110px;">
+                <button type="button" class="btn btn-danger btn-sm remove-opt-btn" data-vidx="${vIdx}" data-oidx="${oIdx}">&times;</button>
+              </div>
+            `).join('')}
+            <button type="button" class="btn btn-secondary btn-sm add-opt-btn" data-vidx="${vIdx}" style="margin-top:10px;">+ Add Option</button>
+          </div>
+        </div>
+      `).join('');
+
+      // Dynamic Event Binding inside Variants
+      container.querySelectorAll('.variant-title-input').forEach(inp => {
+        inp.addEventListener('input', (e) => {
+          const vIdx = parseInt(e.target.getAttribute('data-vidx'));
+          currentEditProduct.variants[vIdx].title = e.target.value;
+        });
+      });
+
+      container.querySelectorAll('.opt-name-input').forEach(inp => {
+        inp.addEventListener('input', (e) => {
+          const vIdx = parseInt(e.target.getAttribute('data-vidx'));
+          const oIdx = parseInt(e.target.getAttribute('data-oidx'));
+          currentEditProduct.variants[vIdx].options[oIdx].name = e.target.value;
+        });
+      });
+
+      container.querySelectorAll('.opt-price-input').forEach(inp => {
+        inp.addEventListener('input', (e) => {
+          const vIdx = parseInt(e.target.getAttribute('data-vidx'));
+          const oIdx = parseInt(e.target.getAttribute('data-oidx'));
+          currentEditProduct.variants[vIdx].options[oIdx].extraPrice = parseFloat(e.target.value) || 0;
+        });
+      });
+
+      container.querySelectorAll('.remove-variant-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const vIdx = parseInt(e.currentTarget.getAttribute('data-vidx'));
+          currentEditProduct.variants.splice(vIdx, 1);
+          renderVariantsList();
+        });
+      });
+
+      container.querySelectorAll('.add-opt-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const vIdx = parseInt(e.currentTarget.getAttribute('data-vidx'));
+          currentEditProduct.variants[vIdx].options.push({ name: '', extraPrice: 0 });
+          renderVariantsList();
+        });
+      });
+
+      container.querySelectorAll('.remove-opt-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const vIdx = parseInt(e.currentTarget.getAttribute('data-vidx'));
+          const oIdx = parseInt(e.currentTarget.getAttribute('data-oidx'));
+          currentEditProduct.variants[vIdx].options.splice(oIdx, 1);
+          renderVariantsList();
+        });
+      });
+    }
+
+    document.getElementById('addVariantBtn').addEventListener('click', () => {
+      currentEditProduct.variants.push({
+        title: '',
+        options: [{ name: '', extraPrice: 0 }]
+      });
+      renderVariantsList();
+    });
+
+    // ----------------------------------------------------
+    // 6. SAVE PRODUCT (WITH deleteField Support)
+    // ----------------------------------------------------
+    document.getElementById('saveProductBtn').addEventListener('click', async () => {
+      if (!currentEditProduct || !currentUid) return;
+
+      // SECURITY CHECK
+      if (currentEditProduct.shopsId !== currentUid) {
+        showToast("এই পণ্যটি আপনার নয়।", "error");
+        return;
+      }
+
+      const nameVal = document.getElementById('editProductName').value.trim();
+      const priceVal = parseFloat(document.getElementById('editProductPrice').value);
+      const oldPriceRaw = document.getElementById('editProductOldPrice').value.trim();
+      const descRaw = document.getElementById('editDescription').value.trim();
+      const activeVal = document.getElementById('editActive').checked;
+
+      // Validation
+      if (!nameVal) {
+        showToast("পণ্যের নাম আবশ্যক!", "error");
+        return;
+      }
+      if (isNaN(priceVal) || priceVal < 0) {
+        showToast("সঠিক মূল্য লিখুন!", "error");
+        return;
+      }
+
+      const saveBtn = document.getElementById('saveProductBtn');
+      saveBtn.disabled = true;
+      saveBtn.innerText = "সংরক্ষণ হচ্ছে...";
+
+      try {
+        const updateData = {
+          productName: nameVal,
+          productPrice: priceVal,
+          active: activeVal,
+          updatedAt: serverTimestamp()
+        };
+
+        // Handle Optional Field Removal via deleteField()
+        if (descRaw !== "") {
+          updateData.description = descRaw;
+        } else {
+          updateData.description = deleteField();
+        }
+
+        if (oldPriceRaw !== "" && !isNaN(parseFloat(oldPriceRaw))) {
+          updateData.productOldPrice = parseFloat(oldPriceRaw);
+        } else {
+          updateData.productOldPrice = deleteField();
+        }
+
+        if (currentEditProduct.images.length > 0) {
+          updateData.images = currentEditProduct.images;
+        } else {
+          updateData.images = deleteField();
+        }
+
+        if (currentEditProduct.searchKeywords.length > 0) {
+          updateData.searchKeywords = currentEditProduct.searchKeywords;
+        } else {
+          updateData.searchKeywords = deleteField();
+        }
+
+        // Clean & process variants
+        const cleanVariants = (currentEditProduct.variants || [])
+          .filter(v => v.title.trim() !== '')
+          .map(v => ({
+            title: v.title.trim(),
+            options: (v.options || [])
+              .filter(o => o.name.trim() !== '')
+              .map(o => ({
+                name: o.name.trim(),
+                extraPrice: typeof o.extraPrice === 'number' ? o.extraPrice : parseFloat(o.extraPrice) || 0
+              }))
+          }));
+
+        if (cleanVariants.length > 0) {
+          updateData.variants = cleanVariants;
+        } else {
+          updateData.variants = deleteField();
+        }
+
+        // Execute Firestore Update
+        const docRef = doc(db, "shops_products", currentEditProduct.id);
+        await updateDoc(docRef, updateData);
+
+        // Update in-memory object for UI
+        const index = loadedProducts.findIndex(p => p.id === currentEditProduct.id);
+        if (index !== -1) {
+          loadedProducts[index] = {
+            ...loadedProducts[index],
+            productName: nameVal,
+            productPrice: priceVal,
+            active: activeVal,
+            description: descRaw !== "" ? descRaw : undefined,
+            productOldPrice: oldPriceRaw !== "" ? parseFloat(oldPriceRaw) : undefined,
+            images: currentEditProduct.images.length > 0 ? currentEditProduct.images : [],
+            searchKeywords: currentEditProduct.searchKeywords.length > 0 ? currentEditProduct.searchKeywords : [],
+            variants: cleanVariants.length > 0 ? cleanVariants : [],
+            updatedAt: { toDate: () => new Date() }
+          };
+        }
+
+        renderProducts();
+        closeModalDirectly();
+        showToast("পণ্য সফলভাবে আপডেট হয়েছে।", "success");
+
+      } catch (error) {
+        console.error("Save error:", error);
+        showToast("পণ্য আপডেট করতে ব্যর্থ হয়েছে।", "error");
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerText = "Save Changes";
+      }
+    });
+
+    // ----------------------------------------------------
+    // 7. DIRTY STATE CHECK & CLOSE HANDLING
+    // ----------------------------------------------------
+    function isEditDirty() {
+      if (!currentEditProduct || !originalEditSnapshot) return false;
+
+      // Sync form DOM state to edit object before comparison
+      currentEditProduct.productName = document.getElementById('editProductName').value.trim();
+      currentEditProduct.description = document.getElementById('editDescription').value.trim();
+      currentEditProduct.productPrice = parseFloat(document.getElementById('editProductPrice').value) || 0;
+      const oldP = document.getElementById('editProductOldPrice').value.trim();
+      currentEditProduct.productOldPrice = oldP !== "" ? parseFloat(oldP) : null;
+      currentEditProduct.active = document.getElementById('editActive').checked;
+
+      return JSON.stringify(currentEditProduct) !== originalEditSnapshot;
+    }
+
+    function requestCloseEditModal() {
+      if (isEditDirty()) {
+        dirtyWarningModal.classList.add('active');
+      } else {
+        closeModalDirectly();
+      }
+    }
+
+    function closeModalDirectly() {
+      editModal.classList.remove('active');
+      dirtyWarningModal.classList.remove('active');
+      currentEditProduct = null;
+      originalEditSnapshot = null;
+    }
+
+    document.getElementById('closeEditModalBtn').addEventListener('click', requestCloseEditModal);
+    document.getElementById('cancelEditBtn').addEventListener('click', requestCloseEditModal);
+    document.getElementById('stayInEditBtn').addEventListener('click', () => dirtyWarningModal.classList.remove('active'));
+    document.getElementById('forceCloseEditBtn').addEventListener('click', closeModalDirectly);
+
+    // ----------------------------------------------------
+    // 8. DELETE PRODUCT LOGIC (shops_products ONLY)
+    // ----------------------------------------------------
+    function openDeleteModal(productId) {
+      const product = loadedProducts.find(p => p.id === productId);
+      if (!product) return;
+
+      if (product.shopsId !== currentUid) {
+        showToast("এই পণ্যটি আপনার নয়।", "error");
+        return;
+      }
+
+      targetDeleteId = productId;
+      document.getElementById('deleteProductName').innerText = product.productName || 'Unnamed Product';
+      deleteModal.classList.add('active');
+    }
+
+    document.getElementById('closeDeleteModalBtn').addEventListener('click', () => deleteModal.classList.remove('active'));
+    document.getElementById('cancelDeleteBtn').addEventListener('click', () => deleteModal.classList.remove('active'));
+
+    document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
+      if (!targetDeleteId || !currentUid) return;
+
+      const product = loadedProducts.find(p => p.id === targetDeleteId);
+      if (!product || product.shopsId !== currentUid) {
+        showToast("এই পণ্যটি মুছে ফেলার অনুমতি নেই।", "error");
+        return;
+      }
+
+      const confirmBtn = document.getElementById('confirmDeleteBtn');
+      confirmBtn.disabled = true;
+      confirmBtn.innerText = "মুছে ফেলা হচ্ছে...";
+
+      try {
+        // DELETE ONLY from shops_products
+        await deleteDoc(doc(db, "shops_products", targetDeleteId));
+
+        // Remove from memory
+        loadedProducts = loadedProducts.filter(p => p.id !== targetDeleteId);
+        
+        renderProducts();
+        deleteModal.classList.remove('active');
+        showToast("পণ্যটি সফলভাবে মুছে ফেলা হয়েছে", "success");
+
+      } catch (error) {
+        console.error("Delete Error:", error);
+        showToast("পণ্য মুছে ফেলতে সমস্যা হয়েছে।", "error");
+      } finally {
+        confirmBtn.disabled = false;
+        confirmBtn.innerText = "Delete Product";
+        targetDeleteId = null;
+      }
+    });
+
+    // ----------------------------------------------------
+    // 9. EVENT LISTENERS & HELPERS
+    // ----------------------------------------------------
+    loadMoreBtn.addEventListener('click', () => loadProducts(false));
+    searchInput.addEventListener('input', () => renderProducts());
+
+    function showToast(message, type = "success") {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type === 'error' ? 'toast-error' : 'toast-success'}`;
+      toast.innerText = message;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 3500);
+    }
+
+    function escapeHtml(str) {
+      if (typeof str !== 'string') return str;
+      return str.replace(/[&<>"']/g, function(m) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        }[m];
+      });
+    }
+  </script>
+</body>
+</html>

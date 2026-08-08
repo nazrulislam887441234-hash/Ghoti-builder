@@ -547,75 +547,77 @@
     // REALTIME FIRESTORE CATEGORIES LISTENER
     // =========================================================================
     function listenToCategories(shopId) {
-      if (unsubscribeCategoriesListener) {
-        unsubscribeCategoriesListener();
-      }
+  if (unsubscribeCategoriesListener) {
+    unsubscribeCategoriesListener();
+  }
 
-      const categoriesQuery = query(
-    collection(db, "shops_categories"),
-    where("shopsId", "==", shopId)
-  );
+  // where + orderBy বাদ। সব ডাটা শুনবো
+  const categoriesQuery = collection(db, "shops_categories");
 
-      unsubscribeCategoriesListener = onSnapshot(categoriesQuery, (snapshot) => {
-        categoryGrid.innerHTML = "";
-        const count = snapshot.docs.length;
-        categoryCountBadge.textContent = `${count} ${count === 1 ? 'Category' : 'Categories'}`;
+  unsubscribeCategoriesListener = onSnapshot(categoriesQuery, (snapshot) => {
+    categoryGrid.innerHTML = "";
+    
+    // Client side এ Filter + Sort
+    const docs = snapshot.docs
+      .filter(docSnap => docSnap.data().shopsId === shopId) // নিজের shop এর গুলা
+      .sort((a, b) => { // createdAt দিয়ে sort
+        const dateA = a.data().createdAt?.toMillis() || 0;
+        const dateB = b.data().createdAt?.toMillis() || 0;
+        return dateB - dateA; 
+      });
 
-        if (snapshot.empty) {
-          emptyCategoryState.classList.remove("hidden");
-        } else {
-          emptyCategoryState.classList.add("hidden");
+    const count = docs.length;
+    categoryCountBadge.textContent = `${count} ${count === 1 ? 'Category' : 'Categories'}`;
 
-          snapshot.docs.forEach((docSnap) => {
-            const data = docSnap.data();
-            const catId = docSnap.id;
-            
-            // Format Created Date
-            let dateString = "N/A";
-            if (data.createdAt && data.createdAt.toDate) {
-              dateString = data.createdAt.toDate().toLocaleDateString("bn-BD", {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-              });
-            }
+    if (docs.length === 0) {
+      emptyCategoryState.classList.remove("hidden");
+    } else {
+      emptyCategoryState.classList.add("hidden");
 
-            const card = document.createElement("div");
-            card.className = "bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between hover:shadow-md transition duration-200 group";
-            card.innerHTML = `
-              <div>
-                <div class="relative w-full h-40 bg-slate-200 rounded-lg overflow-hidden mb-3">
-                  <img src="${data.categoryImage}" alt="${data.categoryName}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                </div>
-                <h4 class="font-bold text-slate-800 text-base truncate" title="${data.categoryName}">${data.categoryName}</h4>
-                <p class="text-xs text-slate-400 mt-1"><i class="fa-regular fa-clock mr-1"></i>${dateString}</p>
-              </div>
-              <div class="flex items-center space-x-2 mt-4 pt-3 border-t border-slate-200">
-                <button 
-                  onclick="openEditModal('${catId}', '${escapeHtml(data.categoryName)}', '${data.categoryImage}')" 
-                  class="flex-1 bg-white hover:bg-slate-100 text-indigo-600 border border-slate-300 py-1.5 px-3 rounded-lg text-xs font-semibold flex items-center justify-center transition"
-                >
-                  <i class="fa-solid fa-pen-to-square mr-1.5"></i> Edit
-                </button>
-                <button 
-                  onclick="openDeleteModal('${catId}')" 
-                  class="bg-white hover:bg-rose-50 text-rose-600 border border-slate-300 py-1.5 px-3 rounded-lg text-xs font-semibold flex items-center justify-center transition"
-                >
-                  <i class="fa-solid fa-trash-can"></i>
-                </button>
-              </div>
-            `;
-
-            categoryGrid.appendChild(card);
+      docs.forEach((docSnap) => {
+        const data = docSnap.data();
+        const catId = docSnap.id;
+        
+        let dateString = "N/A";
+        if (data.createdAt && data.createdAt.toDate) {
+          dateString = data.createdAt.toDate().toLocaleDateString("bn-BD", {
+            year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
           });
         }
-      }, (error) => {
-        console.error("Categories listener error:", error);
-        showToast("ক্যাটাগরি ডাটা লোড করতে ব্যর্থ হয়েছে।", "error");
+
+        const card = document.createElement("div");
+        card.className = "bg-slate-50 border border-slate-200 rounded-xl p-4 flex-col justify-between hover:shadow-md transition duration-200 group";
+        card.innerHTML = `
+          <div>
+            <div class="relative w-full h-40 bg-slate-200 rounded-lg overflow-hidden mb-3">
+              <img src="${data.categoryImage}" alt="${data.categoryName}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            </div>
+            <h4 class="font-bold text-slate-800 text-base truncate" title="${data.categoryName}">${data.categoryName}</h4>
+            <p class="text-xs text-slate-400 mt-1"><i class="fa-regular fa-clock mr-1"></i>${dateString}</p>
+          </div>
+          <div class="flex items-center space-x-2 mt-4 pt-3 border-t border-slate-200">
+            <button 
+              onclick="openEditModal('${catId}', '${escapeHtml(data.categoryName)}', '${data.categoryImage}')" 
+              class="flex-1 bg-white hover:bg-slate-100 text-indigo-600 border-slate-300 py-1.5 px-3 rounded-lg text-xs font-semibold flex items-center justify-center transition"
+            >
+              <i class="fa-solid fa-pen-to-square mr-1.5"></i> Edit
+            </button>
+            <button 
+              onclick="openDeleteModal('${catId}')" 
+              class="bg-white hover:bg-rose-50 text-rose-600 border-slate-300 py-1.5 px-3 rounded-lg text-xs font-semibold flex items-center justify-center transition"
+            >
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        `;
+        categoryGrid.appendChild(card);
       });
     }
+  }, (error) => {
+    console.error("Categories listener error:", error);
+    showToast("ক্যাটাগরি ডাটা লোড করতে ব্যর্থ হয়েছে: " + error.message, "error");
+  });
+}
 
     // Helper for escaping strings in inline HTML handlers
     function escapeHtml(str) {

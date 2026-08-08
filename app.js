@@ -149,26 +149,19 @@ async function verifyShopOwnership(shopId, currentUserUid) {
         return false;
     }
 }
-
 // ==========================================
-// HELPER: FETCH IMGBB API KEY
+// HELPER: FETCH IMGBB API KEY FROM HTML
 // ==========================================
 async function getImgBBApiKey() {
-    try {
-        const apiDocRef = doc(db, "api_keys", "imgbb");
-        const apiDocSnap = await getDoc(apiDocRef);
-        
-        if (apiDocSnap.exists() && apiDocSnap.data().key) {
-            return apiDocSnap.data().key;
-        }
-    } catch (e) {
-        console.warn("api_keys collection fetch error, fallbacking...", e);
+    // HTML এর window.GHOTI_CONFIG থেকে Key নিবে
+    const key = window.GHOTI_CONFIG?.IMGBB_API_KEY;
+    
+    if (!key || key === "e1da51b6d309ac3a5a235b5088ebc334") {
+        throw new Error("ImgBB API Key HTML এ পাওয়া যায়নি। window.GHOTI_CONFIG এ Set করেন");
     }
     
-    // Default fallback API Key (replace if necessary)
-    return "e1da51b6d309ac3a5a235b5088ebc334";
+    return key;
 }
-
 // ==========================================
 // REALTIME DATA LISTENER
 // ==========================================

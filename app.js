@@ -166,7 +166,7 @@ async function getImgBBApiKey() {
     }
     
     // Default fallback API Key (replace if necessary)
-    return "YOUR_FALLBACK_IMGBB_API_KEY";
+    return "e1da51b6d309ac3a5a235b5088ebc334";
 }
 
 // ==========================================

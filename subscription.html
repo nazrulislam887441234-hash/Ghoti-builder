@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing Plans - GHOTI Builder</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       CSS VARIABLES & BASE STYLES
+       ========================================================================== */
+    :root {
+      --primary: #0F172A;
+      --primary-light: #1E293B;
+      --accent: #FF6B00;
+      --accent-hover: #E05E00;
+      --accent-soft: rgba(255, 107, 0, 0.1);
+      --bg-body: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 10px 15px -3px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.12);
+      --radius-card: 20px;
+      --radius-btn: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ==========================================================================
+       NAVBAR
+       ========================================================================== */
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--primary);
+    }
+
+    .brand-logo svg {
+      width: 32px;
+      height: 32px;
+      fill: var(--accent);
+    }
+
+    .brand-logo span {
+      color: var(--accent);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .lang-switcher {
+      background: #F1F5F9;
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--primary);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .lang-switcher:hover {
+      background: var(--border-color);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: var(--primary);
+      border-radius: 3px;
+      transition: var(--transition);
+    }
+
+    /* ==========================================================================
+       HERO SECTION
+       ========================================================================== */
+    .hero {
+      padding: 64px 0 40px;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      padding: 8px 16px;
+      border-radius: 30px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+    }
+
+    .trust-item svg {
+      width: 18px;
+      height: 18px;
+      fill: #10B981;
+    }
+
+    /* ==========================================================================
+       PRICING SECTION
+       ========================================================================== */
+    .pricing-section {
+      padding: 40px 0 80px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    /* Pricing Card */
+    .pricing-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-color);
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(255, 107, 0, 0.3);
+    }
+
+    .pricing-card.featured {
+      border: 2px solid var(--accent);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #FFFFFF;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 4px 16px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .pkg-name {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .pkg-divider {
+      height: 2px;
+      width: 40px;
+      background: var(--accent-soft);
+      margin-bottom: 20px;
+    }
+
+    .pricing-card.featured .pkg-divider {
+      background: var(--accent);
+    }
+
+    .pkg-price-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .pkg-price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .pkg-duration {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .features-list {
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .feature-item svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .btn-buy {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: var(--radius-btn);
+      border: none;
+      background: var(--primary);
+      color: #FFFFFF;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-buy:hover {
+      background: var(--accent);
+    }
+
+    .pricing-card.featured .btn-buy {
+      background: var(--accent);
+    }
+
+    .pricing-card.featured .btn-buy:hover {
+      background: var(--accent-hover);
+    }
+
+    /* ==========================================================================
+       STATE MESSAGES (Loading, Empty, Error)
+       ========================================================================== */
+    .state-box {
+      text-align: center;
+      padding: 60px 20px;
+      background: #FFFFFF;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-color);
+      grid-column: 1 / -1;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 4px solid var(--border-color);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s infinite linear;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .state-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .state-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       MODALS
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-card);
+      width: 100%;
+      max-width: 480px;
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(20px);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .modal-body {
+      margin-bottom: 24px;
+    }
+
+    .summary-box {
+      background: var(--bg-body);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .summary-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .summary-value {
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      word-break: break-all;
+    }
+
+    .btn-copy {
+      background: #E2E8F0;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+    }
+
+    .btn-copy:hover {
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-modal {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: var(--radius-btn);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: #F1F5F9;
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: var(--border-color);
+    }
+
+    /* ==========================================================================
+       TOAST NOTIFICATION
+       ========================================================================== */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--primary);
+      color: #FFFFFF;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      z-index: 1100;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .footer {
+      background: var(--primary);
+      color: #FFFFFF;
+      padding: 60px 0 24px;
+      margin-top: 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand p {
+      color: #94A3B8;
+      margin-top: 12px;
+      font-size: 0.95rem;
+      max-width: 320px;
+    }
+
+    .footer-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #FFFFFF;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: #94A3B8;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--primary-light);
+      padding-top: 24px;
+      text-align: center;
+      color: #64748B;
+      font-size: 0.85rem;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.1rem;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 68px;
+        left: 0;
+        width: 100%;
+        background: #FFFFFF;
+        flex-direction: column;
+        padding: 24px;
+        gap: 20px;
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: var(--shadow-md);
+        display: none;
+      }
+
+      .nav-menu.active {
+        display: flex;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       NAVBAR
+       ========================================================================== -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        GHOTI <span>Builder</span>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#" class="nav-link" data-i18n="home">Home</a>
+        <a href="#" class="nav-link" data-i18n="features">Features</a>
+        <a href="#" class="nav-link active" data-i18n="pricing">Pricing</a>
+        <a href="#" class="nav-link" data-i18n="contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="lang-switcher" id="lang-btn">
+          🌐 <span id="lang-text">বাংলা</span>
+        </button>
+        <button class="hamburger" id="hamburger-btn" aria-label="Toggle Navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title" id="hero-title">
+        Build Your Online Store<br>with <span>GHOTI Builder</span>
+      </h1>
+      <p class="hero-subtitle" data-i18n="heroSubtitle">
+        Choose the perfect subscription plan for your business.
+      </p>
+
+      <div class="trust-badges">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          <span data-i18n="trust1">No hosting hassle</span>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          <span data-i18n="trust2">Easy product management</span>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          <span data-i18n="trust3">Professional online shop</span>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          <span data-i18n="trust4">Customer support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PRICING SECTION
+       ========================================================================== -->
+  <section class="pricing-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="choosePlan">Choose Your Plan</h2>
+        <p class="section-subtitle" data-i18n="planSubtitle">Simple pricing. Powerful features. Built for your business.</p>
+      </div>
+
+      <div class="pricing-grid" id="pricing-grid">
+        <!-- Dynamic content via JS -->
+        <div class="state-box" id="loading-state">
+          <div class="spinner"></div>
+          <div class="state-title" data-i18n="loadingTitle">Loading subscription plans...</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo" style="color: #FFFFFF;">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            GHOTI <span style="color: var(--accent);">Builder</span>
+          </div>
+          <p data-i18n="footerDesc">Build your online store with ease. The complete e-commerce shop builder platform.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-title" data-i18n="quickLinks">Quick Links</h4>
+          <div class="footer-links">
+            <a href="https://build.ghotimarket.com" data-i18n="home">Home</a>
+            <a href="#" data-i18n="pricing">Pricing</a>
+            <a href="https://build.ghotimarket.com/support" data-i18n="contact">support</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title" data-i18n="legal">Legal</h4>
+          <div class="footer-links">
+            <a href="https://build.ghotimarket.com/privacu-policy" data-i18n="privacy">Privacy Policy</a>
+            <a href="https://build.ghotimarket.com/terms" data-i18n="terms">Terms & Conditions</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2026 GHOTI Builder. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       LOGIN REQUIRED MODAL
+       ========================================================================== -->
+  <div class="modal-overlay" id="login-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" data-i18n="loginRequiredTitle">Login Required</h3>
+        <button class="modal-close" class="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p data-i18n="loginRequiredMsg">Please login to your GHOTI Builder account before ordering a subscription.</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-modal btn-secondary close-modal-btn" data-i18n="cancel">Cancel</button>
+        <button class="btn-modal btn-primary" id="go-login-btn" data-i18n="login">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       ORDER CONFIRMATION MODAL
+       ========================================================================== -->
+  <div class="modal-overlay" id="confirm-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" data-i18n="confirmOrderTitle">Confirm Subscription</h3>
+        <button class="modal-close" class="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p data-i18n="confirmOrderDesc">Review your selected plan and account information before ordering:</p>
+        
+        <div class="summary-box">
+          <div class="summary-row">
+            <span class="summary-label" data-i18n="lblPackage">Package:</span>
+            <span class="summary-value" id="summary-pkg-name">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label" data-i18n="lblDuration">Duration:</span>
+            <span class="summary-value" id="summary-pkg-duration">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label" data-i18n="lblPrice">Price:</span>
+            <span class="summary-value" id="summary-pkg-price">-</span>
+          </div>
+          <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 4px 0;">
+          <div class="summary-row">
+            <span class="summary-label" data-i18n="lblAccount">Account:</span>
+            <span class="summary-value">
+              <span id="summary-user-email">-</span>
+              <button class="btn-copy" id="copy-email-btn" data-i18n="copy">Copy</button>
+            </span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">UID:</span>
+            <span class="summary-value">
+              <span id="summary-user-uid">-</span>
+              <button class="btn-copy" id="copy-uid-btn" data-i18n="copy">Copy</button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-modal btn-secondary close-modal-btn" data-i18n="cancel">Cancel</button>
+        <button class="btn-modal btn-primary" id="send-whatsapp-btn" data-i18n="continueWhatsApp">Continue to WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">Copied successfully!</div>
+
+
+  <!-- ==========================================================================
+       JAVASCRIPT MODULE & FIREBASE LOGIC
+       ========================================================================== -->
+  <script type="module">
+    // --------------------------------------------------------------------------
+    // 1. GLOBAL CONFIGURATION
+    // --------------------------------------------------------------------------
+    const CONFIG = {
+      WHATSAPP_NUMBER: "8801XXXXXXXXX", // Specify International Digits (e.g., 8801700000000)
+      LOGIN_PAGE: "login.html",
+      INCLUDE_PACKAGE_ID_IN_WHATSAPP: true,
+      DEFAULT_LANGUAGE: "en",
+      ENABLE_RECOMMENDED_BADGE: false // Set true to visually highlight the second package
+    };
+
+    // --------------------------------------------------------------------------
+    // 2. FIREBASE SDK IMPORTS
+    // --------------------------------------------------------------------------
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, collection, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // --------------------------------------------------------------------------
+    // 3. FIREBASE CONFIGURATION
+    // --------------------------------------------------------------------------
+    // ===== FIREBASE CONFIG =====
+    // PASTE EXISTING GHOTI BUILDER FIREBASE CONFIG HERE
+    const firebaseConfig = {
+  apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
+  authDomain: "ghotimarket.firebaseapp.com",
+  databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
+  projectId: "ghotimarket",
+  storageBucket: "ghotimarket.firebasestorage.app",
+  messagingSenderId: "481257644093",
+  appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
+  measurementId: "G-4SR8V2EKC1"
+};
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // --------------------------------------------------------------------------
+    // 4. TRANSLATIONS SYSTEM
+    // --------------------------------------------------------------------------
+    const translations = {
+      en: {
+        home: "Home",
+        features: "Features",
+        pricing: "Pricing",
+        contact: "Contact",
+        heroTitle: "Build Your Online Store<br>with <span>GHOTI Builder</span>",
+        heroSubtitle: "Choose the perfect subscription plan for your business.",
+        trust1: "No hosting hassle",
+        trust2: "Easy product management",
+        trust3: "Professional online shop",
+        trust4: "Customer support",
+        choosePlan: "Choose Your Plan",
+        planSubtitle: "Simple pricing. Powerful features. Built for your business.",
+        loadingTitle: "Loading subscription plans...",
+        emptyTitle: "No subscription plans are currently available.",
+        emptyDesc: "Please check back later or contact customer support.",
+        errorTitle: "Unable to load subscription plans.",
+        errorDesc: "Please check your network connection and try again.",
+        getStarted: "Get Started",
+        loginRequiredTitle: "Login Required",
+        loginRequiredMsg: "Please login to your GHOTI Builder account before ordering a subscription.",
+        login: "Login",
+        cancel: "Cancel",
+        confirmOrderTitle: "Confirm Subscription",
+        confirmOrderDesc: "Review your selected plan and account information before ordering:",
+        lblPackage: "Package:",
+        lblDuration: "Duration:",
+        lblPrice: "Price:",
+        lblAccount: "Account:",
+        copy: "Copy",
+        copied: "Copied successfully!",
+        continueWhatsApp: "Continue to WhatsApp",
+        popularBadge: "MOST POPULAR",
+        quickLinks: "Quick Links",
+        legal: "Legal",
+        privacy: "Privacy Policy",
+        terms: "Terms & Conditions",
+        footerDesc: "Build your online store with ease. The complete e-commerce shop builder platform.",
+        daysUnit: "Days",
+        monthsUnit: "Months",
+        yearsUnit: "Years"
+      },
+      bn: {
+        home: "হোম",
+        features: "ফিচার",
+        pricing: "প্রাইসিং",
+        contact: "যোগাযোগ",
+        heroTitle: "GHOTI Builder দিয়ে<br>আপনার <span>অনলাইন শপ</span> তৈরি করুন",
+        heroSubtitle: "আপনার ব্যবসার জন্য উপযুক্ত সাবস্ক্রিপশন প্যাকেজ বেছে নিন।",
+        trust1: "হোস্টিং-এর কোনো ঝামেলা নেই",
+        trust2: "সহজ প্রোডাক্ট ম্যানেজমেন্ট",
+        trust3: "প্রফেশনাল অনলাইন শপ",
+        trust4: "কাস্টমার সাপোর্ট",
+        choosePlan: "আপনার প্যাকেজ নির্বাচন করুন",
+        planSubtitle: "সহজ মূল্য। শক্তিশালী ফিচার। আপনার ব্যবসার জন্য তৈরি।",
+        loadingTitle: "সাবস্ক্রিপশন প্যাকেজ লোড হচ্ছে...",
+        emptyTitle: "বর্তমানে কোনো সাবস্ক্রিপশন প্যাকেজ পাওয়া যাচ্ছে না।",
+        emptyDesc: "অনুগ্রহ করে পরে আবার দেখুন অথবা কাস্টমার সাপোর্টে যোগাযোগ করুন।",
+        errorTitle: "সাবস্ক্রিপশন প্যাকেজ লোড করা যাচ্ছে না।",
+        errorDesc: "নেটওয়ার্ক কানেকশন চেক করুন এবং পরে আবার চেষ্টা করুন।",
+        getStarted: "সাবস্ক্রিপশন নিন",
+        loginRequiredTitle: "লগইন প্রয়োজন",
+        loginRequiredMsg: "সাবস্ক্রিপশন অর্ডার করার আগে আপনার GHOTI Builder অ্যাকাউন্টে লগইন করুন।",
+        login: "লগইন",
+        cancel: "বাতিল",
+        confirmOrderTitle: "সাবস্ক্রিপশন নিশ্চিত করুন",
+        confirmOrderDesc: "অর্ডার করার আগে আপনার নির্বাচিত প্ল্যান এবং অ্যাকাউন্ট তথ্য দেখে নিন:",
+        lblPackage: "প্যাকেজ:",
+        lblDuration: "মেয়াদ:",
+        lblPrice: "মূল্য:",
+        lblAccount: "অ্যাকাউন্ট:",
+        copy: "কপি",
+        copied: "কপি করা হয়েছে!",
+        continueWhatsApp: "WhatsApp-এ অর্ডার করুন",
+        popularBadge: "সেরা পছন্দ",
+        quickLinks: "গুরুত্বপূর্ণ লিঙ্ক",
+        legal: "লিগ্যাল",
+        privacy: "প্রাইভেসি পলিসি",
+        terms: "শর্তাবলী",
+        footerDesc: "সহজেই তৈরি করুন আপনার অনলাইন স্টোর। একটি পূর্ণাঙ্গ ই-কমার্স শপ বিল্ডার প্ল্যাটফর্ম।",
+        daysUnit: "দিন",
+        monthsUnit: "মাস",
+        yearsUnit: "বছর"
+      }
+    };
+
+    // --------------------------------------------------------------------------
+    // 5. APPLICATION STATE
+    // --------------------------------------------------------------------------
+    let currentLang = localStorage.getItem("ghoti_builder_language") || CONFIG.DEFAULT_LANGUAGE;
+    let currentUser = null;
+    let rawPackagesList = [];
+    let activeSelectedPackage = null;
+
+    // --------------------------------------------------------------------------
+    // 6. DOM ELEMENTS
+    // --------------------------------------------------------------------------
+    const pricingGrid = document.getElementById("pricing-grid");
+    const langBtn = document.getElementById("lang-btn");
+    const langText = document.getElementById("lang-text");
+    const loginModal = document.getElementById("login-modal");
+    const confirmModal = document.getElementById("confirm-modal");
+    const toast = document.getElementById("toast");
+    const goLoginBtn = document.getElementById("go-login-btn");
+    const sendWhatsAppBtn = document.getElementById("send-whatsapp-btn");
+    const hamburgerBtn = document.getElementById("hamburger-btn");
+    const navMenu = document.getElementById("nav-menu");
+
+    // Copy buttons & summary fields
+    const summaryPkgName = document.getElementById("summary-pkg-name");
+    const summaryPkgDuration = document.getElementById("summary-pkg-duration");
+    const summaryPkgPrice = document.getElementById("summary-pkg-price");
+    const summaryUserEmail = document.getElementById("summary-user-email");
+    const summaryUserUid = document.getElementById("summary-user-uid");
+    const copyEmailBtn = document.getElementById("copy-email-btn");
+    const copyUidBtn = document.getElementById("copy-uid-btn");
+
+    // --------------------------------------------------------------------------
+    // 7. INITIALIZATION & LISTENERS
+    // --------------------------------------------------------------------------
+    document.addEventListener("DOMContentLoaded", () => {
+      applyLanguage(currentLang);
+      initAuthListener();
+      initFirestoreListener();
+      setupEventListeners();
+    });
+
+    function setupEventListeners() {
+      // Language Switcher
+      langBtn.addEventListener("click", () => {
+        currentLang = currentLang === "en" ? "bn" : "en";
+        localStorage.setItem("ghoti_builder_language", currentLang);
+        applyLanguage(currentLang);
+        if (rawPackagesList.length > 0) {
+          renderPackages(rawPackagesList);
+        }
+      });
+
+      // Mobile Menu Toggle
+      hamburgerBtn.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+
+      // Close Modal Buttons
+      document.querySelectorAll(".close-modal-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          closeModals();
+        });
+      });
+
+      // Close Modal on Overlay Click
+      [loginModal, confirmModal].forEach(modal => {
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) closeModals();
+        });
+      });
+
+      // Login Redirect
+      goLoginBtn.addEventListener("click", () => {
+        window.location.href = CONFIG.LOGIN_PAGE;
+      });
+
+      // Send WhatsApp Order
+      sendWhatsAppBtn.addEventListener("click", handleWhatsAppRedirect);
+
+      // Copy Buttons
+      copyEmailBtn.addEventListener("click", () => copyToClipboard(summaryUserEmail.textContent));
+      copyUidBtn.addEventListener("click", () => copyToClipboard(summaryUserUid.textContent));
+    }
+
+    // --------------------------------------------------------------------------
+    // 8. AUTHENTICATION LISTENER
+    // --------------------------------------------------------------------------
+    function initAuthListener() {
+      onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+      });
+    }
+
+    // --------------------------------------------------------------------------
+    // 9. FIRESTORE REALTIME LISTENER
+    // --------------------------------------------------------------------------
+    function initFirestoreListener() {
+      try {
+        const packagesRef = collection(db, "shops_packages");
+        const q = query(packagesRef, where("active", "==", true));
+
+        onSnapshot(q, (snapshot) => {
+          const packages = [];
+          snapshot.forEach((doc) => {
+            packages.push({
+              id: doc.id,
+              ...doc.data()
+            });
+          });
+
+          // Client-side Sorting by price ascending
+          packages.sort((a, b) => (a.price || 0) - (b.price || 0));
+          rawPackagesList = packages;
+
+          if (packages.length === 0) {
+            renderEmptyState();
+          } else {
+            renderPackages(packages);
+          }
+        }, (error) => {
+          console.error("Firestore error:", error);
+          renderErrorState();
+        });
+      } catch (err) {
+        console.error("Connection error:", err);
+        renderErrorState();
+      }
+    }
+
+    // --------------------------------------------------------------------------
+    // 10. RENDER FUNCTIONS
+    // --------------------------------------------------------------------------
+    function renderPackages(packages) {
+      pricingGrid.innerHTML = "";
+
+      packages.forEach((pkg, index) => {
+        const isFeatured = CONFIG.ENABLE_RECOMMENDED_BADGE && index === 1;
+
+        const card = document.createElement("div");
+        card.className = `pricing-card ${isFeatured ? 'featured' : ''}`;
+
+        // Recommended Badge
+        if (isFeatured) {
+          const badge = document.createElement("div");
+          badge.className = "popular-badge";
+          badge.textContent = translations[currentLang].popularBadge;
+          card.appendChild(badge);
+        }
+
+        // Title
+        const nameEl = document.createElement("h3");
+        nameEl.className = "pkg-name";
+        nameEl.textContent = pkg.packageName || "Subscription Plan";
+
+        // Divider
+        const divider = document.createElement("div");
+        divider.className = "pkg-divider";
+
+        // Price Wrapper
+        const priceWrap = document.createElement("div");
+        priceWrap.className = "pkg-price-wrap";
+
+        const priceEl = document.createElement("div");
+        priceEl.className = "pkg-price";
+        priceEl.textContent = formatPrice(pkg.price, pkg.currency);
+
+        priceWrap.appendChild(priceEl);
+
+        // Duration
+        const durationEl = document.createElement("div");
+        durationEl.className = "pkg-duration";
+        durationEl.textContent = formatDuration(pkg.duration, pkg.durationUnit);
+
+        // Features List
+        const featuresList = document.createElement("ul");
+        featuresList.className = "features-list";
+
+        if (Array.isArray(pkg.features)) {
+          pkg.features.forEach((feat) => {
+            const item = document.createElement("li");
+            item.className = "feature-item";
+
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("viewBox", "0 0 24 24");
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z");
+            svg.appendChild(path);
+
+            const span = document.createElement("span");
+            span.textContent = feat;
+
+            item.appendChild(svg);
+            item.appendChild(span);
+            featuresList.appendChild(item);
+          });
+        }
+
+        // CTA Button
+        const btn = document.createElement("button");
+        btn.className = "btn-buy";
+        btn.textContent = translations[currentLang].getStarted;
+        btn.addEventListener("click", () => handlePackageSelect(pkg));
+
+        // Assemble Card
+        card.appendChild(nameEl);
+        card.appendChild(divider);
+        card.appendChild(priceWrap);
+        card.appendChild(durationEl);
+        card.appendChild(featuresList);
+        card.appendChild(btn);
+
+        pricingGrid.appendChild(card);
+      });
+    }
+
+    function renderEmptyState() {
+      pricingGrid.innerHTML = `
+        <div class="state-box">
+          <div class="state-title">${translations[currentLang].emptyTitle}</div>
+          <div class="state-desc">${translations[currentLang].emptyDesc}</div>
+        </div>
+      `;
+    }
+
+    function renderErrorState() {
+      pricingGrid.innerHTML = `
+        <div class="state-box">
+          <div class="state-title" style="color: #EF4444;">${translations[currentLang].errorTitle}</div>
+          <div class="state-desc">${translations[currentLang].errorDesc}</div>
+        </div>
+      `;
+    }
+
+    // --------------------------------------------------------------------------
+    // 11. PACKAGE SELECTION & ORDER FLOW
+    // --------------------------------------------------------------------------
+    function handlePackageSelect(pkg) {
+      if (!currentUser) {
+        openModal(loginModal);
+        return;
+      }
+
+      activeSelectedPackage = pkg;
+
+      // Fill Confirmation Modal Details
+      summaryPkgName.textContent = pkg.packageName || "";
+      summaryPkgDuration.textContent = formatDuration(pkg.duration, pkg.durationUnit);
+      summaryPkgPrice.textContent = formatPrice(pkg.price, pkg.currency);
+
+      summaryUserEmail.textContent = currentUser.email || "Not provided";
+      summaryUserUid.textContent = currentUser.uid || "Not logged in";
+
+      openModal(confirmModal);
+    }
+
+    function handleWhatsAppRedirect() {
+      if (!activeSelectedPackage) return;
+
+      const user = currentUser;
+      const uid = user?.uid || "Not logged in";
+      const email = user?.email || "Not provided";
+      const name = user?.displayName || "Not provided";
+
+      const durationStr = formatDuration(activeSelectedPackage.duration, activeSelectedPackage.durationUnit);
+      const pkgIdStr = CONFIG.INCLUDE_PACKAGE_ID_IN_WHATSAPP ? `\nPackage ID: ${activeSelectedPackage.id}` : "";
+      const pkgIdStrBn = CONFIG.INCLUDE_PACKAGE_ID_IN_WHATSAPP ? `\nপ্যাকেজ আইডি: ${activeSelectedPackage.id}` : "";
+
+      let message = "";
+
+      if (currentLang === "en") {
+        message = `Assalamu Alaikum.\n\n` +
+          `I would like to purchase a subscription from GHOTI Builder.\n\n` +
+          `Package: ${activeSelectedPackage.packageName || ''}\n` +
+          `Duration: ${durationStr}\n` +
+          `Price: ${activeSelectedPackage.price || ''} ${activeSelectedPackage.currency || ''}${pkgIdStr}\n\n` +
+          `Name: ${name}\n` +
+          `Email: ${email}\n` +
+          `UID: ${uid}\n\n` +
+          `Please provide me with the payment and subscription details.\n\n` +
+          `Thank you.`;
+      } else {
+        message = `আসসালামু আলাইকুম।\n\n` +
+          `আমি GHOTI Builder থেকে একটি সাবস্ক্রিপশন কিনতে চাই।\n\n` +
+          `প্যাকেজ: ${activeSelectedPackage.packageName || ''}\n` +
+          `মেয়াদ: ${durationStr}\n` +
+          `দাম: ${activeSelectedPackage.price || ''} ${activeSelectedPackage.currency || ''}${pkgIdStrBn}\n\n` +
+          `নাম: ${name}\n` +
+          `ইমেইল: ${email}\n` +
+          `ইউআইডি (UID): ${uid}\n\n` +
+          `অনুগ্রহ করে আমাকে পেমেন্ট এবং সাবস্ক্রিপশন সংক্রান্ত তথ্য দিন।\n\n` +
+          `ধন্যবাদ।`;
+      }
+
+      const encodedMsg = encodeURIComponent(message);
+      const waUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodedMsg}`;
+
+      window.open(waUrl, "_blank");
+      closeModals();
+    }
+
+    // --------------------------------------------------------------------------
+    // 12. HELPER UTILITIES
+    // --------------------------------------------------------------------------
+    function formatDuration(duration, durationUnit) {
+      if (!duration) return "";
+      const unit = (durationUnit || "").toLowerCase();
+
+      let unitText = durationUnit;
+      if (unit === "days") unitText = translations[currentLang].daysUnit;
+      else if (unit === "months") unitText = translations[currentLang].monthsUnit;
+      else if (unit === "years") unitText = translations[currentLang].yearsUnit;
+
+      return `${duration} ${unitText}`;
+    }
+
+    function formatPrice(price, currency) {
+      if (price === undefined || price === null) return "";
+      if (currency === "BDT") {
+        return `৳${price}`;
+      }
+      return `${price} ${currency || ''}`;
+    }
+
+    function applyLanguage(lang) {
+      langText.textContent = lang === "en" ? "বাংলা" : "English";
+
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang] && translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+    }
+
+    function openModal(modal) {
+      modal.classList.add("active");
+    }
+
+    function closeModals() {
+      loginModal.classList.remove("active");
+      confirmModal.classList.remove("active");
+    }
+
+    function copyToClipboard(text) {
+      if (!text || text === "-") return;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(translations[currentLang].copied);
+      }).catch(err => {
+        console.error("Failed to copy:", err);
+      });
+    }
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

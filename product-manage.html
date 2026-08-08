@@ -1070,8 +1070,8 @@
         renderProducts();
 
       } catch (error) {
-        console.error("Firestore Fetch Error:", error);
-        showToast("পণ্য লোড করতে সমস্যা হয়েছে।", "error");
+  console.error("Firestore Fetch Error:", error);
+  showToast("Error: " + error.message, "error"); // <- আসল Error দেখাবে
       } finally {
         isLoadingMore = false;
         loadMoreBtn.disabled = false;

@@ -117,6 +117,7 @@
     }
     input[type="text"],
     input[type="number"],
+    select, /* ADDED FOR CATEGORY */
     textarea {
       width: 100%;
       padding: 0.75rem 0.9rem;
@@ -131,6 +132,7 @@
     }
     input[type="text"]:focus,
     input[type="number"]:focus,
+    select:focus, /* ADDED FOR CATEGORY */
     textarea:focus {
       border-color: var(--secondary);
     }
@@ -484,6 +486,17 @@
         </div>
       </div>
 
+      <!-- ADDED FOR CATEGORY -->
+      <!-- Product Category Select -->
+      <div class="card">
+        <div class="card-title">Category *</div>
+        <div class="form-group">
+          <select id="productCategory" required>
+            <option value="">Select Category</option>
+          </select>
+        </div>
+      </div>
+
       <!-- 3. Pricing -->
       <div class="card grid-2">
         <div class="form-group">
@@ -568,22 +581,25 @@
       doc, 
       getDoc, 
       addDoc, 
-      serverTimestamp 
+      serverTimestamp,
+      query, // ADDED FOR CATEGORY
+      where, // ADDED FOR CATEGORY
+      getDocs // ADDED FOR CATEGORY
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     // ------------------------------------------
     // CONFIGURATIONS (Placeholders)
     // ------------------------------------------
     const firebaseConfig = {
-  apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
-  authDomain: "ghotimarket.firebaseapp.com",
-  databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
-  projectId: "ghotimarket",
-  storageBucket: "ghotimarket.firebasestorage.app",
-  messagingSenderId: "481257644093",
-  appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
-  measurementId: "G-4SR8V2EKC1"
-};
+      apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
+      authDomain: "ghotimarket.firebaseapp.com",
+      databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
+      projectId: "ghotimarket",
+      storageBucket: "ghotimarket.firebasestorage.app",
+      messagingSenderId: "481257644093",
+      appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
+      measurementId: "G-4SR8V2EKC1"
+    };
 
     const IMGBB_API_KEY = "e1da51b6d309ac3a5a235b5088ebc334";
 
@@ -598,6 +614,7 @@
     let selectedImageFiles = []; // Max 3
     let searchKeywordsList = []; // Max 10
     let variantGroups = [];      // Max 5
+    let myCategories = [];       // ADDED FOR CATEGORY
 
     // UI Elements
     const authWarning = document.getElementById('auth-warning');
@@ -629,47 +646,79 @@
     });
 
     async function checkProfileUnlocked(uid) {
-  try {
-    const shopDocRef = doc(db, "shops", uid);
-    const shopDocSnap = await getDoc(shopDocRef);
+      try {
+        const shopDocRef = doc(db, "shops", uid);
+        const shopDocSnap = await getDoc(shopDocRef);
 
-    if (shopDocSnap.exists()) {
-      const data = shopDocSnap.data();
-      const profileUnlocked = data.profileUnlocked; // এটা এখন Number
+        if (shopDocSnap.exists()) {
+          const data = shopDocSnap.data();
+          const profileUnlocked = data.profileUnlocked; // এটা এখন Number
 
-      // Check if profileUnlocked exists and is a Number
-      if (profileUnlocked && typeof profileUnlocked === 'number') {
-        const expireTime = profileUnlocked; // সরাসরি ms
-        const currentTime = Date.now();
+          // Check if profileUnlocked exists and is a Number
+          if (profileUnlocked && typeof profileUnlocked === 'number') {
+            const expireTime = profileUnlocked; // সরাসরি ms
+            const currentTime = Date.now();
 
-        if (expireTime > currentTime) {
-          isProfileUnlockedValid = true;
-          const daysLeft = Math.ceil((expireTime - currentTime) / (1000 * 60 * 60 * 24));
-          console.log("Subscription Valid. " + daysLeft + " days left");
+            if (expireTime > currentTime) {
+              isProfileUnlockedValid = true;
+              const daysLeft = Math.ceil((expireTime - currentTime) / (1000 * 60 * 60 * 24));
+              console.log("Subscription Valid. " + daysLeft + " days left");
+            } else {
+              console.log("Subscription Expired");
+            }
+          } else {
+            console.log("profileUnlocked field not found or not a Number");
+          }
         } else {
-          console.log("Subscription Expired");
+          console.log("Shop doc not found");
         }
-      } else {
-        console.log("profileUnlocked field not found or not a Number");
+
+        if (isProfileUnlockedValid) {
+          productForm.classList.remove('hidden');
+          subscriptionWarning.classList.add('hidden');
+          await loadMyCategories(uid); // ADDED FOR CATEGORY
+        } else {
+          productForm.classList.add('hidden');
+          subscriptionWarning.classList.remove('hidden');
+        }
+      } catch (err) {
+        console.error(err);
+        showToast("Error checking subscription status", "error");
+        productForm.classList.add('hidden');
       }
-    } else {
-      console.log("Shop doc not found");
     }
 
-    if (isProfileUnlockedValid) {
-      productForm.classList.remove('hidden');
-      subscriptionWarning.classList.add('hidden');
-    } else {
-      productForm.classList.add('hidden');
-      subscriptionWarning.classList.remove('hidden');
-    }
-  } catch (err) {
-    console.error(err);
-    showToast("Error checking subscription status", "error");
-    productForm.classList.add('hidden');
-  }
-                      }
+    // ADDED FOR CATEGORY
+    // ------------------------------------------
+    // LOAD CATEGORIES FROM FIRESTORE
+    // ------------------------------------------
+    async function loadMyCategories(uid) {
+      const selectEl = document.getElementById('productCategory');
+      selectEl.innerHTML = '<option value="">Loading categories...</option>';
+      try {
+        const q = query(collection(db, "shops_categories"), where("shopsId", "==", uid));
+        const querySnapshot = await getDocs(q);
+        myCategories = [];
 
+        if (querySnapshot.empty) {
+          selectEl.innerHTML = '<option value="">No category found. Please create one first</option>';
+          return;
+        }
+
+        selectEl.innerHTML = '<option value="">Select Category</option>';
+        querySnapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          myCategories.push({ id: docSnap.id, ...data });
+          const option = document.createElement('option');
+          option.value = docSnap.id;
+          option.textContent = data.categoryName || "Unnamed Category";
+          selectEl.appendChild(option);
+        });
+      } catch (err) {
+        console.error("Error loading categories:", err);
+        selectEl.innerHTML = '<option value="">Error loading categories</option>';
+      }
+    }
 
     // ------------------------------------------
     // IMAGE SELECTION & PREVIEW MANAGEMENT
@@ -917,6 +966,14 @@
         return;
       }
 
+      // ADDED FOR CATEGORY - Category Validation
+      const categorySelect = document.getElementById('productCategory');
+      if (!categorySelect.value) {
+        showToast("Please select a category", "error");
+        return;
+      }
+      const selectedCategoryOption = categorySelect.options[categorySelect.selectedIndex];
+
       // 2. Front-end Validations
       if (selectedImageFiles.length < 1) {
         showToast("Please select at least one image", "error");
@@ -983,6 +1040,8 @@
         const productPayload = {
           shopsId: currentUser.uid,
           productName: productName,
+          categoryId: selectedCategoryOption.value, // ADDED FOR CATEGORY
+          categoryName: selectedCategoryOption.textContent, // ADDED FOR CATEGORY
           productPrice: productPrice,
           ...(productOldPrice && { productOldPrice: productOldPrice }),
           description: description,
@@ -1014,6 +1073,11 @@
     // Helper: Reset Form
     function resetForm() {
       document.getElementById('product-form').reset();
+      
+      // ADDED FOR CATEGORY reset
+      const categorySelect = document.getElementById('productCategory');
+      if (categorySelect) categorySelect.value = "";
+
       selectedImageFiles = [];
       searchKeywordsList = [];
       variantGroups = [];

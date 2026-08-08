@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GHOTI Builder - Social Links Manager</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome CDN for Brand Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* ==========================================================================
+       1. VARIABLES & BASE STYLES
+       ========================================================================== */
+    :root {
+      --primary: #4F46E5;
+      --primary-hover: #4338CA;
+      --primary-light: #EEF2FF;
+      --success: #10B981;
+      --success-light: #ECFDF5;
+      --danger: #EF4444;
+      --danger-hover: #DC2626;
+      --danger-light: #FEF2F2;
+      --warning: #F59E0B;
+      --warning-light: #FFFBEB;
+      
+      --bg-main: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --border-focus: #818CF8;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+      --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 60px 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       2. HEADER SECTION
+       ========================================================================== */
+    .app-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 28px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      transition: var(--transition-normal);
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-container {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--radius-md);
+      background: #F1F5F9;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand-titles h1 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .brand-titles p {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary-light);
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(79, 70, 229, 0.15);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .user-badge i {
+      font-size: 14px;
+    }
+
+    /* ==========================================================================
+       3. AUTH / STATE CARDS
+       ========================================================================== */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 24px;
+      transition: var(--transition-normal);
+    }
+
+    .auth-warning {
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    .auth-warning i {
+      font-size: 48px;
+      color: var(--warning);
+      margin-bottom: 16px;
+    }
+
+    .auth-warning h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .auth-warning p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .btn-redirect {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: white;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: var(--transition-fast);
+    }
+
+    .btn-redirect:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       4. SECTION HEADINGS & PROGRESS
+       ========================================================================== */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .link-counter {
+      font-size: 13px;
+      font-weight: 600;
+      background: #F1F5F9;
+      color: var(--text-muted);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-color);
+    }
+
+    .link-counter.full {
+      background: var(--warning-light);
+      color: var(--warning);
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+
+    /* ==========================================================================
+       5. FORM STYLING & ICON PREVIEW
+       ========================================================================== */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .select-wrapper, .input-wrapper {
+      position: relative;
+    }
+
+    .form-select, .form-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-color);
+      background-color: #FAFAFA;
+      font-size: 15px;
+      color: var(--text-main);
+      outline: none;
+      transition: var(--transition-fast);
+      appearance: none;
+    }
+
+    .select-wrapper::after {
+      content: "\f107";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .form-select:focus, .form-input:focus {
+      border-color: var(--primary);
+      background-color: #FFFFFF;
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    }
+
+    /* Icon Preview Box */
+    .preview-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #F8FAFC;
+      border: 1.5px dashed var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 4px;
+      transition: var(--transition-fast);
+    }
+
+    .preview-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: #94A3B8;
+      background: #FFFFFF;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      transition: var(--transition-normal);
+    }
+
+    .preview-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preview-details .platform-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .preview-details .platform-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Validation & Hints */
+    .validation-msg {
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .validation-msg.error {
+      color: var(--danger);
+      display: block;
+    }
+
+    .validation-msg.success {
+      color: var(--success);
+      display: block;
+    }
+
+    /* Buttons */
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      height: 48px;
+      padding: 0 24px;
+      border-radius: var(--radius-md);
+      border: none;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #FFFFFF;
+      flex: 1;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
+    }
+
+    .btn-primary:disabled {
+      background: #A5B4FC;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: #F1F5F9;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: #E2E8F0;
+      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       6. EXISTING LINKS LIST & CARDS
+       ========================================================================== */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 16px;
+    }
+
+    .link-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-fast);
+    }
+
+    .link-card:hover {
+      border-color: #CBD5E1;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .link-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0; /* truncate text inside flex */
+    }
+
+    .link-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      background: #F8FAFC;
+    }
+
+    .link-details {
+      min-width: 0;
+    }
+
+    .link-details h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .link-details a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+      margin-top: 2px;
+      transition: var(--transition-fast);
+    }
+
+    .link-details a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .link-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .btn-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: #FFFFFF;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: var(--transition-fast);
+    }
+
+    .btn-icon.edit:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: rgba(79, 70, 229, 0.3);
+    }
+
+    .btn-icon.delete:hover {
+      background: var(--danger-light);
+      color: var(--danger);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--bg-card);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+    }
+
+    .empty-state-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 16px auto;
+    }
+
+    .empty-state h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .empty-state p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    /* Skeleton Loading */
+    .skeleton {
+      animation: skeleton-loading 1.2s infinite alternate;
+      border-radius: var(--radius-md);
+      background-color: #E2E8F0;
+    }
+
+    @keyframes skeleton-loading {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    .skeleton-card {
+      height: 80px;
+      width: 100%;
+    }
+
+    /* ==========================================================================
+       7. MODAL SYSTEM
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition-normal);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 420px;
+      padding: 28px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.95);
+      transition: var(--transition-normal);
+      text-align: center;
+    }
+
+    .modal-overlay.active .modal {
+      transform: scale(1);
+    }
+
+    .modal-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--danger-light);
+      color: var(--danger);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 16px auto;
+    }
+
+    .modal h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .modal p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: #FFFFFF;
+      flex: 1;
+    }
+
+    .btn-danger:hover {
+      background: var(--danger-hover);
+    }
+
+    /* ==========================================================================
+       8. TOAST SYSTEM
+       ========================================================================== */
+    .toast-container {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 360px;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    .toast {
+      pointer-events: auto;
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transform: translateX(120%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .toast-content {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .toast.success .toast-icon { color: var(--success); }
+    .toast.error .toast-icon { color: var(--danger); }
+    .toast.info .toast-icon { color: var(--primary); }
+
+    /* Spinner */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #FFFFFF;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 640px) {
+      body {
+        padding: 12px 12px 40px 12px;
+      }
+
+      .app-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px;
+      }
+
+      .user-badge {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .form-actions {
+        flex-direction: column;
+      }
+
+      .toast-container {
+        top: 12px;
+        right: 12px;
+        left: 12px;
+        max-width: calc(100% - 24px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Custom Delete Modal -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal">
+      <div class="modal-icon">
+        <i class="fa-solid fa-trash-can"></i>
+      </div>
+      <h3 id="modalTitle">Delete Link?</h3>
+      <p id="modalDescription">Are you sure you want to remove this social link from your shop?</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" style="flex: 1;" onclick="closeDeleteModal()">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="brand-box">
+        <div class="logo-container">
+          <img src="https://build.ghotimarket.com/logo.png" alt="GHOTI Builder Logo" onerror="this.src='https://via.placeholder.com/50?text=GHOTI'">
+        </div>
+        <div class="brand-titles">
+          <h1>GHOTI Builder</h1>
+          <p>Social Links Manager</p>
+        </div>
+      </div>
+      <div class="user-badge" id="userBadge" style="display: none;">
+        <i class="fa-solid fa-store"></i>
+        <span id="userUidDisplay">UID: Loading...</span>
+      </div>
+    </header>
+
+    <!-- Auth Protection / Warning View -->
+    <div class="card auth-warning" id="authWarning" style="display: none;">
+      <i class="fa-solid fa-shield-halved"></i>
+      <h2>Authentication Required</h2>
+      <p>You must be logged in to access and manage your shop's social links.</p>
+      <a href="/login" class="btn-redirect">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        Go to Login Page
+      </a>
+    </div>
+
+    <!-- Main Content Area (Shown when logged in) -->
+    <div id="mainContent" style="display: none;">
+
+      <!-- Add / Edit Social Link Form Card -->
+      <section class="card">
+        <div class="section-header">
+          <h2 class="section-title" id="formTitle">
+            <i class="fa-solid fa-plus-circle" style="color: var(--primary);"></i>
+            Add Social Link
+          </h2>
+          <span class="link-counter" id="linkCounter">0 / 7 Links</span>
+        </div>
+
+        <form id="socialLinkForm" onsubmit="handleFormSubmit(event)">
+          <div class="form-grid">
+            
+            <!-- Platform Dropdown -->
+            <div class="form-group">
+              <label class="form-label" for="platformSelect">Select Platform</label>
+              <div class="select-wrapper">
+                <select class="form-select" id="platformSelect" onchange="onPlatformChange()">
+                  <option value="" disabled selected>-- Choose a Platform --</option>
+                  <option value="youtube">YouTube</option>
+                  <option value="facebook">Facebook</option>
+                  <option value="instagram">Instagram</option>
+                  <option value="twitter">Twitter / X</option>
+                  <option value="linkedin">LinkedIn</option>
+                  <option value="tiktok">TikTok</option>
+                  <option value="whatsapp">WhatsApp</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Icon & Name Live Preview Widget -->
+            <div class="preview-container" id="previewBox">
+              <div class="preview-icon-box" id="previewIcon">
+                <i class="fa-solid fa-globe"></i>
+              </div>
+              <div class="preview-details">
+                <span class="platform-title" id="previewTitle">No Platform Selected</span>
+                <span class="platform-hint" id="previewHint">Select a platform above to preview icon</span>
+              </div>
+            </div>
+
+            <!-- Link Input -->
+            <div class="form-group">
+              <label class="form-label" for="linkInput">Social Media URL</label>
+              <div class="input-wrapper">
+                <input 
+                  type="text" 
+                  class="form-input" 
+                  id="linkInput" 
+                  placeholder="https://..." 
+                  oninput="validateInputRealtime()"
+                >
+              </div>
+              <div class="validation-msg" id="validationMsg"></div>
+            </div>
+
+            <!-- Form Action Buttons -->
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="saveBtn">
+                <i class="fa-solid fa-plus" id="btnIcon"></i>
+                <span id="btnText">Save Social Link</span>
+              </button>
+              <button type="button" class="btn btn-secondary" id="cancelEditBtn" style="display: none;" onclick="resetForm()">
+                Cancel Edit
+              </button>
+            </div>
+
+          </div>
+        </form>
+      </section>
+
+      <!-- Existing Social Links Section -->
+      <section>
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fa-solid fa-link" style="color: var(--primary);"></i>
+            Your Saved Links
+          </h2>
+        </div>
+
+        <!-- Skeleton Loader -->
+        <div id="skeletonLoader" class="links-grid" style="display: none;">
+          <div class="skeleton skeleton-card"></div>
+          <div class="skeleton skeleton-card"></div>
+        </div>
+
+        <!-- Links Grid -->
+        <div class="links-grid" id="linksGrid"></div>
+
+        <!-- Empty State View -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <div class="empty-state-icon">
+            <i class="fa-solid fa-share-nodes"></i>
+          </div>
+          <h3>No Social Links Added Yet</h3>
+          <p>Add your official social media profiles to showcase on your shop.</p>
+          <button class="btn btn-primary" onclick="focusForm()">
+            <i class="fa-solid fa-plus"></i>
+            Add Your First Social Link
+          </button>
+        </div>
+
+      </section>
+
+    </div> <!-- End Main Content -->
+
+  </div> <!-- End Container -->
+
+  <!-- ==========================================================================
+       9. FIREBASE SDKs & JAVASCRIPT LOGIC
+       ========================================================================== -->
+  <!-- Firebase Compat SDKs (CDN) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    /* ==========================================================================
+       FIREBASE CONFIGURATION
+       ========================================================================== */
+    const firebaseConfig = {
+  apiKey: "AIzaSyBUhNhYvuo_FTvZ5RZR6Gn-4hsUY21S0XE",
+  authDomain: "ghotimarket.firebaseapp.com",
+  databaseURL: "https://ghotimarket-default-rtdb.firebaseio.com",
+  projectId: "ghotimarket",
+  storageBucket: "ghotimarket.firebasestorage.app",
+  messagingSenderId: "481257644093",
+  appId: "1:481257644093:web:0dfc3699d6b3c86afeca54",
+  measurementId: "G-4SR8V2EKC1"
+};
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    /* ==========================================================================
+       PLATFORMS CONFIGURATION DATA
+       ========================================================================== */
+    const PLATFORMS = {
+      youtube: {
+        name: "YouTube",
+        icon: "fa-brands fa-youtube",
+        color: "#FF0000",
+        bgLight: "#FEF2F2",
+        placeholder: "https://youtube.com/@username",
+        domainRegex: /(youtube\.com|youtu\.be)/i
+      },
+      facebook: {
+        name: "Facebook",
+        icon: "fa-brands fa-facebook",
+        color: "#1877F2",
+        bgLight: "#EFF6FF",
+        placeholder: "https://facebook.com/username",
+        domainRegex: /(facebook\.com|fb\.com)/i
+      },
+      instagram: {
+        name: "Instagram",
+        icon: "fa-brands fa-instagram",
+        color: "#E4405F",
+        bgLight: "#FDF2F8",
+        placeholder: "https://instagram.com/username",
+        domainRegex: /instagram\.com/i
+      },
+      twitter: {
+        name: "Twitter / X",
+        icon: "fa-brands fa-x-twitter",
+        color: "#0F172A",
+        bgLight: "#F1F5F9",
+        placeholder: "https://x.com/username",
+        domainRegex: /(x\.com|twitter\.com)/i
+      },
+      linkedin: {
+        name: "LinkedIn",
+        icon: "fa-brands fa-linkedin",
+        color: "#0A66C2",
+        bgLight: "#F0F9FF",
+        placeholder: "https://linkedin.com/in/username",
+        domainRegex: /linkedin\.com/i
+      },
+      tiktok: {
+        name: "TikTok",
+        icon: "fa-brands fa-tiktok",
+        color: "#000000",
+        bgLight: "#F8FAFC",
+        placeholder: "https://tiktok.com/@username",
+        domainRegex: /tiktok\.com/i
+      },
+      whatsapp: {
+        name: "WhatsApp",
+        icon: "fa-brands fa-whatsapp",
+        color: "#25D366",
+        bgLight: "#F0FDF4",
+        placeholder: "https://wa.me/8801XXXXXXXXX",
+        domainRegex: /(wa\.me|whatsapp\.com)/i
+      }
+    };
+
+    /* ==========================================================================
+       APPLICATION STATE
+       ========================================================================== */
+    let currentUser = null;
+    let socialLinksList = [];
+    let isEditing = false;
+    let editingPlatformKey = null;
+    let platformToDelete = null;
+
+    /* ==========================================================================
+       AUTH INITIALIZATION
+       ========================================================================== */
+    auth.onAuthStateChanged((user) => {
+      const authWarning = document.getElementById("authWarning");
+      const mainContent = document.getElementById("mainContent");
+      const userBadge = document.getElementById("userBadge");
+      const userUidDisplay = document.getElementById("userUidDisplay");
+
+      if (user) {
+        currentUser = user;
+        authWarning.style.display = "none";
+        mainContent.style.display = "block";
+        userBadge.style.display = "flex";
+        userUidDisplay.textContent = `UID: ${user.uid.slice(0, 8)}...`;
+        
+        // Fetch social links for current user's shop document
+        fetchSocialLinks();
+      } else {
+        currentUser = null;
+        authWarning.style.display = "block";
+        mainContent.style.display = "none";
+        userBadge.style.display = "none";
+      }
+    });
+
+    /* ==========================================================================
+       FIRESTORE OPERATIONS
+       ========================================================================== */
+
+    // 1. READ Social Links
+    async function fetchSocialLinks() {
+      if (!currentUser) return;
+
+      showSkeleton(true);
+      const shopRef = db.collection("shops").doc(currentUser.uid);
+
+      try {
+        const docSnap = await shopRef.get();
+        if (docSnap.exists) {
+          const shopData = docSnap.data();
+          socialLinksList = Array.isArray(shopData.socialLinks) ? shopData.socialLinks : [];
+        } else {
+          socialLinksList = [];
+        }
+        renderLinksGrid();
+        updateCounter();
+      } catch (error) {
+        console.error("Error loading social links:", error);
+        showToast("Error loading social links from Firestore.", "error");
+      } finally {
+        showSkeleton(false);
+      }
+    }
+
+    // 2. SAVE / UPDATE Social Link
+    async function handleFormSubmit(event) {
+      event.preventDefault();
+
+      if (!currentUser) {
+        showToast("You must be logged in to perform this action.", "error");
+        return;
+      }
+
+      const selectEl = document.getElementById("platformSelect");
+      const inputEl = document.getElementById("linkInput");
+      
+      const platformKey = selectEl.value;
+      const rawUrl = inputEl.value.trim();
+
+      // Validation
+      if (!platformKey) {
+        showToast("Please select a social media platform.", "info");
+        return;
+      }
+
+      if (!rawUrl) {
+        showToast("Please enter a valid URL.", "info");
+        setValidationState(false, "URL field cannot be empty.");
+        return;
+      }
+
+      if (!validateURL(rawUrl, platformKey)) {
+        setValidationState(false, `Please enter a valid ${PLATFORMS[platformKey].name} URL.`);
+        showToast(`Invalid ${PLATFORMS[platformKey].name} URL format.`, "error");
+        return;
+      }
+
+      // Check limit (Max 7)
+      if (!isEditing && socialLinksList.length >= 7) {
+        showToast("Maximum 7 social links allowed.", "info");
+        return;
+      }
+
+      // Check for duplicates
+      const existsIndex = socialLinksList.findIndex(item => item.platform === platformKey);
+      if (!isEditing && existsIndex !== -1) {
+        showToast(`${PLATFORMS[platformKey].name} link already exists.`, "info");
+        setValidationState(false, `${PLATFORMS[platformKey].name} is already added. Edit the existing one instead.`);
+        return;
+      }
+
+      // If editing and changed platform to another existing platform
+      if (isEditing && editingPlatformKey !== platformKey && existsIndex !== -1) {
+        showToast(`${PLATFORMS[platformKey].name} link already exists.`, "info");
+        setValidationState(false, `${PLATFORMS[platformKey].name} is already added.`);
+        return;
+      }
+
+      // Prepare payload item
+      const newItem = {
+        platform: platformKey,
+        name: PLATFORMS[platformKey].name,
+        url: rawUrl
+      };
+
+      // Construct new array
+      let updatedList = [...socialLinksList];
+      if (isEditing) {
+        const targetIndex = updatedList.findIndex(item => item.platform === editingPlatformKey);
+        if (targetIndex !== -1) {
+          updatedList[targetIndex] = newItem;
+        } else {
+          updatedList.push(newItem);
+        }
+      } else {
+        updatedList.push(newItem);
+      }
+
+      // Submit to Firestore
+      setSaveButtonLoading(true);
+
+      try {
+        const shopRef = db.collection("shops").doc(currentUser.uid);
+        
+        // ONLY update socialLinks field without touching or deleting other fields
+        await shopRef.set({
+          socialLinks: updatedList
+        }, { merge: true });
+
+        socialLinksList = updatedList;
+        renderLinksGrid();
+        updateCounter();
+
+        showToast(
+          isEditing 
+            ? `${newItem.name} link updated successfully!` 
+            : `${newItem.name} link added successfully!`,
+          "success"
+        );
+
+        resetForm();
+      } catch (error) {
+        console.error("Firestore update error:", error);
+        showToast("Failed to save social link. Please try again.", "error");
+      } finally {
+        setSaveButtonLoading(false);
+      }
+    }
+
+    // 3. DELETE Social Link
+    async function executeDelete() {
+      if (!platformToDelete || !currentUser) return;
+
+      const targetPlatform = PLATFORMS[platformToDelete] ? PLATFORMS[platformToDelete].name : "Social";
+      const updatedList = socialLinksList.filter(item => item.platform !== platformToDelete);
+
+      closeDeleteModal();
+
+      try {
+        const shopRef = db.collection("shops").doc(currentUser.uid);
+
+        await shopRef.set({
+          socialLinks: updatedList
+        }, { merge: true });
+
+        socialLinksList = updatedList;
+        renderLinksGrid();
+        updateCounter();
+
+        showToast(`${targetPlatform} link deleted successfully.`, "success");
+
+        if (isEditing && editingPlatformKey === platformToDelete) {
+          resetForm();
+        }
+      } catch (error) {
+        console.error("Firestore delete error:", error);
+        showToast("Failed to delete link. Please try again.", "error");
+      } finally {
+        platformToDelete = null;
+      }
+    }
+
+    /* ==========================================================================
+       UI RENDER FUNCTIONS
+       ========================================================================== */
+
+    function renderLinksGrid() {
+      const gridContainer = document.getElementById("linksGrid");
+      const emptyState = document.getElementById("emptyState");
+
+      gridContainer.innerHTML = "";
+
+      if (socialLinksList.length === 0) {
+        emptyState.style.display = "block";
+        gridContainer.style.display = "none";
+        return;
+      }
+
+      emptyState.style.display = "none";
+      gridContainer.style.display = "grid";
+
+      socialLinksList.forEach((item) => {
+        const platformConfig = PLATFORMS[item.platform] || {
+          name: item.name || "Link",
+          icon: "fa-solid fa-link",
+          color: "#4F46E5",
+          bgLight: "#EEF2FF"
+        };
+
+        const card = document.createElement("div");
+        card.className = "link-card";
+
+        // DOM elements building safely to prevent XSS
+        const infoDiv = document.createElement("div");
+        infoDiv.className = "link-info";
+
+        const badge = document.createElement("div");
+        badge.className = "link-icon-badge";
+        badge.style.color = platformConfig.color;
+        badge.style.backgroundColor = platformConfig.bgLight;
+        
+        const badgeIcon = document.createElement("i");
+        badgeIcon.className = platformConfig.icon;
+        badge.appendChild(badgeIcon);
+
+        const details = document.createElement("div");
+        details.className = "link-details";
+
+        const title = document.createElement("h3");
+        title.textContent = platformConfig.name;
+
+        const linkAnchor = document.createElement("a");
+        linkAnchor.href = item.url;
+        linkAnchor.target = "_blank";
+        linkAnchor.rel = "noopener noreferrer";
+        linkAnchor.textContent = item.url;
+
+        details.appendChild(title);
+        details.appendChild(linkAnchor);
+
+        infoDiv.appendChild(badge);
+        infoDiv.appendChild(details);
+
+        // Action Buttons
+        const actionsDiv = document.createElement("div");
+        actionsDiv.className = "link-card-actions";
+
+        const editBtn = document.createElement("button");
+        editBtn.className = "btn-icon edit";
+        editBtn.title = "Edit Link";
+        editBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
+        editBtn.onclick = () => startEdit(item.platform);
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "btn-icon delete";
+        deleteBtn.title = "Delete Link";
+        deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+        deleteBtn.onclick = () => promptDelete(item.platform);
+
+        actionsDiv.appendChild(editBtn);
+        actionsDiv.appendChild(deleteBtn);
+
+        card.appendChild(infoDiv);
+        card.appendChild(actionsDiv);
+
+        gridContainer.appendChild(card);
+      });
+    }
+
+    function onPlatformChange() {
+      const selectEl = document.getElementById("platformSelect");
+      const key = selectEl.value;
+      const previewIcon = document.getElementById("previewIcon");
+      const previewTitle = document.getElementById("previewTitle");
+      const previewHint = document.getElementById("previewHint");
+      const linkInput = document.getElementById("linkInput");
+
+      if (key && PLATFORMS[key]) {
+        const p = PLATFORMS[key];
+        previewIcon.innerHTML = `<i class="${p.icon}"></i>`;
+        previewIcon.style.color = p.color;
+        previewIcon.style.backgroundColor = p.bgLight;
+        previewTitle.textContent = p.name;
+        previewHint.textContent = `Expected format: ${p.placeholder}`;
+        linkInput.placeholder = p.placeholder;
+      } else {
+        previewIcon.innerHTML = '<i class="fa-solid fa-globe"></i>';
+        previewIcon.style.color = '#94A3B8';
+        previewIcon.style.backgroundColor = '#FFFFFF';
+        previewTitle.textContent = 'No Platform Selected';
+        previewHint.textContent = 'Select a platform above to preview icon';
+        linkInput.placeholder = 'https://...';
+      }
+
+      validateInputRealtime();
+    }
+
+    function startEdit(platformKey) {
+      const target = socialLinksList.find(i => i.platform === platformKey);
+      if (!target) return;
+
+      isEditing = true;
+      editingPlatformKey = platformKey;
+
+      document.getElementById("formTitle").innerHTML = '<i class="fa-solid fa-pen-to-square" style="color: var(--primary);"></i> Edit Social Link';
+      document.getElementById("platformSelect").value = platformKey;
+      document.getElementById("linkInput").value = target.url;
+      document.getElementById("btnText").textContent = "Update Link";
+      document.getElementById("btnIcon").className = "fa-solid fa-check";
+      document.getElementById("cancelEditBtn").style.display = "inline-flex";
+
+      onPlatformChange();
+      focusForm();
+    }
+
+    function resetForm() {
+      isEditing = false;
+      editingPlatformKey = null;
+
+      document.getElementById("socialLinkForm").reset();
+      document.getElementById("formTitle").innerHTML = '<i class="fa-solid fa-plus-circle" style="color: var(--primary);"></i> Add Social Link';
+      document.getElementById("btnText").textContent = "Save Social Link";
+      document.getElementById("btnIcon").className = "fa-solid fa-plus";
+      document.getElementById("cancelEditBtn").style.display = "none";
+
+      setValidationState(null, "");
+      onPlatformChange();
+    }
+
+    function updateCounter() {
+      const counter = document.getElementById("linkCounter");
+      const count = socialLinksList.length;
+      counter.textContent = `${count} / 7 Links`;
+
+      if (count >= 7) {
+        counter.classList.add("full");
+      } else {
+        counter.classList.remove("full");
+      }
+    }
+
+    /* ==========================================================================
+       VALIDATION HELPERS
+       ========================================================================== */
+    function validateURL(url, platformKey) {
+      try {
+        const parsed = new URL(url);
+        if (!['http:', 'https:'].includes(parsed.protocol)) return false;
+
+        if (platformKey && PLATFORMS[platformKey]) {
+          return PLATFORMS[platformKey].domainRegex.test(parsed.hostname);
+        }
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function validateInputRealtime() {
+      const selectEl = document.getElementById("platformSelect");
+      const inputEl = document.getElementById("linkInput");
+      const key = selectEl.value;
+      const url = inputEl.value.trim();
+
+      if (!url) {
+        setValidationState(null, "");
+        return;
+      }
+
+      if (!key) {
+        setValidationState(false, "Please select a platform first.");
+        return;
+      }
+
+      if (validateURL(url, key)) {
+        setValidationState(true, `Valid ${PLATFORMS[key].name} URL`);
+      } else {
+        setValidationState(false, `URL must match ${PLATFORMS[key].name} format (${PLATFORMS[key].placeholder})`);
+      }
+    }
+
+    function setValidationState(isValid, msg) {
+      const msgEl = document.getElementById("validationMsg");
+      if (isValid === true) {
+        msgEl.className = "validation-msg success";
+        msgEl.textContent = `✓ ${msg}`;
+      } else if (isValid === false) {
+        msgEl.className = "validation-msg error";
+        msgEl.textContent = `✕ ${msg}`;
+      } else {
+        msgEl.className = "validation-msg";
+        msgEl.textContent = "";
+      }
+    }
+
+    /* ==========================================================================
+       MODAL & TOAST HELPERS
+       ========================================================================== */
+    function promptDelete(platformKey) {
+      platformToDelete = platformKey;
+      const pName = PLATFORMS[platformKey] ? PLATFORMS[platformKey].name : "Social";
+      
+      document.getElementById("modalTitle").textContent = `Delete ${pName} Link?`;
+      document.getElementById("modalDescription").textContent = `Are you sure you want to remove your ${pName} profile link from GHOTI Builder?`;
+      document.getElementById("confirmDeleteBtn").onclick = executeDelete;
+
+      document.getElementById("deleteModal").classList.add("active");
+    }
+
+    function closeDeleteModal() {
+      document.getElementById("deleteModal").classList.remove("active");
+      platformToDelete = null;
+    }
+
+    function showToast(message, type = "info") {
+      const container = document.getElementById("toastContainer");
+
+      const toast = document.createElement("div");
+      toast.className = `toast ${type}`;
+
+      let iconClass = "fa-solid fa-circle-info";
+      if (type === "success") iconClass = "fa-solid fa-circle-check";
+      if (type === "error") iconClass = "fa-solid fa-circle-exclamation";
+
+      toast.innerHTML = `
+        <i class="${iconClass} toast-icon"></i>
+        <div class="toast-content">${message}</div>
+      `;
+
+      container.appendChild(toast);
+
+      // Trigger animation
+      setTimeout(() => toast.classList.add("show"), 10);
+
+      // Auto dismiss after 3.5 seconds
+      setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    function setSaveButtonLoading(isLoading) {
+      const btn = document.getElementById("saveBtn");
+      const btnText = document.getElementById("btnText");
+      const btnIcon = document.getElementById("btnIcon");
+
+      if (isLoading) {
+        btn.disabled = true;
+        btnIcon.className = "spinner";
+        btnText.textContent = isEditing ? "Updating..." : "Saving...";
+      } else {
+        btn.disabled = false;
+        btnIcon.className = isEditing ? "fa-solid fa-check" : "fa-solid fa-plus";
+        btnText.textContent = isEditing ? "Update Link" : "Save Social Link";
+      }
+    }
+
+    function showSkeleton(show) {
+      document.getElementById("skeletonLoader").style.display = show ? "grid" : "none";
+      if (show) {
+        document.getElementById("linksGrid").style.display = "none";
+        document.getElementById("emptyState").style.display = "none";
+      }
+    }
+
+    function focusForm() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById("platformSelect").focus();
+    }
+  </script>
+</body>
+</html>

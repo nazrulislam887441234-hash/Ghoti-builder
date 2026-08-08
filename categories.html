@@ -552,10 +552,9 @@
       }
 
       const categoriesQuery = query(
-        collection(db, "shops_categories"),
-        where("shopsId", "==", shopId),
-        orderBy("createdAt", "desc")
-      );
+    collection(db, "shops_categories"),
+    where("shopsId", "==", shopId)
+  );
 
       unsubscribeCategoriesListener = onSnapshot(categoriesQuery, (snapshot) => {
         categoryGrid.innerHTML = "";

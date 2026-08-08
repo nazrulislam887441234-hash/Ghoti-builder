@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Categories Management | GHOTI BUILDER</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        
+        <!-- Header Section -->
+        <header class="page-header">
+            <div class="header-content">
+                <h1 class="page-title">Shop Categories</h1>
+                <p class="page-subtitle">আপনার Shop-এর Product Categories পরিচালনা করুন</p>
+            </div>
+            <button id="open-add-modal-btn" class="btn btn-primary">
+                <span class="btn-icon">+</span> Add Category
+            </button>
+        </header>
+
+        <!-- Notification Banner (For Errors/Warnings) -->
+        <div id="status-banner" class="status-banner hidden"></div>
+
+        <!-- Categories Section -->
+        <main class="content-body">
+            
+            <!-- Loading Spinner -->
+            <div id="loading-spinner" class="spinner-container">
+                <div class="spinner"></div>
+                <p>ক্যাটাগরি ডাটা লোড হচ্ছে...</p>
+            </div>
+
+            <!-- Categories Grid -->
+            <div id="categories-grid" class="categories-grid hidden"></div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state hidden">
+                <div class="empty-icon">📁</div>
+                <h3>কোনো ক্যাটাগরি পাওয়া যায়নি</h3>
+                <p>আপনার শপে নতুন ক্যাটাগরি যুক্ত করতে "+ Add Category" বাটনে ক্লিক করুন।</p>
+            </div>
+            
+        </main>
+    </div>
+
+    <!-- Add Category Modal -->
+    <div id="add-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Add New Category</h2>
+                <button class="modal-close" id="close-add-modal">&times;</button>
+            </div>
+            <form id="add-category-form" class="modal-form">
+                
+                <div class="form-group">
+                    <label for="add-category-name">Category Name <span class="required">*</span></label>
+                    <input type="text" id="add-category-name" placeholder="Enter category name" required minlength="2" maxlength="50">
+                    <small class="input-hint">২ থেকে ৫০ অক্ষরের মধ্যে হতে হবে</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="add-category-image">Category Image <span class="required">*</span></label>
+                    <input type="file" id="add-category-image" accept="image/png, image/jpeg, image/webp, image/jpg" required>
+                    <small class="input-hint">সমর্থিত ফরম্যাট: PNG, JPG, JPEG, WEBP</small>
+                </div>
+
+                <!-- Image Preview Area -->
+                <div id="add-image-preview-box" class="image-preview-box hidden">
+                    <img id="add-image-preview" src="" alt="Preview">
+                    <span class="preview-note">Image will be uploaded to ImgBB</span>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-add-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submit-add-btn">
+                        <span class="btn-text">Create Category</span>
+                        <div class="btn-spinner hidden"></div>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Category Modal -->
+    <div id="edit-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Edit Category</h2>
+                <button class="modal-close" id="close-edit-modal">&times;</button>
+            </div>
+            <form id="edit-category-form" class="modal-form">
+                
+                <input type="hidden" id="edit-category-id">
+
+                <div class="form-group">
+                    <label>Current Category Image</label>
+                    <div class="edit-image-preview">
+                        <img id="edit-image-preview-img" src="" alt="Category Image">
+                    </div>
+                    <small class="input-hint text-warning">নিরাপত্তার স্বার্থে ক্যাটাগরি ইমেজ পরিবর্তন করা যাবে না</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-category-name">Category Name <span class="required">*</span></label>
+                    <input type="text" id="edit-category-name" placeholder="Enter category name" required minlength="2" maxlength="50">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-edit-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submit-edit-btn">
+                        <span class="btn-text">Update Category</span>
+                        <div class="btn-spinner hidden"></div>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs and App Script -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
